@@ -1,11 +1,11 @@
 // @flow
 import { combineReducers } from 'redux';
 import { routerReducer as router } from 'react-router-redux';
-import counter from './counter';
+import fileDialog from './fileDialog';
 
 const rootReducer = combineReducers({
-  counter,
   router,
+  fileDialog
 });
 
 export default rootReducer;

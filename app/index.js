@@ -4,6 +4,8 @@ import { AppContainer } from 'react-hot-loader';
 import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
 import './app.global.css';
+import { ipcRenderer } from 'electron';
+import * as fileDialogActions from 'actions/fileDialog';
 
 const store = configureStore();
 
@@ -25,3 +27,8 @@ if (module.hot) {
     );
   });
 }
+
+ipcRenderer.on('open-file', (event, filename) => {
+  console.log(store.getState());
+  store.dispatch(fileDialogActions.open(filename));
+});

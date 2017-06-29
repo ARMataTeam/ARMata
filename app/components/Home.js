@@ -8,7 +8,7 @@ export default class Home extends Component {
     return (
       <div>
         <div className={styles.container} data-tid="container">
-          <h2>ARMata</h2>
+          <h2>Load a template to start working on it!</h2>
         </div>
       </div>
     );

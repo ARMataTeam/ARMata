@@ -1,5 +1,5 @@
 // @flow
-import { app, Menu, shell, BrowserWindow } from 'electron';
+import { app, Menu, shell, BrowserWindow, dialog } from 'electron';
 
 export default class MenuBuilder {
   mainWindow: BrowserWindow;
@@ -43,7 +43,20 @@ export default class MenuBuilder {
       label: '&File',
       submenu: [{
         label: '&Open a template',
-        accelerator: 'Ctrl+O'
+        accelerator: 'Ctrl+O',
+        click: () => {
+          dialog.showOpenDialog({
+              filters: [
+                {
+                  name: 'ARM Template (JSON files)', 
+                  extensions: ['json']
+                }
+              ],
+              properties: ['openFile']
+            }, (selectedFilename) => {
+              this.mainWindow.webContents.send('open-file', selectedFilename);
+            });
+        }
       }, {
         label: '&Close',
         accelerator: 'Ctrl+W',
