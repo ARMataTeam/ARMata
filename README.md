@@ -13,3 +13,17 @@ Anyone can join and we'll welcome all new contributors. Currently we need people
 * ideas  
 
 if you feel you could help, please either post an issue in this repo or join our chat on Gitter.
+
+## Run
+To run a project you can use either [Yarn](https://yarnpkg.com/lang/en/) or NPM:
+```
+$ cd your_project
+$ yarn
+$ npm run dev
+```
+or
+```
+$ cd your_project
+$ npm install
+$ npm run dev
+```
