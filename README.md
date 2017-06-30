@@ -1,4 +1,4 @@
-# ARMata [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/ARMataTeam/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
+# ARMata [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/ARMataTeam/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link) [![Build Status](https://travis-ci.org/ARMataTeam/ARMata.svg?branch=develop)](https://travis-ci.org/ARMataTeam/ARMata) [![Build status](https://ci.appveyor.com/api/projects/status/ao4tcsxoh1te8elk/branch/develop?svg=true)](https://ci.appveyor.com/project/kamil-mrzyglod/armata/branch/develop)
 ARM templates visualizer
 
 ## Our goal
