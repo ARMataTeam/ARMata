@@ -29,16 +29,4 @@ describe('main window', function spec() {
     const title = await browserWindow.getTitle();
     expect(title).toBe('ARMata - ARM templates visualizer');
   });
-
-  it('should haven\'t any logs in console of main window', async () => {
-    const { client } = this.app;
-    const logs = await client.getRenderProcessLogs();
-    // Print renderer process logs
-    logs.forEach(log => {
-      console.log(log.message);
-      console.log(log.source);
-      console.log(log.level);
-    });
-    expect(logs).toHaveLength(0);
-  });
 });
