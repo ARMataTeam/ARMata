@@ -6,6 +6,7 @@ import { configureStore, history } from './store/configureStore';
 import './app.global.css';
 import { ipcRenderer } from 'electron';
 import * as fileDialogActions from 'actions/fileDialog';
+import {fileDialogStateType} from 'reducers/fileDialog';
 
 const store = configureStore();
 
@@ -29,6 +30,5 @@ if (module.hot) {
 }
 
 ipcRenderer.on('open-file', (event, filename) => {
-  console.log(store.getState());
   store.dispatch(fileDialogActions.open(filename));
 });

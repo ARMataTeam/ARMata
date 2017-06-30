@@ -1,11 +1,17 @@
 // @flow
-import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Home from '../components/Home';
+import * as FileDialogActions from '../actions/fileDialog';
 
-export default class HomePage extends Component {
-  render() {
-    return (
-      <Home />
-    );
-  }
+function mapStateToProps(state) {
+  return {
+    selectedFilename: state.fileDialog
+  };
 }
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(FileDialogActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

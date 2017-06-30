@@ -8,7 +8,7 @@ export type fileDialogStateType = {
 export default function fileDialog(defaultState: string = '', action: actionType) {
     switch (action.type) {
         case OPEN_FILE:
-            return action.selectedFilename;
+            return action.selectedFilename[0];
         default:
             return defaultState;
     }
