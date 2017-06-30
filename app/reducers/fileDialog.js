@@ -1,15 +1,20 @@
 // @flow
-import { OPEN_FILE, actionType } from '../actions/fileDialog';
+import { OPEN_FILE } from '../actions/fileDialog'; // eslint-disable-line flowtype-errors/show-errors
 
-export type fileDialogStateType = {
+type actionType = {
+  type: string,
   selectedFilename: string
 };
 
-export default function fileDialog(defaultState: string = '', action: actionType) {
-    switch (action.type) {
-        case OPEN_FILE:
-            return action.selectedFilename[0];
-        default:
-            return defaultState;
-    }
+export type fileDialogStateType = {
+    selectedFilename: string
+};
+
+export default function fileDialog(state: string = '', action: actionType) {
+  switch (action.type) {
+    case OPEN_FILE:
+      return action.selectedFilename[0];
+    default:
+      return state;
+  }
 }

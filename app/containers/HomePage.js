@@ -1,8 +1,6 @@
 // @flow
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Home from '../components/Home';
-import * as FileDialogActions from '../actions/fileDialog';
+import Home from '../components/Home'; // eslint-disable-line flowtype-errors/show-errors
 
 function mapStateToProps(state) {
   return {
@@ -10,8 +8,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(FileDialogActions, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps)(Home);
