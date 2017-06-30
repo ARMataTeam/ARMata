@@ -1,5 +1,5 @@
 // @flow
-import { app, Menu, shell, BrowserWindow, dialog } from 'electron';
+import { Menu, shell, BrowserWindow, dialog } from 'electron';
 
 export default class MenuBuilder {
   mainWindow: BrowserWindow;
@@ -13,10 +13,7 @@ export default class MenuBuilder {
       this.setupDevelopmentEnvironment();
     }
 
-    let template;
-    template = this.buildDefaultTemplate();
-
-    const menu = Menu.buildFromTemplate(template);
+    const menu = Menu.buildFromTemplate(this.buildDefaultTemplate());
     Menu.setApplicationMenu(menu);
 
     return menu;
@@ -46,16 +43,16 @@ export default class MenuBuilder {
         accelerator: 'Ctrl+O',
         click: () => {
           dialog.showOpenDialog({
-              filters: [
-                {
-                  name: 'ARM Template (JSON files)', 
-                  extensions: ['json']
-                }
-              ],
-              properties: ['openFile']
-            }, (selectedFilename) => {
-              this.mainWindow.webContents.send('open-file', selectedFilename);
-            });
+            filters: [
+              {
+                name: 'ARM Template (JSON files)',
+                extensions: ['json']
+              }
+            ],
+            properties: ['openFile']
+          }, (selectedFilename) => {
+            this.mainWindow.webContents.send('open-file', selectedFilename);
+          });
         }
       }, {
         label: '&Close',
