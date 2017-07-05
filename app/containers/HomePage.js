@@ -4,7 +4,8 @@ import Home from '../components/Home'; // eslint-disable-line flowtype-errors/sh
 
 function mapStateToProps(state) {
   return {
-    selectedFilename: state.fileDialog
+    selectedFilename: state.fileDialog.selectedFilename,
+    data: state.fileDialog.fileData
   };
 }
 

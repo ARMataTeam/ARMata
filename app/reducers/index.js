@@ -8,6 +8,4 @@ const rootReducer = combineReducers({
   fileDialog
 });
 
-console.log(fileDialog);
-
 export default rootReducer;
