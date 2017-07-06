@@ -1,0 +1,12 @@
+.sideMenu {
+  background-color: rgb(50, 50, 50);
+  left: 0;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 4%;
+}
+
+.menuItemIcon {
+  padding: 0;
+}

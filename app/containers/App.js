@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import type { Children } from 'react';
+import SideMenu from '../Components/SideMenu';
 
 export default class App extends Component {
   props: {
@@ -10,6 +11,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <SideMenu />
         {this.props.children}
       </div>
     );
