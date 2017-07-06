@@ -14,20 +14,6 @@ export default class Structure extends Component {
   resources: any;
   outputs: any;
 
-  constructor(props: any) {
-    super(props);
-
-    const json = JSON.parse(this.props.data.replace(/\s+/, ''));
-    this.schema = json.$schema;
-    this.contentVersion = json.contentVersion;
-    this.parameters = json.parameters;
-    this.variables = json.variables;
-    this.resources = json.resources;
-    this.outputs = json.outputs;
-
-    console.log(this.schema);
-  }
-
   displayVariables(): Element<any>[] {
     const variables = [];
     Object.keys(this.variables).forEach((k) => {
@@ -55,7 +41,19 @@ export default class Structure extends Component {
     return outputs;
   }
 
+  parseJson(): void {
+    const json = JSON.parse(this.props.data.replace(/\s+/, ''));
+    this.schema = json.$schema;
+    this.contentVersion = json.contentVersion;
+    this.parameters = json.parameters;
+    this.variables = json.variables;
+    this.resources = json.resources;
+    this.outputs = json.outputs;
+  }
+
   render() {
+    this.parseJson();
+
     return (
       <div className={styles.structure}>
         <h4>Structure</h4>
