@@ -1,5 +1,7 @@
 // @flow
 import React, { Component, Element } from 'react';
+import Subheader from 'material-ui/Subheader';
+import { List, ListItem } from 'material-ui/List';
 import styles from './Structure.css'; // eslint-disable-line flowtype-errors/show-errors
 
 export default class Structure extends Component {
@@ -56,17 +58,29 @@ export default class Structure extends Component {
 
     return (
       <div className={styles.structure}>
-        <h4>Structure</h4>
-        <h5>Schema:</h5>
-        {this.schema}
-        <h5>Content Version:</h5>
-        {this.contentVersion}
-        <h5>Variables:</h5>
-        <ul>{this.displayVariables()}</ul>
-        <h5>Parameters:</h5>
-        <ul>{this.displayParameters()}</ul>
-        <h5>Outputs:</h5>
-        <ul>{this.displayOutputs()}</ul>
+        <List>
+          <Subheader>Structure</Subheader>
+          <Subheader>Schema</Subheader>
+          <ListItem>
+            {this.schema}
+          </ListItem>
+          <Subheader>Content Version</Subheader>
+          <ListItem>
+            {this.contentVersion}
+          </ListItem>
+          <Subheader>Variables</Subheader>
+          <ListItem>
+            {this.displayVariables()}
+          </ListItem>
+          <Subheader>Parameters</Subheader>
+          <ListItem>
+            {this.displayParameters()}
+          </ListItem>
+          <Subheader>Outputs</Subheader>
+          <ListItem>
+            {this.displayOutputs()}
+          </ListItem>
+        </List>
       </div>);
   }
 }

@@ -14,7 +14,7 @@ export default class Home extends Component {
       return (
         <div>
           <div className={styles.container} data-tid="container">
-            {this.props.selectedFilename === '' ? <h2>Load a template to start working on it!</h2> : this.props.selectedFilename}
+            {this.props.selectedFilename === '' ? <h3>Load a template to start working on it!</h3> : this.props.selectedFilename}
           </div>
         </div>
       );

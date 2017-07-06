@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import type { Children } from 'react';
-import SideMenu from '../Components/SideMenu';
+import SideMenu from '../components/SideMenu';
 
 export default class App extends Component {
   props: {
