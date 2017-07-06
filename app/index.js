@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { ipcRenderer } from 'electron';
 import { render } from 'react-dom';
@@ -6,6 +7,8 @@ import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
 import './app.global.css';
 import * as fileDialogActions from './actions/fileDialog';
+
+const fs = require('fs');
 
 const store = configureStore();
 
@@ -29,5 +32,13 @@ if (module.hot) {
 }
 
 ipcRenderer.on('open-file', (event, filename) => {
-  store.dispatch(fileDialogActions.open(filename));
+  const selectedFilename = filename[0];
+  fs.readFile(selectedFilename, 'utf-8', (err, data) => {
+    if (err) {
+      alert(`An error ocurred reading the file : ${err.message}`);
+      return;
+    }
+
+    store.dispatch(fileDialogActions.open(selectedFilename, data));
+  });
 });
