@@ -47,10 +47,10 @@ export default class Structure extends Component {
     const json = JSON.parse(this.props.data.replace(/\s+/, ''));
     this.schema = json.$schema;
     this.contentVersion = json.contentVersion;
-    this.parameters = json.parameters;
-    this.variables = json.variables;
+    this.parameters = json.parameters || {};
+    this.variables = json.variables || {};
     this.resources = json.resources;
-    this.outputs = json.outputs;
+    this.outputs = json.outputs || {};
   }
 
   render() {
