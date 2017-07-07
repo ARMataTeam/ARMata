@@ -1,6 +1,16 @@
 .structure {
+    background-color: rgb(40, 40, 40);
+    left: 54px;
+    max-width: 300px;
+    padding: 1%;
     position: fixed;
-    right: 0;
+    white-space: pre-wrap;
+  overflow: hidden;
+    text-align: left;
+    text-overflow: clip;
     top: 0;
-    width: 30%;
+}
+
+.structure > div {
+  height: auto;
 }

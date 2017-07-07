@@ -1,5 +1,9 @@
 // @flow
 import React from 'react';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import { ipcRenderer } from 'electron';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
@@ -12,10 +16,14 @@ const fs = require('fs');
 
 const store = configureStore();
 
+injectTapEventPlugin();
+
 render(
-  <AppContainer>
-    <Root store={store} history={history} />
-  </AppContainer>,
+  <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+    <AppContainer>
+      <Root store={store} history={history} />
+    </AppContainer>
+  </MuiThemeProvider>,
   document.getElementById('root')
 );
 
