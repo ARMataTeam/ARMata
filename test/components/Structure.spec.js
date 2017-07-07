@@ -32,6 +32,16 @@ function setupMissingOutputs() {
   };
 }
 
+function setupJsonComments() {
+  const actions = {
+  };
+  const component = shallow(<Structure data={'{"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion": "","parameters": {  }, /*"variables": {  },*/ "resources": [  ], "outputs": {  }}'} {...actions} />);
+  return {
+    component,
+    actions
+  };
+}
+
 describe('Structure component', () => {
   it('be generated without error without variables in JSON', () => {
     setupMissingVariables();
@@ -45,6 +55,11 @@ describe('Structure component', () => {
 
   it('be generated without error without outputs in JSON', () => {
     setupMissingOutputs();
+    expect('1').toMatch('1');
+  });
+
+  it('be generated without error when JSON contains comments', () => {
+    setupJsonComments();
     expect('1').toMatch('1');
   });
 });
