@@ -199,7 +199,8 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
-    "source-map-support": "^0.4.15"
+    "source-map-support": "^0.4.15",
+    "strip-json-comments": "^2.0.1"
   },
   "devEngines": {
     "node": ">=6.x",
