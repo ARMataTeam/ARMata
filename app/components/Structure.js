@@ -19,7 +19,7 @@ export default class Structure extends Component {
   displayVariables(): Element<any>[] {
     const variables = [];
     Object.keys(this.variables).forEach((k) => {
-      variables.push(<li key={k}>{k}</li>);
+      variables.push(<ListItem key={k}>{k}</ListItem>);
     });
 
     return variables;
@@ -28,7 +28,7 @@ export default class Structure extends Component {
   displayParameters(): Element<any>[] {
     const parameters = [];
     Object.keys(this.parameters).forEach((p) => {
-      parameters.push(<li key={p}>{p}</li>);
+      parameters.push(<ListItem key={p}>{p}</ListItem>);
     });
 
     return parameters;
@@ -37,7 +37,7 @@ export default class Structure extends Component {
   displayOutputs(): Element<any>[] {
     const outputs = [];
     Object.keys(this.outputs).forEach((o) => {
-      outputs.push(<li key={o}>{o}</li>);
+      outputs.push(<ListItem key={o}>{o}</ListItem>);
     });
 
     return outputs;
@@ -47,10 +47,10 @@ export default class Structure extends Component {
     const json = JSON.parse(this.props.data.replace(/\s+/, ''));
     this.schema = json.$schema;
     this.contentVersion = json.contentVersion;
-    this.parameters = json.parameters;
-    this.variables = json.variables;
+    this.parameters = json.parameters || {};
+    this.variables = json.variables || {};
     this.resources = json.resources;
-    this.outputs = json.outputs;
+    this.outputs = json.outputs || {};
   }
 
   render() {
@@ -69,17 +69,11 @@ export default class Structure extends Component {
             {this.contentVersion}
           </ListItem>
           <Subheader>Variables</Subheader>
-          <ListItem>
-            {this.displayVariables()}
-          </ListItem>
+          {this.displayVariables()}
           <Subheader>Parameters</Subheader>
-          <ListItem>
-            {this.displayParameters()}
-          </ListItem>
+          {this.displayParameters()}
           <Subheader>Outputs</Subheader>
-          <ListItem>
-            {this.displayOutputs()}
-          </ListItem>
+          {this.displayOutputs()}
         </List>
       </div>);
   }
