@@ -34,21 +34,17 @@ function setupMissingOutputs() {
 
 describe('Structure component', () => {
   it('be generated without error without variables in JSON', () => {
-    const component = setupMissingVariables();
+    setupMissingVariables();
     expect('1').toMatch('1');
   });
-});
 
-describe('Structure component', () => {
   it('be generated without error without parameters in JSON', () => {
-    const component = setupMissingParameters();
+    setupMissingParameters();
     expect('1').toMatch('1');
   });
-});
 
-describe('Structure component', () => {
   it('be generated without error without outputs in JSON', () => {
-    const component = setupMissingOutputs();
+    setupMissingOutputs();
     expect('1').toMatch('1');
   });
 });
