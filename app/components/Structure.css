@@ -3,10 +3,9 @@
     font-size: 12px;
     left: 54px;
     max-width: 300px;
-    padding: 1%;
     position: fixed;
     white-space: pre-wrap;
-  overflow: hidden;
+    overflow-y: auto;
     text-align: left;
     text-overflow: clip;
     top: 0;
@@ -14,4 +13,14 @@
 
 .structure > div {
   height: auto;
+}
+
+.structureHeader {
+  background-color: rgb(70, 70, 70) !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
+
+.structureItem {
+  font-size: 12px !important;
 }

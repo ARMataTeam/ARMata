@@ -21,7 +21,7 @@ export default class Structure extends Component {
   displayVariables(): Element<any>[] {
     const variables = [];
     Object.keys(this.variables).forEach((k) => {
-      variables.push(<ListItem key={k}>{k}</ListItem>);
+      variables.push(<ListItem className={styles.structureItem} key={k}>{k}</ListItem>);
     });
 
     return variables;
@@ -30,7 +30,7 @@ export default class Structure extends Component {
   displayParameters(): Element<any>[] {
     const parameters = [];
     Object.keys(this.parameters).forEach((p) => {
-      parameters.push(<ListItem key={p}>{p}</ListItem>);
+      parameters.push(<ListItem className={styles.structureItem} key={p}>{p}</ListItem>);
     });
 
     return parameters;
@@ -39,7 +39,7 @@ export default class Structure extends Component {
   displayOutputs(): Element<any>[] {
     const outputs = [];
     Object.keys(this.outputs).forEach((o) => {
-      outputs.push(<ListItem key={o}>{o}</ListItem>);
+      outputs.push(<ListItem className={styles.structureItem} key={o}>{o}</ListItem>);
     });
 
     return outputs;
@@ -62,20 +62,11 @@ export default class Structure extends Component {
       <div className={styles.structure}>
         <List>
           <Subheader>Structure</Subheader>
-          <Subheader>Schema</Subheader>
-          <ListItem>
-            {this.schema}
-          </ListItem>
-          <Subheader>Content Version</Subheader>
-          <ListItem>
-            {this.contentVersion}
-          </ListItem>
-          <Subheader>Variables</Subheader>
-          {this.displayVariables()}
-          <Subheader>Parameters</Subheader>
-          {this.displayParameters()}
-          <Subheader>Outputs</Subheader>
-          {this.displayOutputs()}
+          <ListItem className={styles.structureHeader} primaryText="Schema" initiallyOpen={false} nestedItems={[<ListItem className={styles.structureItem} key={1} primaryText={this.schema} />]} />
+          <ListItem className={styles.structureHeader} primaryText="Content Version" initiallyOpen={false} nestedItems={[<ListItem className={styles.structureItem} key={1} primaryText={this.contentVersion} />]} />
+          <ListItem className={styles.structureHeader} primaryText="Variables" initiallyOpen={false} nestedItems={this.displayVariables()} />
+          <ListItem className={styles.structureHeader} primaryText="Parameters" initiallyOpen={false} nestedItems={this.displayParameters()} />
+          <ListItem className={styles.structureHeader} primaryText="Outputs" initiallyOpen={false} nestedItems={this.displayOutputs()} />
         </List>
       </div>);
   }
