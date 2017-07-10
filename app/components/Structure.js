@@ -62,11 +62,11 @@ export default class Structure extends Component {
       <div className={styles.structure}>
         <List>
           <Subheader>Structure</Subheader>
-          <ListItem className={styles.structureHeader} primaryText="Schema" initiallyOpen={false} primaryTogglesNestedList={true} nestedItems={[<ListItem className={styles.structureItem} key={1} primaryText={this.schema} />]} />
-          <ListItem className={styles.structureHeader} primaryText="Content Version" initiallyOpen={false} primaryTogglesNestedList={true} nestedItems={[<ListItem className={styles.structureItem} key={1} primaryText={this.contentVersion} />]} />
-          <ListItem className={styles.structureHeader} primaryText="Variables" initiallyOpen={false} primaryTogglesNestedList={true} nestedItems={this.displayVariables()} />
-          <ListItem className={styles.structureHeader} primaryText="Parameters" initiallyOpen={false} primaryTogglesNestedList={true} nestedItems={this.displayParameters()} />
-          <ListItem className={styles.structureHeader} primaryText="Outputs" initiallyOpen={false} primaryTogglesNestedList={true} nestedItems={this.displayOutputs()} />
+          <ListItem className={styles.structureHeader} primaryText="Schema" initiallyOpen={false} nestedItems={[<ListItem className={styles.structureItem} key={1} primaryText={this.schema} />]} />
+          <ListItem className={styles.structureHeader} primaryText="Content Version" initiallyOpen={false} nestedItems={[<ListItem className={styles.structureItem} key={1} primaryText={this.contentVersion} />]} />
+          <ListItem className={styles.structureHeader} primaryText="Variables" initiallyOpen={false} nestedItems={this.displayVariables()} />
+          <ListItem className={styles.structureHeader} primaryText="Parameters" initiallyOpen={false} nestedItems={this.displayParameters()} />
+          <ListItem className={styles.structureHeader} primaryText="Outputs" initiallyOpen={false} nestedItems={this.displayOutputs()} />
         </List>
       </div>);
   }
