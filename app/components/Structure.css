@@ -9,6 +9,7 @@
     text-align: left;
     text-overflow: clip;
     top: 0;
+    z-index: 100;
 }
 
 .structure > div {
