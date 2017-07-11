@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import Graph from 'react-graph-vis';
+import styles from './Visualization.css'; // eslint-disable-line flowtype-errors/show-errors
 
 export default class Visualization extends Component {
   props: {
@@ -62,6 +63,6 @@ export default class Visualization extends Component {
       autoResize: true
     };
 
-    return <Graph graph={graph} options={options} style={{ width: '100%', height: '100%' }} />;
+    return (<div className={styles.visualization}><Graph graph={graph} options={options} style={{ width: '100%', height: '100%' }} /></div>);
   }
 }
