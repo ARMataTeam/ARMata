@@ -5,7 +5,7 @@ import Structure from '../../app/components/Structure';
 function setupMissingVariables() {
   const actions = {
   };
-  const component = shallow(<Structure data={'{"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion": "","parameters": {}, "resources":[], "outputs": {}}'} {...actions} />);
+  const component = shallow(<Structure json={'{"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion": "","parameters": {}, "resources":[], "outputs": {}}'} {...actions} />);
   return {
     component,
     actions
@@ -15,7 +15,7 @@ function setupMissingVariables() {
 function setupMissingParameters() {
   const actions = {
   };
-  const component = shallow(<Structure data={'{"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion": "", "variables": {}, "resources":[], "outputs": {}}'} {...actions} />);
+  const component = shallow(<Structure json={'{"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion": "", "variables": {}, "resources":[], "outputs": {}}'} {...actions} />);
   return {
     component,
     actions
@@ -25,7 +25,7 @@ function setupMissingParameters() {
 function setupMissingOutputs() {
   const actions = {
   };
-  const component = shallow(<Structure data={'{"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion": "", "variables": {}, "resources":[], "parameters": {}}'} {...actions} />);
+  const component = shallow(<Structure json={'{"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion": "", "variables": {}, "resources":[], "parameters": {}}'} {...actions} />);
   return {
     component,
     actions
@@ -35,7 +35,7 @@ function setupMissingOutputs() {
 function setupJsonComments() {
   const actions = {
   };
-  const component = shallow(<Structure data={'{"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion": "","parameters": {  }, /*"variables": {  },*/ "resources": [  ], "outputs": {  }}'} {...actions} />);
+  const component = shallow(<Structure json={'{"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#","contentVersion": "","parameters": {  }, /*"variables": {  },*/ "resources": [  ], "outputs": {  }}'} {...actions} />);
   return {
     component,
     actions
