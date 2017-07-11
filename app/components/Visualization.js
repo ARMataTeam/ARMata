@@ -35,17 +35,60 @@ export default class Visualization extends Component {
     }
   }
 
+  static normalizeResourceName(name: string) {
+    if (name.startsWith('[') === false) {
+      return name;
+    }
+
+    let normalizedName = name;
+    normalizedName = normalizedName.replace('[', '');
+    normalizedName = normalizedName.replace(']', '');
+    return normalizedName;
+  }
+
+  static normalizeDependencyName(dependency: string) {
+    let name = dependency;
+
+    name = name.replace('[', '');
+    name = name.replace(']', '');
+    name = name.replace('resourceId(\'', '');
+    name = name.replace('concat(\'', '');
+    name = name.replace('\',', ',');
+    name = name.replace('))', ')');
+    name = name.replace(' ', '');
+    name = name.replace(',', '/');
+
+    return name;
+  }
+
   render() {
     this.resources = this.props.json.resources;
 
     const resources = [];
+    const dependencies = [];
     for (let i = 0; i < this.resources.length; i += 1) {
-      resources.push({ id: i, label: this.resources[i].name, shape: 'image', image: this.findImage(this.resources[i].type) });
+      const resource = this.resources[i];
+      const id = `${resource.type}/${Visualization.normalizeResourceName(resource.name)}`;
+
+      const dependsOn = resource.dependsOn || [];
+      for (let y = 0; y < dependsOn.length; y += 1) {
+        dependencies.push({
+          from: id,
+          to: Visualization.normalizeDependencyName(resource.dependsOn[y])
+        });
+      }
+
+      resources.push({
+        id,
+        label: this.resources[i].name,
+        shape: 'image',
+        image: Visualization.findImage(this.resources[i].type)
+      });
     }
 
     const graph = {
       nodes: resources,
-      edges: []
+      edges: dependencies
     };
 
     const options = {
