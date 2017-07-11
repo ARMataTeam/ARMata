@@ -9,25 +9,50 @@ export default class Visualization extends Component {
 
   resources: any;
 
+  findImage(resourceType: string) {
+    switch (resourceType) {
+      case 'Microsoft.Web/serverfarms':
+        return '../resources/azure/Azure App Service_COLOR.png';
+      case 'Microsoft.Web/sites':
+        return '../resources/azure/Azure App Service - Web App_COLOR.png';
+      case 'Microsoft.Insights/components':
+        return '../resources/azure/Azure Application Insights_COLOR.png';
+      case 'Microsoft.Storage/storageAccounts':
+        return '../resources/azure/Azure Storage.png';
+      case 'Microsoft.EventHub/namespaces':
+        return '../resources/azure/Azure Event Hubs_COLOR.png';
+      case 'Microsoft.Network/trafficManagerProfiles':
+        return '../resources/azure/Azure Traffic Manager_COLOR.png';
+      default:
+        return '';
+    }
+  }
+
   render() {
     this.resources = this.props.json.resources;
 
     const resources = [];
     for (let i = 0; i < this.resources.length; i += 1) {
-      resources.push({ id: i, label: this.resources[i].name });
+      resources.push({ id: i, label: this.resources[i].name, shape: 'image', image: this.findImage(this.resources[i].type) });
     }
 
     const graph = {
       nodes: resources,
-      edges: [
-        { from: 1, to: 2 },
-        { from: 1, to: 3 },
-        { from: 2, to: 4 },
-        { from: 2, to: 5 }
-      ]
+      edges: []
     };
 
     const options = {
+      nodes: {
+        borderWidth: 4,
+        size: 30,
+        color: {
+          border: '#222222',
+          background: '#666666'
+        },
+        font: {
+          color: '#fff'
+        }
+      },
       layout: {
         hierarchical: false
       },
