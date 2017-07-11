@@ -4,11 +4,9 @@ import Subheader from 'material-ui/Subheader';
 import { List, ListItem } from 'material-ui/List';
 import styles from './Structure.css'; // eslint-disable-line flowtype-errors/show-errors
 
-const stripJsonComments = require('strip-json-comments');
-
 export default class Structure extends Component {
   props: {
-    data: string
+    json: Object
   }
 
   schema: string;
@@ -46,13 +44,12 @@ export default class Structure extends Component {
   }
 
   parseJson(): void {
-    const json = JSON.parse(stripJsonComments(this.props.data));
-    this.schema = json.$schema;
-    this.contentVersion = json.contentVersion;
-    this.parameters = json.parameters || {};
-    this.variables = json.variables || {};
-    this.resources = json.resources;
-    this.outputs = json.outputs || {};
+    this.schema = this.props.json.$schema;
+    this.contentVersion = this.props.json.contentVersion;
+    this.parameters = this.props.json.parameters || {};
+    this.variables = this.props.json.variables || {};
+    this.resources = this.props.json.resources;
+    this.outputs = this.props.json.outputs || {};
   }
 
   render() {

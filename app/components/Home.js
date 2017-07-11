@@ -2,6 +2,9 @@
 import React, { Component } from 'react';
 import Structure from './Structure';
 import styles from './Home.css'; // eslint-disable-line flowtype-errors/show-errors
+import Visualization from './Visualization';
+
+const stripJsonComments = require('strip-json-comments');
 
 export default class Home extends Component {
   props: {
@@ -20,10 +23,13 @@ export default class Home extends Component {
       );
     }
 
+    const json = JSON.parse(stripJsonComments(this.props.data));
+
     return (
       <div>
         <div className={styles.container} data-tid="container">
-          <Structure data={this.props.data} />
+          <Structure json={json} />
+          <Visualization json={json} />
         </div>
       </div>
     );
