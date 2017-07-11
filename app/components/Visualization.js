@@ -24,8 +24,14 @@ export default class Visualization extends Component {
         return '../resources/azure/Azure Event Hubs_COLOR.png';
       case 'Microsoft.Network/trafficManagerProfiles':
         return '../resources/azure/Azure Traffic Manager_COLOR.png';
+      case 'Microsoft.Network/trafficManagerProfiles/azureEndpoints':
+        return '../resources/azure/Azure Traffic Manager.png';
+      case 'Microsoft.NotificationHubs/namespaces':
+        return '../resources/azure/Azure Notification Hubs_COLOR.png';
+      case 'Microsoft.Resources/deployments':
+        return '../resources/azure/Unidentified feature object_COLOR.png';
       default:
-        return '';
+        return '../resources/azure/Unidentified feature object_COLOR.png';
     }
   }
 
