@@ -10,7 +10,7 @@ export default class Visualization extends Component {
 
   resources: any;
 
-  findImage(resourceType: string) {
+  static findImage(resourceType: string) {
     switch (resourceType) {
       case 'Microsoft.Web/serverfarms':
         return '../resources/azure/Azure App Service_COLOR.png';
