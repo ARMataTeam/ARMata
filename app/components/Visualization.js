@@ -61,6 +61,15 @@ export default class Visualization extends Component {
     return name;
   }
 
+  static findResourceName(resource: Object) {
+    let resourceName = resource.name;
+    if (resource.tags && resource.tags.displayName) {
+      resourceName = resource.tags.displayName;
+    }
+
+    return resourceName;
+  }
+
   render() {
     this.resources = this.props.json.resources;
 
@@ -80,7 +89,7 @@ export default class Visualization extends Component {
 
       resources.push({
         id,
-        label: this.resources[i].name,
+        label: Visualization.findResourceName(this.resources[i]),
         shape: 'image',
         image: Visualization.findImage(this.resources[i].type)
       });
