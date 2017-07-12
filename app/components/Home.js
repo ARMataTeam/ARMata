@@ -12,6 +12,15 @@ export default class Home extends Component {
     selectedFilename: string
   }
 
+  static removeBOM(data: string) {
+    let clearedData = data;
+    if (clearedData.charCodeAt(0) === 0xFEFF) {
+      clearedData = clearedData.slice(1);
+    }
+
+    return clearedData;
+  }
+
   render() {
     if (this.props.selectedFilename === '') {
       return (
@@ -23,7 +32,7 @@ export default class Home extends Component {
       );
     }
 
-    const json = JSON.parse(stripJsonComments(this.props.data));
+    const json = JSON.parse(stripJsonComments(Home.removeBOM(this.props.data)));
 
     return (
       <div>
