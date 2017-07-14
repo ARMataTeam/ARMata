@@ -3,6 +3,7 @@
     font-size: 12px;
     left: 54px;
     max-width: 300px;
+    min-width: 200px;
     position: fixed;
     white-space: pre-wrap;
     overflow-y: auto;

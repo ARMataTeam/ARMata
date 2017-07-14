@@ -3,6 +3,7 @@
 exports[`reducers fileDialog should handle OPEN_FILE 1`] = `
 Object {
   "fileData": undefined,
+  "hierarchicalLayout": false,
   "selectedFilename": undefined,
 }
 `;

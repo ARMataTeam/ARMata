@@ -5,7 +5,8 @@ import styles from './Visualization.css'; // eslint-disable-line flowtype-errors
 
 export default class Visualization extends Component {
   props: {
-    json: Object
+    json: Object,
+    hierarchicalLayout: boolean
   }
 
   resources: any;
@@ -113,7 +114,7 @@ export default class Visualization extends Component {
         }
       },
       layout: {
-        hierarchical: false
+        hierarchical: this.props.hierarchicalLayout
       },
       edges: {
         color: '#FFFFFF'

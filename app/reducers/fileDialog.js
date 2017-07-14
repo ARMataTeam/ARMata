@@ -24,7 +24,8 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
     case OPEN_FILE:
       return Object.assign({}, state, {
         selectedFilename: action.selectedFilename,
-        fileData: action.data
+        fileData: action.data,
+        hierarchicalLayout: false
       });
     case OPEN_FILE_ERROR:
       return Object.assign({}, state, {
