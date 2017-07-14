@@ -9,7 +9,9 @@ const stripJsonComments = require('strip-json-comments');
 export default class Home extends Component {
   props: {
     data: string,
-    selectedFilename: string
+    selectedFilename: string,
+    hierarchicalLayout: boolean,
+    toggleHierarchicalLayout: () => void
   }
 
   static removeBOM(data: string) {
@@ -37,8 +39,12 @@ export default class Home extends Component {
     return (
       <div>
         <div className={styles.container} data-tid="container">
-          <Structure json={json} />
-          <Visualization json={json} />
+          <Structure
+            json={json}
+            hierarchicalLayout={this.props.hierarchicalLayout}
+            toggleHierarchicalLayout={this.props.toggleHierarchicalLayout}
+            />
+          <Visualization json={json} hierarchicalLayout={this.props.hierarchicalLayout} />
         </div>
       </div>
     );

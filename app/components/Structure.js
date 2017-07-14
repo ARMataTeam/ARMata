@@ -2,11 +2,25 @@
 import React, { Component, Element } from 'react';
 import Subheader from 'material-ui/Subheader';
 import { List, ListItem } from 'material-ui/List';
+import Toggle from 'material-ui/Toggle';
 import styles from './Structure.css'; // eslint-disable-line flowtype-errors/show-errors
+
+const inlineStyles = {
+  element: {
+    marginLeft: '10px',
+    width: '95% !important'
+  },
+  label: {
+    fontSize: '11px',
+    width: 'auto !important'
+  }
+};
 
 export default class Structure extends Component {
   props: {
-    json: Object
+    json: Object,
+    hierarchicalLayout: boolean,
+    toggleHierarchicalLayout: () => void
   }
 
   schema: string;
@@ -65,6 +79,7 @@ export default class Structure extends Component {
           <ListItem className={styles.structureHeader} primaryText="Parameters" initiallyOpen={false} nestedItems={this.displayParameters()} />
           <ListItem className={styles.structureHeader} primaryText="Outputs" initiallyOpen={false} nestedItems={this.displayOutputs()} />
         </List>
+        <Toggle label="Hierarchical layout?" labelStyle={inlineStyles.label} style={inlineStyles.element} toggled={this.props.hierarchicalLayout} onToggle={this.props.toggleHierarchicalLayout} />
       </div>);
   }
 }
