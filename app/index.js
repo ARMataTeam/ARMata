@@ -40,10 +40,12 @@ if (module.hot) {
 }
 
 ipcRenderer.on('open-file', (event, filename) => {
+  if (!filename) return;
+
   const selectedFilename = filename[0];
   fs.readFile(selectedFilename, 'utf-8', (err, data) => {
     if (err) {
-      alert(`An error ocurred reading the file : ${err.message}`);
+      store.dispatch(fileDialogActions.error(selectedFilename, err));
       return;
     }
 

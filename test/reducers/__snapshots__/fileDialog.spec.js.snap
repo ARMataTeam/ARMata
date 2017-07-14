@@ -9,7 +9,9 @@ Object {
 
 exports[`reducers fileDialog should handle initial state 1`] = `
 Object {
+  "errorMessage": "",
   "fileData": "",
+  "isError": false,
   "selectedFilename": "",
 }
 `;
