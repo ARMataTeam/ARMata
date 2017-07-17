@@ -7,9 +7,11 @@ import Alert from '../components/Alert';
 export default class App extends Component {
   props: {
     clearErrors: () => void,
+    changeView: () => void,
     children: Children,
     errorMessage: string,
-    isError: boolean
+    isError: boolean,
+    currentView: string
   };
 
   render() {
@@ -19,7 +21,7 @@ export default class App extends Component {
           errorMessage={this.props.errorMessage}
           isError={this.props.isError}
           clearErrors={this.props.clearErrors} />
-        <SideMenu />
+        <SideMenu changeView={this.props.changeView} currentView={this.props.currentView} />
         {this.props.children}
       </div>
     );
