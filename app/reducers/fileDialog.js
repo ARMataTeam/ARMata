@@ -1,5 +1,5 @@
 // @flow
-import { OPEN_FILE, OPEN_FILE_ERROR, CLEAR_ERRORS } from '../actions/fileDialog';
+import { OPEN_FILE, OPEN_FILE_ERROR } from '../actions/fileDialog';
 
 type actionType = {
   type: string
@@ -31,11 +31,6 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
       return Object.assign({}, state, {
         errorMessage: action.errorMessage,
         isError: true
-      });
-    case CLEAR_ERRORS:
-      return Object.assign({}, state, {
-        errorMessage: '',
-        isError: false
       });
     default:
       return state;

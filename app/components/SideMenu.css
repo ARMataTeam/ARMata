@@ -7,6 +7,10 @@
   width: 54px;
 }
 
+.sideMenu div {
+  height: auto !important;
+}
+
 .menuItemIcon {
   padding: 0;
 }
