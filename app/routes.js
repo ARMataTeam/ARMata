@@ -8,7 +8,7 @@ import JsonPreview from './containers/JsonPreview';
 export default () => (
   <App>
     <Switch>
-
+      <Route exact path="/" component={HomePage} />
       <Route path="/JsonPreview" component={JsonPreview} />
       <Route path="/Structure" component={HomePage} />
     </Switch>

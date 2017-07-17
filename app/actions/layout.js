@@ -10,7 +10,7 @@ type actionType = {
 type changeViewType = {
   type: string,
   view: string
-}
+};
 
 export function toggleHierarchicalLayout() {
   return (dispatch: (action: actionType) => void) => {
@@ -19,7 +19,7 @@ export function toggleHierarchicalLayout() {
 }
 
 export function changeView(view: string) {
-  return (dispatch: (action: actionType) => void) => {
+  return (dispatch: (action: changeViewType) => void) => {
     dispatch({ type: CHANGE_VIEW, view });
   };
 }

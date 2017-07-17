@@ -31,7 +31,10 @@ export default class Home extends Component {
             hierarchicalLayout={this.props.hierarchicalLayout}
             toggleHierarchicalLayout={this.props.toggleHierarchicalLayout}
             />
-          <Visualization json={this.props.json} hierarchicalLayout={this.props.hierarchicalLayout} />
+          <Visualization
+            json={this.props.json}
+            hierarchicalLayout={this.props.hierarchicalLayout}
+            />
         </div>
       </div>
     );

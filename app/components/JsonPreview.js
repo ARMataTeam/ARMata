@@ -9,10 +9,13 @@ export default class JsonPreview extends Component {
   }
 
   render() {
-      if(this.props.template) {
-      return <div className={styles.jsonView}><ReactJson src={this.props.template } collapsed={2} /></div>;
+    if (this.props.template) {
+      return (
+        <div className={styles.jsonView}>
+          <ReactJson src={this.props.template} collapsed={2} />
+        </div>);
     }
 
-    return <div></div>;
+    return <div />;
   }
 }

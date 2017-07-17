@@ -32,7 +32,7 @@ function removeBOM(data: string) {
 
 export default function fileDialog(state: fileDialogStateType = initialState, action: actionType) {
   switch (action.type) {
-    case OPEN_FILE:
+    case OPEN_FILE: {
       const rawData = stripJsonComments(removeBOM(action.data));
       const json = JSON.parse(rawData);
 
@@ -41,12 +41,15 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
         fileData: json,
         hierarchicalLayout: false
       });
-    case OPEN_FILE_ERROR:
+    }
+    case OPEN_FILE_ERROR: {
       return Object.assign({}, state, {
         errorMessage: action.errorMessage,
         isError: true
       });
-    default:
+    }
+    default: {
       return state;
+    }
   }
 }
