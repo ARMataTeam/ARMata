@@ -4,23 +4,12 @@ import Structure from './Structure';
 import styles from './Home.css'; // eslint-disable-line flowtype-errors/show-errors
 import Visualization from './Visualization';
 
-const stripJsonComments = require('strip-json-comments');
-
 export default class Home extends Component {
   props: {
-    data: string,
+    json: Object,
     selectedFilename: string,
     hierarchicalLayout: boolean,
     toggleHierarchicalLayout: () => void
-  }
-
-  static removeBOM(data: string) {
-    let clearedData = data;
-    if (clearedData.charCodeAt(0) === 0xFEFF) {
-      clearedData = clearedData.slice(1);
-    }
-
-    return clearedData;
   }
 
   render() {
@@ -34,17 +23,15 @@ export default class Home extends Component {
       );
     }
 
-    const json = JSON.parse(stripJsonComments(Home.removeBOM(this.props.data)));
-
     return (
       <div>
         <div className={styles.container} data-tid="container">
           <Structure
-            json={json}
+            json={this.props.json}
             hierarchicalLayout={this.props.hierarchicalLayout}
             toggleHierarchicalLayout={this.props.toggleHierarchicalLayout}
             />
-          <Visualization json={json} hierarchicalLayout={this.props.hierarchicalLayout} />
+          <Visualization json={this.props.json} hierarchicalLayout={this.props.hierarchicalLayout} />
         </div>
       </div>
     );

@@ -7,7 +7,7 @@ import * as LayoutActions from '../actions/layout';
 function mapStateToProps(state) {
   return {
     selectedFilename: state.fileDialog.selectedFilename,
-    data: state.fileDialog.fileData,
+    json: state.fileDialog.fileData,
     error: state.fileDialog.error,
     hierarchicalLayout: state.layout.hierarchicalLayout
   };

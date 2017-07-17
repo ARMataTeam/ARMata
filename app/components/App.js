@@ -10,18 +10,18 @@ export default class App extends Component {
     changeView: () => void,
     children: Children,
     errorMessage: string,
-    isError: boolean
+    isError: boolean,
+    currentView: string
   };
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <Alert
           errorMessage={this.props.errorMessage}
           isError={this.props.isError}
           clearErrors={this.props.clearErrors} />
-        <SideMenu changeView={this.props.changeView} />
+        <SideMenu changeView={this.props.changeView} currentView={this.props.currentView} />
         {this.props.children}
       </div>
     );
