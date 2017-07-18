@@ -9,7 +9,7 @@ export default class App extends Component {
     clearErrors: () => void,
     changeView: () => void,
     children: Children,
-    errorMessage: string,
+    message: string,
     isError: boolean,
     currentView: string
   };
@@ -18,7 +18,7 @@ export default class App extends Component {
     return (
       <div>
         <Alert
-          errorMessage={this.props.errorMessage}
+          message={this.props.message}
           isError={this.props.isError}
           clearErrors={this.props.clearErrors} />
         <SideMenu changeView={this.props.changeView} currentView={this.props.currentView} />

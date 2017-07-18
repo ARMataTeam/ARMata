@@ -6,7 +6,7 @@ import * as LayoutActions from '../actions/layout';
 
 function mapStateToProps(state) {
   return {
-    errorMessage: state.layout.errorMessage,
+    message: state.layout.message,
     isError: state.layout.isError,
     currentView: state.layout.view
   };

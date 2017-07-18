@@ -60,13 +60,13 @@ ipcRenderer.on('update-error', (event, err) => {
 });
 
 ipcRenderer.on('checking-for-update', (event) => {
-  store.dispatch(updateActions.checkingForUpdate());
+  store.dispatch(layoutActions.alert('Checking for update...'));
 });
 
 ipcRenderer.on('update-available', (event) => {
-  store.dispatch(updateActions.updateAvailable());
+  store.dispatch(layoutActions.alert('Update available!'));
 });
 
 ipcRenderer.on('update-not-available', (event) => {
-  store.dispatch(updateActions.updateNotAvailable());
+  store.dispatch(layoutActions.alert('Update not available!'));
 });
