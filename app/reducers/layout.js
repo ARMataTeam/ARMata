@@ -1,5 +1,5 @@
 // @flow
-import { CHANGE_LAYOUT, CHANGE_VIEW, CLEAR_ERRORS } from '../actions/layout';
+import { CHANGE_LAYOUT, CHANGE_VIEW, CLEAR_ERRORS, ERROR } from '../actions/layout';
 
 type actionType = {
   type: string
@@ -30,10 +30,17 @@ export default function layout(state: layoutStateType = initialState, action: ac
         view: action.view
       });
     case CLEAR_ERRORS:
+      console.log(state);
       return Object.assign({}, state, {
         errorMessage: '',
         isError: false
       });
+    case ERROR: {
+      return Object.assign({}, state, {
+        errorMessage: action.errorMessage,
+        isError: true
+      });
+    }
     default:
       return state;
   }

@@ -1,5 +1,5 @@
 // @flow
-import { OPEN_FILE, OPEN_FILE_ERROR } from '../actions/fileDialog';
+import { OPEN_FILE } from '../actions/fileDialog';
 
 const stripJsonComments = require('strip-json-comments');
 
@@ -9,16 +9,12 @@ type actionType = {
 
 type fileDialogStateType = {
   selectedFilename: string,
-  fileData: Object,
-  errorMessage: string,
-  isError: boolean
+  fileData: Object
 };
 
 const initialState = {
   selectedFilename: '',
-  fileData: {},
-  errorMessage: '',
-  isError: false
+  fileData: {}
 };
 
 function removeBOM(data: string) {
@@ -40,12 +36,6 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
         selectedFilename: action.selectedFilename,
         fileData: json,
         hierarchicalLayout: false
-      });
-    }
-    case OPEN_FILE_ERROR: {
-      return Object.assign({}, state, {
-        errorMessage: action.errorMessage,
-        isError: true
       });
     }
     default: {

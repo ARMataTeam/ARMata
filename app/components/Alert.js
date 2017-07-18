@@ -20,7 +20,7 @@ export default class Alert extends Component {
     return (<Dialog
       actions={actions}
       modal={false}
-      open={this.props.isError}
+      open={this.props.isError === true}
       onRequestClose={this.props.clearErrors}
       bodyClassName={styles.alert}
       contentClassName={styles.alert}>
