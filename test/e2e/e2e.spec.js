@@ -27,6 +27,6 @@ describe('main window', function spec() {
     await client.waitUntilWindowLoaded();
     await delay(500);
     const title = await browserWindow.getTitle();
-    expect(title).toBe('ARMata - ARM templates visualizer');
+    expect(title).toContain('ARMata - ARM templates visualizer');
   });
 });
