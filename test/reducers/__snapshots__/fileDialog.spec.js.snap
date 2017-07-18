@@ -10,6 +10,15 @@ Object {
 }
 `;
 
+exports[`reducers fileDialog should handle OPEN_FILE_ERROR 1`] = `
+Object {
+  "errorMessage": undefined,
+  "fileData": null,
+  "isError": true,
+  "selectedFilename": "",
+}
+`;
+
 exports[`reducers fileDialog should handle initial state 1`] = `
 Object {
   "errorMessage": "",

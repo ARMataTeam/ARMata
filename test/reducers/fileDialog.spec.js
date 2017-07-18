@@ -1,5 +1,5 @@
 import fileDialog from '../../app/reducers/fileDialog';
-import { OPEN_FILE } from '../../app/actions/fileDialog';
+import { OPEN_FILE, OPEN_FILE_ERROR } from '../../app/actions/fileDialog';
 
 describe('reducers', () => {
   describe('fileDialog', () => {
@@ -9,6 +9,10 @@ describe('reducers', () => {
 
     it('should handle OPEN_FILE', () => {
       expect(fileDialog({ selectedFilename: 'C:\\Temp\\Foo.json', fileData: '{"foo":"bar"}' }, { type: OPEN_FILE, data: '{"foo":"bar"}' })).toMatchSnapshot();
+    });
+
+    it('should handle OPEN_FILE_ERROR', () => {
+      expect(fileDialog({ selectedFilename: '', fileData: null }, { type: OPEN_FILE_ERROR })).toMatchSnapshot();
     });
   });
 });

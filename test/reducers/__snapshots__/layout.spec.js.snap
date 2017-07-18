@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reducers layout should handle CHANGE_LAYOUT 1`] = `
+Object {
+  "errorMessage": "",
+  "hierarchicalLayout": true,
+  "isError": false,
+  "view": "Structure",
+}
+`;
+
+exports[`reducers layout should handle CHANGE_VIEW 1`] = `
+Object {
+  "errorMessage": "",
+  "hierarchicalLayout": false,
+  "isError": false,
+  "view": "JsonPreview",
+}
+`;
+
+exports[`reducers layout should handle CLEAR_ERRORS 1`] = `
+Object {
+  "errorMessage": "",
+  "hierarchicalLayout": false,
+  "isError": false,
+  "view": "Structure",
+}
+`;
+
+exports[`reducers layout should handle initial state 1`] = `
+Object {
+  "errorMessage": "",
+  "hierarchicalLayout": false,
+  "isError": false,
+  "view": "Structure",
+}
+`;

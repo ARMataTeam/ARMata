@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions should error should create error action 1`] = `
+Object {
+  "errorMessage": undefined,
+  "selectedFilename": undefined,
+  "type": "OPEN_FILE_ERROR",
+}
+`;
+
+exports[`actions should open should create open action 1`] = `
+Object {
+  "data": undefined,
+  "selectedFilename": undefined,
+  "type": "OPEN_FILE",
+}
+`;
