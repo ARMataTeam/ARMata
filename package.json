@@ -31,15 +31,16 @@
   },
   "browserslist": "electron 1.6",
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.develar.ElectronReact",
+    "productName": "ARMata",
+    "appId": "ARMata",
     "files": [
       "dist/",
       "node_modules/",
       "app.html",
       "main.prod.js",
       "main.prod.js.map",
-      "package.json"
+      "package.json",
+      "resources/azure"
     ],
     "dmg": {
       "contents": [
@@ -56,9 +57,7 @@
       ]
     },
     "win": {
-      "target": [
-        "nsis"
-      ]
+      "target": "NSIS"
     },
     "linux": {
       "target": [
