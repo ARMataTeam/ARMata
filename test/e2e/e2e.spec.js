@@ -29,4 +29,12 @@ describe('main window', function spec() {
     const title = await browserWindow.getTitle();
     expect(title).toContain('ARMata - ARM templates visualizer');
   });
+
+  it('shows an initial window', async () => {
+    const { client } = this.app;
+
+    return client.getWindowCount().then(function (count) {
+      expect(count).toBe(1);
+    })
+  })
 });
