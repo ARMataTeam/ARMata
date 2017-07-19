@@ -2,7 +2,7 @@ import { Application } from 'spectron';
 import electronPath from 'electron';
 import path from 'path';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
 
 const delay = time => new Promise(resolve => setTimeout(resolve, time));
 
