@@ -44,7 +44,7 @@ const os = require('os');
 
 const version = app.getVersion();
 const platform = `${os.platform()}_${os.arch()}`;
-const updaterFeedURL = `http://armata.herokuapp.com/update/${platform}/${version}`;
+const updaterFeedURL = `http://armatanuts.herokuapp.com/update/${platform}/${version}`;
 
 /**
  * Add event listeners...
