@@ -6,8 +6,8 @@ import * as LayoutActions from '../actions/layout';
 
 function mapStateToProps(state) {
   return {
-    errorMessage: state.fileDialog.errorMessage,
-    isError: state.fileDialog.isError,
+    message: state.layout.message,
+    isError: state.layout.isError,
     currentView: state.layout.view
   };
 }

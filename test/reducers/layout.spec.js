@@ -11,7 +11,7 @@ describe('reducers', () => {
       expect(layout({
         hierarchicalLayout: false,
         view: 'Structure',
-        errorMessage: '',
+        message: '',
         isError: false
       }, { type: CHANGE_LAYOUT })).toMatchSnapshot();
     });
@@ -20,7 +20,7 @@ describe('reducers', () => {
       expect(layout({
         hierarchicalLayout: false,
         view: 'Structure',
-        errorMessage: '',
+        message: '',
         isError: false
       }, { type: CHANGE_VIEW, view: 'JsonPreview' })).toMatchSnapshot();
     });
@@ -29,7 +29,7 @@ describe('reducers', () => {
       expect(layout({
         hierarchicalLayout: false,
         view: 'Structure',
-        errorMessage: 'Some message',
+        message: 'Some message',
         isError: true
       }, { type: CLEAR_ERRORS })).toMatchSnapshot();
     });

@@ -1,5 +1,5 @@
 // @flow
-import { CHANGE_LAYOUT, CHANGE_VIEW, CLEAR_ERRORS } from '../actions/layout';
+import { CHANGE_LAYOUT, CHANGE_VIEW, CLEAR_ERRORS, ERROR, ALERT } from '../actions/layout';
 
 type actionType = {
   type: string
@@ -8,14 +8,14 @@ type actionType = {
 type layoutStateType = {
   hierarchicalLayout: boolean,
   view: string,
-  errorMessage: string,
+  message: string,
   isError: boolean
 };
 
 const initialState = {
   hierarchicalLayout: false,
   view: 'Structure',
-  errorMessage: '',
+  message: '',
   isError: false
 };
 
@@ -31,8 +31,17 @@ export default function layout(state: layoutStateType = initialState, action: ac
       });
     case CLEAR_ERRORS:
       return Object.assign({}, state, {
-        errorMessage: '',
+        message: '',
         isError: false
+      });
+    case ERROR:
+      return Object.assign({}, state, {
+        message: action.message,
+        isError: true
+      });
+    case ALERT:
+      return Object.assign({}, state, {
+        message: action.message
       });
     default:
       return state;

@@ -24,7 +24,7 @@ describe('actions', () => {
     const fn = actions.clearErrors();
     expect(fn).toBeInstanceOf(Function);
     const dispatch = spy();
-    const getState = () => ({ isError: false, errorMessage: '' });
+    const getState = () => ({ isError: false, message: '' });
     fn(dispatch, getState);
     expect(dispatch.calledWith({ type: actions.CLEAR_ERRORS })).toBe(true);
   });

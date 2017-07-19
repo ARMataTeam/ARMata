@@ -11,6 +11,7 @@ import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
 import './app.global.css';
 import * as fileDialogActions from './actions/fileDialog';
+import * as layoutActions from './actions/layout';
 
 const fs = require('fs');
 
@@ -45,10 +46,26 @@ ipcRenderer.on('open-file', (event, filename) => {
   const selectedFilename = filename[0];
   fs.readFile(selectedFilename, 'utf-8', (err, data) => {
     if (err) {
-      store.dispatch(fileDialogActions.error(selectedFilename, err));
+      store.dispatch(layoutActions.error(err));
       return;
     }
 
     store.dispatch(fileDialogActions.open(selectedFilename, data));
   });
+});
+
+ipcRenderer.on('update-error', (event, err) => {
+  store.dispatch(layoutActions.error(err));
+});
+
+ipcRenderer.on('checking-for-update', () => {
+  store.dispatch(layoutActions.alert('Checking for update...'));
+});
+
+ipcRenderer.on('update-available', () => {
+  store.dispatch(layoutActions.alert('Update available!'));
+});
+
+ipcRenderer.on('update-not-available', () => {
+  store.dispatch(layoutActions.alert('Update not available!'));
 });
