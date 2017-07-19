@@ -33,8 +33,6 @@ describe('main window', function spec() {
   it('shows an initial window', async () => {
     const { client } = this.app;
 
-    return client.getWindowCount().then(function (count) {
-      expect(count).toBe(1);
-    })
-  })
+    return client.getWindowCount().then((count) => expect(count).toBe(1));
+  });
 });
