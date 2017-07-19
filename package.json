@@ -1,6 +1,6 @@
 {
   "name": "ARMata",
-  "productName": "ARMata",
+  "productName": "ARMata Templates Visualizer",
   "version": "1.0.0",
   "description": "ARM templates visualizer & editor",
   "scripts": {
@@ -22,7 +22,7 @@
     "flow": "flow check",
     "flow-typed": "rimraf flow-typed/npm && flow-typed install --overwrite || true",
     "start-hot-renderer": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./app/main.dev",
-    "postinstall": "concurrently \"npm run flow-typed\" \"npm run build\" \"npm run build-dll\" \"install-app-deps\" \"node node_modules/fbjs-scripts/node/check-dev-engines.js package.json\"",
+    "postinstall": "npm run flow-typed npm run build npm run build-dll install-app-deps node node_modules/fbjs-scripts/node/check-dev-engines.js package.json",
     "dev": "cross-env START_HOT=1 npm run hot-updates-server",
     "package": "npm run build && build --publish never",
     "package-win": "npm run build && build --win --x64",
@@ -167,7 +167,7 @@
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.5",
     "sinon": "^2.3.1",
-    "spectron": "^3.7.0",
+    "spectron": "^3.7.2",
     "style-loader": "^0.18.1",
     "stylefmt": "^5.3.2",
     "stylelint": "^7.10.1",

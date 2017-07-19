@@ -2,7 +2,7 @@ import { Application } from 'spectron';
 import electronPath from 'electron';
 import path from 'path';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
 
 const delay = time => new Promise(resolve => setTimeout(resolve, time));
 
@@ -27,6 +27,12 @@ describe('main window', function spec() {
     await client.waitUntilWindowLoaded();
     await delay(500);
     const title = await browserWindow.getTitle();
-    expect(title).toContain('ARMata - ARM templates visualizer');
+    return expect(title).toContain('ARMata - ARM templates visualizer');
+  });
+
+  it('shows an initial window', async () => {
+    const { client } = this.app;
+
+    return client.getWindowCount().then((count) => expect(count).toBe(1));
   });
 });
