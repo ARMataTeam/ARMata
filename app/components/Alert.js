@@ -7,7 +7,6 @@ import styles from './Alert.css'; // eslint-disable-line flowtype-errors/show-er
 export default class Alert extends Component {
   props: {
     message: string,
-    isError: boolean,
     clearErrors: () => void
   };
 

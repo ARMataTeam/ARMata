@@ -11,7 +11,6 @@ import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
 import './app.global.css';
 import * as fileDialogActions from './actions/fileDialog';
-import * as updateActions from './actions/update';
 import * as layoutActions from './actions/layout';
 
 const fs = require('fs');
@@ -59,14 +58,14 @@ ipcRenderer.on('update-error', (event, err) => {
   store.dispatch(layoutActions.error(err));
 });
 
-ipcRenderer.on('checking-for-update', (event) => {
+ipcRenderer.on('checking-for-update', () => {
   store.dispatch(layoutActions.alert('Checking for update...'));
 });
 
-ipcRenderer.on('update-available', (event) => {
+ipcRenderer.on('update-available', () => {
   store.dispatch(layoutActions.alert('Update available!'));
 });
 
-ipcRenderer.on('update-not-available', (event) => {
+ipcRenderer.on('update-not-available', () => {
   store.dispatch(layoutActions.alert('Update not available!'));
 });

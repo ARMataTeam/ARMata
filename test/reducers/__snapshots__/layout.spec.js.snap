@@ -2,36 +2,36 @@
 
 exports[`reducers layout should handle CHANGE_LAYOUT 1`] = `
 Object {
-  "errorMessage": "",
   "hierarchicalLayout": true,
   "isError": false,
+  "message": "",
   "view": "Structure",
 }
 `;
 
 exports[`reducers layout should handle CHANGE_VIEW 1`] = `
 Object {
-  "errorMessage": "",
   "hierarchicalLayout": false,
   "isError": false,
+  "message": "",
   "view": "JsonPreview",
 }
 `;
 
 exports[`reducers layout should handle CLEAR_ERRORS 1`] = `
 Object {
-  "errorMessage": "",
   "hierarchicalLayout": false,
   "isError": false,
+  "message": "",
   "view": "Structure",
 }
 `;
 
 exports[`reducers layout should handle initial state 1`] = `
 Object {
-  "errorMessage": "",
   "hierarchicalLayout": false,
   "isError": false,
+  "message": "",
   "view": "Structure",
 }
 `;

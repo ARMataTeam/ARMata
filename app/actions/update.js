@@ -3,10 +3,6 @@ export const CHECKING_FOR_UPDATE = 'CHECKINF_FOR_UPDATE';
 export const UPDATE_AVAILABLE = 'UPDATE_AVAILABLE';
 export const UPDATE_NOT_AVAILABLE = 'UPDATE_NOT_AVAILABLE';
 
-type actionType = {
-  type: string
-};
-
 export function checkingForUpdate() {
   return { type: CHECKING_FOR_UPDATE };
 }
