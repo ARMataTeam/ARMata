@@ -10,7 +10,8 @@
  *
  * @flow
  */
-import { app, BrowserWindow, autoUpdater } from 'electron';
+import { app, BrowserWindow } from 'electron';
+import { autoUpdater } from 'electron-updater';
 import MenuBuilder from './menu';
 
 let mainWindow = null;
@@ -39,12 +40,6 @@ const installExtensions = async () => {
     .all(extensions.map(name => installer.default(installer[name], forceDownload)))
     .catch(console.log);
 };
-
-const os = require('os');
-
-const version = app.getVersion();
-const platform = `${os.platform()}_${os.arch()}`;
-const updaterFeedURL = `http://armatanuts.herokuapp.com/update/${platform}/${version}`;
 
 /**
  * Add event listeners...
@@ -81,12 +76,14 @@ app.on('ready', async () => {
     mainWindow.show();
     mainWindow.focus();
 
-    autoUpdater.setFeedURL(updaterFeedURL);
     autoUpdater.on('error', err => mainWindow.webContents.send('update-error', err.toString()));
     autoUpdater.on('checking-for-update', () => mainWindow.webContents.send('checking-for-update'));
     autoUpdater.on('update-available', () => mainWindow.webContents.send('update-available'));
     autoUpdater.on('update-not-available', () => mainWindow.webContents.send('update-not-available'));
-    autoUpdater.checkForUpdates();
+
+    if (process.env.NODE_ENV !== 'development') {
+      autoUpdater.checkForUpdates();
+    }
   });
 
   mainWindow.on('closed', () => {
