@@ -10,8 +10,9 @@
  *
  * @flow
  */
-import { app, BrowserWindow, autoUpdater } from 'electron';
+import { app, BrowserWindow } from 'electron';
 import MenuBuilder from './menu';
+import { autoUpdater } from "electron-updater"
 
 let mainWindow = null;
 
@@ -81,12 +82,15 @@ app.on('ready', async () => {
     mainWindow.show();
     mainWindow.focus();
 
-    autoUpdater.setFeedURL(updaterFeedURL);
+    //autoUpdater.setFeedURL(updaterFeedURL);
     autoUpdater.on('error', err => mainWindow.webContents.send('update-error', err.toString()));
     autoUpdater.on('checking-for-update', () => mainWindow.webContents.send('checking-for-update'));
     autoUpdater.on('update-available', () => mainWindow.webContents.send('update-available'));
     autoUpdater.on('update-not-available', () => mainWindow.webContents.send('update-not-available'));
-    autoUpdater.checkForUpdates();
+
+    if (process.env.NODE_ENV !== 'development') {
+      autoUpdater.checkForUpdates();
+    }
   });
 
   mainWindow.on('closed', () => {
