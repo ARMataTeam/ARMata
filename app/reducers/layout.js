@@ -9,14 +9,16 @@ type layoutStateType = {
   hierarchicalLayout: boolean,
   view: string,
   message: string,
-  isError: boolean
+  isError: boolean,
+  buttons: Object[]
 };
 
 const initialState = {
   hierarchicalLayout: false,
   view: 'Structure',
   message: '',
-  isError: false
+  isError: false,
+  buttons: []
 };
 
 export default function layout(state: layoutStateType = initialState, action: actionType) {
@@ -41,7 +43,8 @@ export default function layout(state: layoutStateType = initialState, action: ac
       });
     case ALERT:
       return Object.assign({}, state, {
-        message: action.message
+        message: action.message,
+        buttons: action.buttons
       });
     default:
       return state;

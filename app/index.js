@@ -59,13 +59,9 @@ ipcRenderer.on('update-error', (event, err) => {
 });
 
 ipcRenderer.on('checking-for-update', () => {
-  store.dispatch(layoutActions.alert('Checking for update...'));
+  store.dispatch(layoutActions.alert('Checking for update...', []));
 });
 
 ipcRenderer.on('update-available', () => {
-  store.dispatch(layoutActions.alert('Update available!'));
-});
-
-ipcRenderer.on('update-not-available', () => {
-  store.dispatch(layoutActions.alert('Update not available!'));
+  store.dispatch(layoutActions.alert('Would you like to download and install an update?', [{ label: 'Yes', action: 'DOWNLOAD_UPDATE' }]));
 });

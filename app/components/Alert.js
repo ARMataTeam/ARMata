@@ -7,20 +7,27 @@ import styles from './Alert.css'; // eslint-disable-line flowtype-errors/show-er
 export default class Alert extends Component {
   props: {
     message: string,
-    clearErrors: () => void
+    buttons: Object[],
+    dispatchButtonClick: (action: string) => void
   };
 
   render() {
-    const actions =
-      [
-        <FlatButton label="Got it!" onTouchTap={this.props.clearErrors} />
-      ];
+    const actions = [];
+    for (let i = 0; i < this.props.buttons.length; i += 1) {
+      const button = this.props.buttons[i];
+      actions.push(
+        <FlatButton
+          label={button.label}
+          onTouchTap={() => this.props.dispatchButtonClick(button.action)}
+          />
+      );
+    }
 
     return (<Dialog
       actions={actions}
       modal={false}
       open={this.props.message !== ''}
-      onRequestClose={this.props.clearErrors}
+      onRequestClose={() => this.props.dispatchButtonClick('CLEAR_ERRORS')}
       bodyClassName={styles.alert}
       contentClassName={styles.alert}>
       {this.props.message}</Dialog>);

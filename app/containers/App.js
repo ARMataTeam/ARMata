@@ -7,8 +7,8 @@ import * as LayoutActions from '../actions/layout';
 function mapStateToProps(state) {
   return {
     message: state.layout.message,
-    isError: state.layout.isError,
-    currentView: state.layout.view
+    currentView: state.layout.view,
+    buttons: state.layout.buttons
   };
 }
 

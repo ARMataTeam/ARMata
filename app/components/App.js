@@ -6,12 +6,12 @@ import Alert from '../components/Alert';
 
 export default class App extends Component {
   props: {
-    clearErrors: () => void,
+    dispatchButtonClick: (action: string) => void,
     changeView: () => void,
     children: Children,
     message: string,
-    isError: boolean,
-    currentView: string
+    currentView: string,
+    buttons: Object[]
   };
 
   render() {
@@ -19,8 +19,8 @@ export default class App extends Component {
       <div>
         <Alert
           message={this.props.message}
-          isError={this.props.isError}
-          clearErrors={this.props.clearErrors} />
+          dispatchButtonClick={this.props.dispatchButtonClick}
+          buttons={this.props.buttons} />
         <SideMenu changeView={this.props.changeView} currentView={this.props.currentView} />
         {this.props.children}
       </div>
