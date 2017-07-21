@@ -1,5 +1,6 @@
 // @flow
 import { Menu, shell, BrowserWindow, dialog } from 'electron';
+import Updater from './updater'
 
 export default class MenuBuilder {
   mainWindow: BrowserWindow;
@@ -110,6 +111,10 @@ export default class MenuBuilder {
         click() {
           shell.openExternal('https://github.com/ARMataTeam/ARMata/issues');
         }
+      },
+      {
+        label: 'Check for updates',
+        click: () => { Updater.checkForUpdates(); }
       }]
     }];
 

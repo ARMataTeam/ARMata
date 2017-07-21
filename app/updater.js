@@ -15,6 +15,10 @@ export default class Updater {
     autoUpdater.on('update-available', () => mainWindow.webContents.send('update-available'));
     autoUpdater.on('update-downloaded', () => autoUpdater.quitAndInstall());
 
+    Updater.checkForUpdates();
+  }
+
+  static checkForUpdates() {
     if (process.env.NODE_ENV !== 'development') {
       autoUpdater.checkForUpdates();
     }
