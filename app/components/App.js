@@ -1,17 +1,20 @@
 // @flow
 import React, { Component } from 'react';
 import type { Children } from 'react';
+import { ProgressInfo } from 'electron-builder-http';
 import SideMenu from '../components/SideMenu';
 import Alert from '../components/Alert';
+import Progress from '../components/Progress';
 
 export default class App extends Component {
   props: {
-    clearErrors: () => void,
+    dispatchButtonClick: (action: string) => void,
     changeView: () => void,
     children: Children,
     message: string,
-    isError: boolean,
-    currentView: string
+    currentView: string,
+    buttons: Object[],
+    progressState: ProgressInfo
   };
 
   render() {
@@ -19,9 +22,10 @@ export default class App extends Component {
       <div>
         <Alert
           message={this.props.message}
-          isError={this.props.isError}
-          clearErrors={this.props.clearErrors} />
+          dispatchButtonClick={this.props.dispatchButtonClick}
+          buttons={this.props.buttons} />
         <SideMenu changeView={this.props.changeView} currentView={this.props.currentView} />
+        <Progress progress={this.props.progressState} />
         {this.props.children}
       </div>
     );

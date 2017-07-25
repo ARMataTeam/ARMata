@@ -1,5 +1,6 @@
 // @flow
-import { CHANGE_LAYOUT, CHANGE_VIEW, CLEAR_ERRORS, ERROR, ALERT } from '../actions/layout';
+import { ProgressInfo } from 'electron-builder-http';
+import { CHANGE_LAYOUT, CHANGE_VIEW, CLEAR_ERRORS, ERROR, ALERT, PROGRESS } from '../actions/layout';
 
 type actionType = {
   type: string
@@ -9,14 +10,18 @@ type layoutStateType = {
   hierarchicalLayout: boolean,
   view: string,
   message: string,
-  isError: boolean
+  isError: boolean,
+  buttons: Object[],
+  progress: ProgressInfo
 };
 
 const initialState = {
   hierarchicalLayout: false,
   view: 'Structure',
   message: '',
-  isError: false
+  isError: false,
+  buttons: [],
+  progress: {}
 };
 
 export default function layout(state: layoutStateType = initialState, action: actionType) {
@@ -41,7 +46,12 @@ export default function layout(state: layoutStateType = initialState, action: ac
       });
     case ALERT:
       return Object.assign({}, state, {
-        message: action.message
+        message: action.message,
+        buttons: action.buttons
+      });
+    case PROGRESS:
+      return Object.assign({}, state, {
+        progress: action.progress
       });
     default:
       return state;

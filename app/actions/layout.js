@@ -1,9 +1,12 @@
 // @flow
+import { ProgressInfo } from 'electron-updater';
+
 export const CHANGE_LAYOUT = 'CHANGE_LAYOUT';
 export const CHANGE_VIEW = 'CHANGE_VIEW';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const ERROR = 'ERROR';
 export const ALERT = 'ALERT';
+export const PROGRESS = 'PROGRESS';
 
 type actionType = {
   type: string
@@ -26,20 +29,29 @@ export function changeView(view: string) {
   };
 }
 
-export function clearErrors() {
+export function dispatchButtonClick(action: string) {
   return (dispatch: (action: actionType) => void) => {
+    dispatch({ type: action });
     dispatch({ type: CLEAR_ERRORS });
   };
 }
 
 export function error(errorMessage: string) {
+  const buttons = [{ label: 'Got it', action: CLEAR_ERRORS }];
+
   return {
-    type: ERROR, message: errorMessage
+    type: ERROR, message: errorMessage, buttons
   };
 }
 
-export function alert(alertMessage: string) {
+export function alert(alertMessage: string, buttons: Object[] = []) {
   return {
-    type: ALERT, message: alertMessage
+    type: ALERT, message: alertMessage, buttons
+  };
+}
+
+export function notifyProgress(progress: ProgressInfo) {
+  return {
+    type: PROGRESS, progress
   };
 }

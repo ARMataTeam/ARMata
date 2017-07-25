@@ -29,9 +29,11 @@ Object {
 
 exports[`reducers layout should handle initial state 1`] = `
 Object {
+  "buttons": Array [],
   "hierarchicalLayout": false,
   "isError": false,
   "message": "",
+  "progress": Object {},
   "view": "Structure",
 }
 `;

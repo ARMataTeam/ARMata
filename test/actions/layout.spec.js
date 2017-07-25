@@ -19,13 +19,4 @@ describe('actions', () => {
     fn(dispatch, getState);
     expect(dispatch.calledWith({ type: actions.CHANGE_VIEW, view: 'SOME_VIEW' })).toBe(true);
   });
-
-  it('should clearErrors should create clearErrors action', () => {
-    const fn = actions.clearErrors();
-    expect(fn).toBeInstanceOf(Function);
-    const dispatch = spy();
-    const getState = () => ({ isError: false, message: '' });
-    fn(dispatch, getState);
-    expect(dispatch.calledWith({ type: actions.CLEAR_ERRORS })).toBe(true);
-  });
 });

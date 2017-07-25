@@ -1,14 +1,14 @@
 // @flow
 import React from 'react';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import { ipcRenderer } from 'electron';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import Root from './containers/Root';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { configureStore, history } from './store/configureStore';
+import Root from './containers/Root';
 import './app.global.css';
 import * as fileDialogActions from './actions/fileDialog';
 import * as layoutActions from './actions/layout';
@@ -59,13 +59,13 @@ ipcRenderer.on('update-error', (event, err) => {
 });
 
 ipcRenderer.on('checking-for-update', () => {
-  store.dispatch(layoutActions.alert('Checking for update...'));
+  store.dispatch(layoutActions.alert('Checking for update...', []));
 });
 
 ipcRenderer.on('update-available', () => {
-  store.dispatch(layoutActions.alert('Update available!'));
+  store.dispatch(layoutActions.alert('An update is being downloaded, please wait...', []));
 });
 
-ipcRenderer.on('update-not-available', () => {
-  store.dispatch(layoutActions.alert('Update not available!'));
+ipcRenderer.on('update-progress', (event, progress) => {
+  store.dispatch(layoutActions.notifyProgress(progress));
 });

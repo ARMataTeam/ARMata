@@ -11,7 +11,7 @@
  * @flow
  */
 import { app, BrowserWindow } from 'electron';
-import { autoUpdater } from 'electron-updater';
+import Updater from './updater';
 import MenuBuilder from './menu';
 
 let mainWindow = null;
@@ -53,7 +53,6 @@ app.on('window-all-closed', () => {
   }
 });
 
-
 app.on('ready', async () => {
   if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
     await installExtensions();
@@ -76,14 +75,8 @@ app.on('ready', async () => {
     mainWindow.show();
     mainWindow.focus();
 
-    autoUpdater.on('error', err => mainWindow.webContents.send('update-error', err.toString()));
-    autoUpdater.on('checking-for-update', () => mainWindow.webContents.send('checking-for-update'));
-    autoUpdater.on('update-available', () => mainWindow.webContents.send('update-available'));
-    autoUpdater.on('update-not-available', () => mainWindow.webContents.send('update-not-available'));
-
-    if (process.env.NODE_ENV !== 'development') {
-      autoUpdater.checkForUpdates();
-    }
+    const updater = new Updater(mainWindow);
+    updater.initialize();
   });
 
   mainWindow.on('closed', () => {
