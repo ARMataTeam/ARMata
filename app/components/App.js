@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import type { Children } from 'react';
 import SideMenu from '../components/SideMenu';
 import Alert from '../components/Alert';
+import Progress from '../components/Progress';
+import { ProgressInfo } from 'electron-builder-http';
 
 export default class App extends Component {
   props: {
@@ -11,7 +13,8 @@ export default class App extends Component {
     children: Children,
     message: string,
     currentView: string,
-    buttons: Object[]
+    buttons: Object[],
+    progressState: ProgressInfo
   };
 
   render() {
@@ -22,6 +25,7 @@ export default class App extends Component {
           dispatchButtonClick={this.props.dispatchButtonClick}
           buttons={this.props.buttons} />
         <SideMenu changeView={this.props.changeView} currentView={this.props.currentView} />
+        <Progress progress={this.props.progressState} />
         {this.props.children}
       </div>
     );

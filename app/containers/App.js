@@ -8,7 +8,8 @@ function mapStateToProps(state) {
   return {
     message: state.layout.message,
     currentView: state.layout.view,
-    buttons: state.layout.buttons
+    buttons: state.layout.buttons,
+    progressState: state.layout.progress
   };
 }
 

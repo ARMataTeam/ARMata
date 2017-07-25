@@ -1,4 +1,5 @@
 import { autoUpdater } from 'electron-updater';
+import { ProgressInfo } from 'electron-builder-http';
 import { BrowserWindow } from 'electron';
 
 export default class Updater {
@@ -14,6 +15,7 @@ export default class Updater {
     autoUpdater.on('checking-for-update', () => mainWindow.webContents.send('checking-for-update'));
     autoUpdater.on('update-available', () => mainWindow.webContents.send('update-available'));
     autoUpdater.on('update-downloaded', () => autoUpdater.quitAndInstall());
+    autoUpdater.on('download-progress', (progress: ProgressInfo) => mainWindow.webContents.send('update-progress', progress));
 
     Updater.checkForUpdates();
   }

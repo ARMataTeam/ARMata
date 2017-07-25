@@ -1,9 +1,12 @@
 // @flow
+import { ProgressInfo } from 'electron-updater';
+
 export const CHANGE_LAYOUT = 'CHANGE_LAYOUT';
 export const CHANGE_VIEW = 'CHANGE_VIEW';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const ERROR = 'ERROR';
 export const ALERT = 'ALERT';
+export const PROGRESS = 'PROGRESS';
 
 type actionType = {
   type: string
@@ -44,5 +47,11 @@ export function error(errorMessage: string) {
 export function alert(alertMessage: string, buttons: Object[] = []) {
   return {
     type: ALERT, message: alertMessage, buttons
+  };
+}
+
+export function progress(progress: ProgressInfo) {
+  return {
+    type: PROGRESS, progress
   };
 }

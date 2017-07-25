@@ -9,6 +9,7 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
+import { ProgressInfo } from 'electron-builder-http';
 import './app.global.css';
 import * as fileDialogActions from './actions/fileDialog';
 import * as layoutActions from './actions/layout';
@@ -63,5 +64,9 @@ ipcRenderer.on('checking-for-update', () => {
 });
 
 ipcRenderer.on('update-available', () => {
-  store.dispatch(layoutActions.alert('Would you like to download and install an update?', [{ label: 'Yes', action: 'DOWNLOAD_UPDATE' }]));
+  store.dispatch(layoutActions.alert('An update is being downloaded, please wait...', []));
+});
+
+ipcRenderer.on('update-progress', (event, progress) => {
+  store.dispatch(layoutActions.progress(progress));
 });
