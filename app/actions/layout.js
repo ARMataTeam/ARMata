@@ -50,7 +50,7 @@ export function alert(alertMessage: string, buttons: Object[] = []) {
   };
 }
 
-export function progress(progress: ProgressInfo) {
+export function notifyProgress(progress: ProgressInfo) {
   return {
     type: PROGRESS, progress
   };

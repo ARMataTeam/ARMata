@@ -1,10 +1,10 @@
 // @flow
 import React, { Component } from 'react';
 import type { Children } from 'react';
+import { ProgressInfo } from 'electron-builder-http';
 import SideMenu from '../components/SideMenu';
 import Alert from '../components/Alert';
 import Progress from '../components/Progress';
-import { ProgressInfo } from 'electron-builder-http';
 
 export default class App extends Component {
   props: {
