@@ -12,27 +12,34 @@ export default class Visualization extends Component {
   resources: any;
 
   static findImage(resourceType: string) {
+    let dir = '';
+    if (process.env.NODE_ENV === 'development') {
+      dir = '../assets/azure/';
+    } else {
+      dir = '../resources/assets/azure/';
+    }
+
     switch (resourceType) {
       case 'Microsoft.Web/serverfarms':
-        return '../resources/azure/Azure App Service_COLOR.png';
+        return `${dir}Azure App Service_COLOR.png`;
       case 'Microsoft.Web/sites':
-        return '../resources/azure/Azure App Service - Web App_COLOR.png';
+        return `${dir}Azure App Service - Web App_COLOR.png`;
       case 'Microsoft.Insights/components':
-        return '../resources/azure/Azure Application Insights_COLOR.png';
+        return `${dir}Azure Application Insights_COLOR.png`;
       case 'Microsoft.Storage/storageAccounts':
-        return '../resources/azure/Azure Storage.png';
+        return `${dir}Azure Storage.png`;
       case 'Microsoft.EventHub/namespaces':
-        return '../resources/azure/Azure Event Hubs_COLOR.png';
+        return `${dir}Azure Event Hubs_COLOR.png`;
       case 'Microsoft.Network/trafficManagerProfiles':
-        return '../resources/azure/Azure Traffic Manager_COLOR.png';
+        return `${dir}Azure Traffic Manager_COLOR.png`;
       case 'Microsoft.Network/trafficManagerProfiles/azureEndpoints':
-        return '../resources/azure/Azure Traffic Manager.png';
+        return `${dir}Azure Traffic Manager.png`;
       case 'Microsoft.NotificationHubs/namespaces':
-        return '../resources/azure/Azure Notification Hubs_COLOR.png';
+        return `${dir}Azure Notification Hubs_COLOR.png`;
       case 'Microsoft.Resources/deployments':
-        return '../resources/azure/Unidentified feature object_COLOR.png';
+        return `${dir}Unidentified feature object_COLOR.png`;
       default:
-        return '../resources/azure/Unidentified feature object_COLOR.png';
+        return `${dir}Unidentified feature object_COLOR.png`;
     }
   }
 
