@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Graph from 'react-graph-vis';
 import styles from './Visualization.css'; // eslint-disable-line flowtype-errors/show-errors
 
+const {app} = require('electron').remote;
+
 export default class Visualization extends Component {
   props: {
     json: Object,
@@ -16,7 +18,7 @@ export default class Visualization extends Component {
     if (process.env.NODE_ENV === 'development') {
       dir = '../assets/azure/';
     } else {
-      dir = '../resources/assets/azure/';
+      dir = app.getAppPath() + `../../assets/azure/`;
     }
 
     switch (resourceType) {
