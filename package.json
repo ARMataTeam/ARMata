@@ -39,8 +39,10 @@
       "app.html",
       "main.prod.js",
       "main.prod.js.map",
-      "package.json",
-      "resources/azure"
+      "package.json"
+    ],
+    "extraResources": [
+      "assets/azure/"
     ],
     "dmg": {
       "contents": [
