@@ -191,6 +191,38 @@ function parseResourceName(name: string, parsedTemplate: Template): string {
     }
   }
 
+  const concatRegex = /concat\([a-zA-Z0-9\-, ']{0,}\)/g;
+  const concatMatches = concatRegex.exec(normalizedName);
+
+  if (concatMatches !== null) {
+    for (let index = 0; index < concatMatches.length; index += 1) {
+      let concatMatch = concatMatches[index];
+
+      concatMatch = concatMatch.replace('concat(', '');
+      concatMatch = concatMatch.replace(')', '');
+      concatMatch = concatMatch.replace(/\'/g, '');
+
+      const concatArgs = concatMatch.split(',');
+      const evalConcat = (values) => {
+        let concated = '';
+        for (let index = 0; index < values.length; index += 1) {
+          concated = concated.concat(values[index]);
+        }
+
+        return concated;
+      }
+      const concatedValue = evalConcat(concatArgs);
+      normalizedName = normalizedName.replace(concatMatches[index], concatedValue);
+    }
+  }
+
+  // Remove whitespaces just for the sake or normalizing names
+  normalizedName = normalizedName.replace(/\s+/g, '');
+
+  // Removed [[ and ]] which have left now
+  normalizedName = normalizedName.replace(/\[/g, '');
+  normalizedName = normalizedName.replace(/\]/g, '');
+
   console.log(normalizedName);
   return normalizedName;
 }
