@@ -57,13 +57,13 @@ export default class Visualization extends Component {
       for (let y = 0; y < dependsOn.length; y += 1) {
         dependencies.push({
           from: id,
-          to: resource.dependsOn[y]
+          to: resource.dependsOn[y].name
         });
       }
 
       resources.push({
         id,
-        label: this.resources[i],
+        label: resource.displayName,
         shape: 'image',
         image: Visualization.findImage(this.resources[i].type)
       });

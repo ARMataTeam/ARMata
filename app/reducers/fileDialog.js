@@ -40,6 +40,8 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
         variables: getVariables(json)
       };
 
+      normalizeNames(parsedTemplate);
+
       return Object.assign({}, state, {
         selectedFilename: action.selectedFilename,
         fileData: parsedTemplate,
@@ -67,6 +69,7 @@ function getVariables(json: Object): Array<Variable> {
 
   for (let variable in variables) {
     result.push({
+      id: `variables('${variable}')`,
       name: variable,
       value: variables[variable]
     })
@@ -81,6 +84,7 @@ function getParameters(json: Object): Array<Parameter> {
 
   for (let parameter in parameters) {
     result.push({
+      id: `parameters('${parameter}')`,
       type: parameters[parameter].type,
       name: parameter,
       defaultValue: parameters[parameter].defaultValue
@@ -108,6 +112,7 @@ function getResources(json: Object): Array<Resource> {
 
     result.push({
       name: resource.name,
+      displayName: resource.name,
       type: resource.type,
       dependsOn
     });
@@ -129,4 +134,63 @@ function getOutputs(json: Object): Array<Output> {
   }
 
   return result;
+}
+
+function normalizeNames(parsedTemplate: Template): void {
+  for (var index = 0; index < parsedTemplate.resources.length; index += 1) {
+    parsedTemplate.resources[index].displayName = parseResourceName(parsedTemplate.resources[index].name, parsedTemplate);
+  }
+}
+
+function parseResourceName(name: string, parsedTemplate: Template): string {
+  let normalizedName = name;
+
+  const variablesRegex = /variables\('[a-zA-Z0-0-9-_]{0,}'\)/g;
+  const variablesMatches = variablesRegex.exec(name);
+
+  if (variablesMatches !== null) {
+    for (let index = 0; index < variablesMatches.length; index += 1) {
+      for (let variablesIndex = 0; variablesIndex < parsedTemplate.variables.length; variablesIndex += 1) {
+        if (parsedTemplate.variables[variablesIndex].id === variablesMatches[index]) {
+          normalizedName = normalizedName.replace(variablesMatches[index], parsedTemplate.variables[variablesIndex].value);
+        }
+      }
+    }
+  }
+
+  const parametersRegex = /parameters\('[a-zA-Z0-0-9-_]{0,}'\)/g;
+  const parametersMatches = parametersRegex.exec(normalizedName);
+
+  if (parametersMatches !== null) {
+    for (let index = 0; index < parametersMatches.length; index += 1) {
+      for (let parametersIndex = 0; parametersIndex < parsedTemplate.parameters.length; parametersIndex += 1) {
+        if (parsedTemplate.parameters[parametersIndex].id === parametersMatches[index]) {
+          const nameToDisplay = parsedTemplate.parameters[parametersIndex].defaultValue || parsedTemplate.parameters[parametersIndex].name;
+          normalizedName = normalizedName.replace(parametersMatches[index], nameToDisplay);
+        }
+      }
+    }
+  }
+
+  const replaceRegex = /replace\([a-zA-Z0-9\-, ']{0,}\)/g;
+  const replaceMatches = replaceRegex.exec(normalizedName);
+
+  if (replaceMatches !== null) {
+    for (let index = 0; index < replaceMatches.length; index += 1) {
+      let replaceMatch = replaceMatches[index];
+
+      replaceMatch = replaceMatch.replace('replace(', '');
+      replaceMatch = replaceMatch.replace(')', '');
+
+      const replaceArgs = replaceMatch.split(',');
+      const evalReplace = (s, searchValue, replaceValue) => {
+        return s.replace(searchValue, replaceValue);
+      };
+      const replaceValue = evalReplace(replaceArgs[0], replaceArgs[1], replaceArgs[2]);
+      normalizedName = normalizedName.replace(replaceMatches[index], replaceValue);
+    }
+  }
+
+  console.log(normalizedName);
+  return normalizedName;
 }

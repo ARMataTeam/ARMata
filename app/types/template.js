@@ -16,6 +16,7 @@ export type Output = {
 };
 
 export type Parameter = {
+  id: string,
   type: string,
   name: string,
   defaultValue?: any
@@ -23,6 +24,7 @@ export type Parameter = {
 
 export type Resource = {
   name: string,
+  displayName: string,
   dependsOn: Array<DependsOn>,
   type: string
 };
@@ -32,6 +34,7 @@ export type DependsOn = {
 };
 
 export type Variable = {
+  id: string,
   name: string,
   value: string
 };
