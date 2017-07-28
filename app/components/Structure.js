@@ -3,6 +3,7 @@ import React, { Component, Element } from 'react';
 import Subheader from 'material-ui/Subheader';
 import { List, ListItem } from 'material-ui/List';
 import Toggle from 'material-ui/Toggle';
+import { Template, Variable, Output, Resource, Parameter } from '../types/template';
 import styles from './Structure.css'; // eslint-disable-line flowtype-errors/show-errors
 
 const inlineStyles = {
@@ -18,63 +19,51 @@ const inlineStyles = {
 
 export default class Structure extends Component {
   props: {
-    json: Object,
+    json: Template,
     hierarchicalLayout: boolean,
     toggleHierarchicalLayout: () => void
   }
 
-  schema: string;
-  contentVersion: string;
-  parameters: Object;
-  variables: Object;
-  resources: Object;
-  outputs: Object;
-
   displayVariables(): Element<Object>[] {
     const variables = [];
-    Object.keys(this.variables).forEach((k) => {
-      variables.push(<ListItem className={styles.structureItem} key={k}>{k}</ListItem>);
-    });
+
+    for (let index = 0; index < this.props.json.variables.length; index += 1) {
+      const variable = this.props.json.variables[index];
+      variables.push(<ListItem className={styles.structureItem} key={variable.id}>{variable.name}</ListItem>);
+    }
 
     return variables;
   }
 
   displayParameters(): Element<Object>[] {
     const parameters = [];
-    Object.keys(this.parameters).forEach((p) => {
-      parameters.push(<ListItem className={styles.structureItem} key={p}>{p}</ListItem>);
-    });
+
+    for (let index = 0; index < this.props.json.parameters.length; index += 1) {
+      const parameter = this.props.json.parameters[index];
+      parameters.push(<ListItem className={styles.structureItem} key={parameter.id}>{parameter.name}</ListItem>);
+    }
 
     return parameters;
   }
 
   displayOutputs(): Element<Object>[] {
     const outputs = [];
-    Object.keys(this.outputs).forEach((o) => {
-      outputs.push(<ListItem className={styles.structureItem} key={o}>{o}</ListItem>);
-    });
+
+    for (let index = 0; index < this.props.json.outputs.length; index += 1) {
+      const output = this.props.json.outputs[index];
+      outputs.push(<ListItem className={styles.structureItem} key={output.name}>{output.name}</ListItem>);
+    }
 
     return outputs;
   }
 
-  parseJson(): void {
-    this.schema = this.props.json.$schema;
-    this.contentVersion = this.props.json.contentVersion;
-    this.parameters = this.props.json.parameters || {};
-    this.variables = this.props.json.variables || {};
-    this.resources = this.props.json.resources;
-    this.outputs = this.props.json.outputs || {};
-  }
-
   render() {
-    this.parseJson();
-
     return (
       <div className={styles.structure}>
         <List>
           <Subheader>Structure</Subheader>
-          <ListItem className={styles.structureHeader} primaryText="Schema" initiallyOpen={false} nestedItems={[<ListItem className={styles.structureItem} key={1} primaryText={this.schema} />]} />
-          <ListItem className={styles.structureHeader} primaryText="Content Version" initiallyOpen={false} nestedItems={[<ListItem className={styles.structureItem} key={1} primaryText={this.contentVersion} />]} />
+          <ListItem className={styles.structureHeader} primaryText="Schema" initiallyOpen={false} nestedItems={[<ListItem className={styles.structureItem} key={1} primaryText={this.props.json.schema} />]} />
+          <ListItem className={styles.structureHeader} primaryText="Content Version" initiallyOpen={false} nestedItems={[<ListItem className={styles.structureItem} key={1} primaryText={this.props.json.contentVersion} />]} />
           <ListItem className={styles.structureHeader} primaryText="Variables" initiallyOpen={false} nestedItems={this.displayVariables()} />
           <ListItem className={styles.structureHeader} primaryText="Parameters" initiallyOpen={false} nestedItems={this.displayParameters()} />
           <ListItem className={styles.structureHeader} primaryText="Outputs" initiallyOpen={false} nestedItems={this.displayOutputs()} />

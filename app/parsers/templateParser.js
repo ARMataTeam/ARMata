@@ -98,6 +98,7 @@ export default class TemplateParser {
   normalizeNames(parsedTemplate: Template): void {
     for (var index = 0; index < parsedTemplate.resources.length; index += 1) {
       parsedTemplate.resources[index].displayName = this.parseResourceName(parsedTemplate.resources[index].name, parsedTemplate);
+      parsedTemplate.resources[index].displayName = this.parseResourceName(parsedTemplate.resources[index].displayName, parsedTemplate);
     }
   }
 
@@ -150,7 +151,7 @@ export default class TemplateParser {
       }
     }
 
-    const concatRegex = /concat\([a-zA-Z0-9\-, ']{0,}\)/g;
+    const concatRegex = /concat\([a-zA-Z0-9\-, '\[\]]{0,}\)/g;
     const concatMatches = concatRegex.exec(normalizedName);
 
     if (concatMatches !== null) {
@@ -182,8 +183,6 @@ export default class TemplateParser {
     normalizedName = normalizedName.replace(/\[/g, '');
     normalizedName = normalizedName.replace(/\]/g, '');
 
-    console.log(normalizedName);
     return normalizedName;
   }
-
 }

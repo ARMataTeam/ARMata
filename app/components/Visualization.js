@@ -55,6 +55,7 @@ export default class Visualization extends Component {
 
       const dependsOn = resource.dependsOn || [];
       for (let y = 0; y < dependsOn.length; y += 1) {
+        console.log(id, resource.dependsOn[y].name);
         dependencies.push({
           from: id,
           to: resource.dependsOn[y].name
