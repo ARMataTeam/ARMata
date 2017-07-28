@@ -49,6 +49,8 @@ export default class Visualization extends Component {
         return `${dir}Azure Virtual Network.png`;
       case 'Microsoft.Compute/virtualMachines':
         return `${dir}Azure Virtual Machine_COLOR.png`;
+      case 'Microsoft.Network/applicationGateways':
+        return `${dir}Azure Application Gateway_COLOR.png`;
       default:
         return `${dir}Unidentified feature object_COLOR.png`;
     }

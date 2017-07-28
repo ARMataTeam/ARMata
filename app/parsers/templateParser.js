@@ -117,7 +117,9 @@ export default class TemplateParser {
     if (variablesMatches !== null) {
       for (let index = 0; index < variablesMatches.length; index += 1) {
         for (let variablesIndex = 0; variablesIndex < parsedTemplate.variables.length; variablesIndex += 1) {
-          if (parsedTemplate.variables[variablesIndex].id === variablesMatches[index]) {
+
+          // Remember that by default string comparison is case-sensitive
+          if (parsedTemplate.variables[variablesIndex].id.toUpperCase() === variablesMatches[index].toUpperCase()) {
             normalizedName = normalizedName.replace(variablesMatches[index], parsedTemplate.variables[variablesIndex].value);
           }
         }
