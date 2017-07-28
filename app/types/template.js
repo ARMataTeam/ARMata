@@ -30,6 +30,7 @@ export type Resource = {
 };
 
 export type DependsOn = {
+  id: string,
   name: string
 };
 

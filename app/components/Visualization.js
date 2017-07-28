@@ -39,6 +39,16 @@ export default class Visualization extends Component {
         return `${dir}Azure Notification Hubs_COLOR.png`;
       case 'Microsoft.Resources/deployments':
         return `${dir}Unidentified feature object_COLOR.png`;
+      case 'Microsoft.Network/networkInterfaces':
+        return `${dir}Azure Virtual Network.png`;
+      case 'Microsoft.Network/virtualNetworks':
+        return `${dir}Azure Virtual Network_COLOR.png`;
+      case 'Microsoft.Network/publicIpAddresses':
+        return `${dir}Azure Virtual Network.png`;
+      case 'Microsoft.Network/networkSecurityGroups':
+        return `${dir}Azure Virtual Network.png`;
+      case 'Microsoft.Compute/virtualMachines':
+        return `${dir}Azure Virtual Machine_COLOR.png`;
       default:
         return `${dir}Unidentified feature object_COLOR.png`;
     }
@@ -51,11 +61,10 @@ export default class Visualization extends Component {
     const dependencies = [];
     for (let i = 0; i < this.resources.length; i += 1) {
       const resource = this.resources[i];
-      const id = `${resource.type}/${resource.name}`;
+      const id = `${resource.displayName}`;
 
       const dependsOn = resource.dependsOn || [];
       for (let y = 0; y < dependsOn.length; y += 1) {
-        console.log(id, resource.dependsOn[y].name);
         dependencies.push({
           from: id,
           to: resource.dependsOn[y].name

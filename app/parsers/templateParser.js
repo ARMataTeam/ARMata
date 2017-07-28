@@ -64,6 +64,7 @@ export default class TemplateParser {
       if (resource.dependsOn) {
         for (let dependsOnIndex = 0; dependsOnIndex < resource.dependsOn.length; dependsOnIndex += 1) {
           dependsOn.push({
+            id: resource.dependsOn[dependsOnIndex],
             name: resource.dependsOn[dependsOnIndex]
           });
         }
@@ -96,16 +97,21 @@ export default class TemplateParser {
   }
 
   normalizeNames(parsedTemplate: Template): void {
-    for (var index = 0; index < parsedTemplate.resources.length; index += 1) {
-      parsedTemplate.resources[index].displayName = this.parseResourceName(parsedTemplate.resources[index].name, parsedTemplate);
-      parsedTemplate.resources[index].displayName = this.parseResourceName(parsedTemplate.resources[index].displayName, parsedTemplate);
+    for (let index = 0; index < parsedTemplate.resources.length; index += 1) {
+      const resource = parsedTemplate.resources[index];
+      resource.displayName = this.parseResourceName(resource.name, parsedTemplate);
+      resource.displayName = this.parseResourceName(resource.displayName, parsedTemplate);
+
+      for (let dependencyIndex = 0; dependencyIndex < resource.dependsOn.length; dependencyIndex += 1) {
+        resource.dependsOn[dependencyIndex].name = this.parseResourceName(resource.dependsOn[dependencyIndex].name, parsedTemplate);
+      }
     }
   }
 
   parseResourceName(name: string, parsedTemplate: Template): string {
     let normalizedName = name;
 
-    const variablesRegex = /variables\('[a-zA-Z0-0-9-_]{0,}'\)/g;
+    const variablesRegex = /variables\([a-zA-Z-0-9-_']{0,}\)/g;
     const variablesMatches = variablesRegex.exec(name);
 
     if (variablesMatches !== null) {
