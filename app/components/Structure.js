@@ -25,12 +25,12 @@ export default class Structure extends Component {
 
   schema: string;
   contentVersion: string;
-  parameters: any;
-  variables: any;
-  resources: any;
-  outputs: any;
+  parameters: Object;
+  variables: Object;
+  resources: Object;
+  outputs: Object;
 
-  displayVariables(): Element<any>[] {
+  displayVariables(): Element<Object>[] {
     const variables = [];
     Object.keys(this.variables).forEach((k) => {
       variables.push(<ListItem className={styles.structureItem} key={k}>{k}</ListItem>);
@@ -39,7 +39,7 @@ export default class Structure extends Component {
     return variables;
   }
 
-  displayParameters(): Element<any>[] {
+  displayParameters(): Element<Object>[] {
     const parameters = [];
     Object.keys(this.parameters).forEach((p) => {
       parameters.push(<ListItem className={styles.structureItem} key={p}>{p}</ListItem>);
@@ -48,7 +48,7 @@ export default class Structure extends Component {
     return parameters;
   }
 
-  displayOutputs(): Element<any>[] {
+  displayOutputs(): Element<Object>[] {
     const outputs = [];
     Object.keys(this.outputs).forEach((o) => {
       outputs.push(<ListItem className={styles.structureItem} key={o}>{o}</ListItem>);

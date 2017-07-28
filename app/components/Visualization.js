@@ -44,14 +44,12 @@ export default class Visualization extends Component {
     }
   }
 
-  static normalizeResourceName(name: string) {
-    if (name.startsWith('[') === false) {
-      return name;
-    }
+  normalizeResourceName(name: string): string {
+    return name;
+  }
 
+  normalizeIfVariable(name: string) {
     let normalizedName = name;
-    normalizedName = normalizedName.replace('[', '');
-    normalizedName = normalizedName.replace(']', '');
     return normalizedName;
   }
 
@@ -86,7 +84,7 @@ export default class Visualization extends Component {
     const dependencies = [];
     for (let i = 0; i < this.resources.length; i += 1) {
       const resource = this.resources[i];
-      const id = `${resource.type}/${Visualization.normalizeResourceName(resource.name)}`;
+      const id = `${resource.type}/${this.normalizeResourceName(resource.name)}`;
 
       const dependsOn = resource.dependsOn || [];
       for (let y = 0; y < dependsOn.length; y += 1) {
