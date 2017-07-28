@@ -42,7 +42,7 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
 
       return Object.assign({}, state, {
         selectedFilename: action.selectedFilename,
-        fileData: json,
+        fileData: parsedTemplate,
         hierarchicalLayout: false
       });
     }
