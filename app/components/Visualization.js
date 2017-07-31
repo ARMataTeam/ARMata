@@ -39,44 +39,21 @@ export default class Visualization extends Component {
         return `${dir}Azure Notification Hubs_COLOR.png`;
       case 'Microsoft.Resources/deployments':
         return `${dir}Unidentified feature object_COLOR.png`;
+      case 'Microsoft.Network/networkInterfaces':
+        return `${dir}Azure Virtual Network.png`;
+      case 'Microsoft.Network/virtualNetworks':
+        return `${dir}Azure Virtual Network_COLOR.png`;
+      case 'Microsoft.Network/publicIpAddresses':
+        return `${dir}Azure Virtual Network.png`;
+      case 'Microsoft.Network/networkSecurityGroups':
+        return `${dir}Azure Virtual Network.png`;
+      case 'Microsoft.Compute/virtualMachines':
+        return `${dir}Azure Virtual Machine_COLOR.png`;
+      case 'Microsoft.Network/applicationGateways':
+        return `${dir}Azure Application Gateway_COLOR.png`;
       default:
         return `${dir}Unidentified feature object_COLOR.png`;
     }
-  }
-
-  static normalizeResourceName(name: string) {
-    if (name.startsWith('[') === false) {
-      return name;
-    }
-
-    let normalizedName = name;
-    normalizedName = normalizedName.replace('[', '');
-    normalizedName = normalizedName.replace(']', '');
-    return normalizedName;
-  }
-
-  static normalizeDependencyName(dependency: string) {
-    let name = dependency;
-
-    name = name.replace('[', '');
-    name = name.replace(']', '');
-    name = name.replace('resourceId(\'', '');
-    name = name.replace('concat(\'', '');
-    name = name.replace('\',', ',');
-    name = name.replace('))', ')');
-    name = name.replace(' ', '');
-    name = name.replace(',', '/');
-
-    return name;
-  }
-
-  static findResourceName(resource: Object) {
-    let resourceName = resource.name;
-    if (resource.tags && resource.tags.displayName) {
-      resourceName = resource.tags.displayName;
-    }
-
-    return resourceName;
   }
 
   render() {
@@ -86,19 +63,19 @@ export default class Visualization extends Component {
     const dependencies = [];
     for (let i = 0; i < this.resources.length; i += 1) {
       const resource = this.resources[i];
-      const id = `${resource.type}/${Visualization.normalizeResourceName(resource.name)}`;
+      const id = `${resource.displayName}`;
 
       const dependsOn = resource.dependsOn || [];
       for (let y = 0; y < dependsOn.length; y += 1) {
         dependencies.push({
           from: id,
-          to: Visualization.normalizeDependencyName(resource.dependsOn[y])
+          to: resource.dependsOn[y].name
         });
       }
 
       resources.push({
         id,
-        label: Visualization.findResourceName(this.resources[i]),
+        label: resource.displayName,
         shape: 'image',
         image: Visualization.findImage(this.resources[i].type)
       });

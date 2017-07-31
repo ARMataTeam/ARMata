@@ -8,7 +8,7 @@ describe('reducers', () => {
     });
 
     it('should handle OPEN_FILE', () => {
-      expect(fileDialog({ selectedFilename: 'C:\\Temp\\Foo.json', fileData: '{"foo":"bar"}' }, { type: OPEN_FILE, data: '{"foo":"bar"}' })).toMatchSnapshot();
+      expect(fileDialog({ selectedFilename: 'C:\\Temp\\Foo.json', fileData: '{"foo":"bar", "parameters": []}' }, { type: OPEN_FILE, data: '{"foo":"bar", "parameters": []}' })).toMatchSnapshot();
     });
 
     it('should handle OPEN_FILE_ERROR', () => {

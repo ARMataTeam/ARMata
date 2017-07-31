@@ -3,7 +3,12 @@
 exports[`reducers fileDialog should handle OPEN_FILE 1`] = `
 Object {
   "fileData": Object {
-    "foo": "bar",
+    "contentVersion": undefined,
+    "outputs": Array [],
+    "parameters": Array [],
+    "resources": Array [],
+    "schema": undefined,
+    "variables": Array [],
   },
   "hierarchicalLayout": false,
   "selectedFilename": undefined,
@@ -19,7 +24,14 @@ Object {
 
 exports[`reducers fileDialog should handle initial state 1`] = `
 Object {
-  "fileData": Object {},
+  "fileData": Object {
+    "contentVersion": "",
+    "outputs": Array [],
+    "parameters": Array [],
+    "resources": Array [],
+    "schema": "",
+    "variables": Array [],
+  },
   "selectedFilename": "",
 }
 `;
