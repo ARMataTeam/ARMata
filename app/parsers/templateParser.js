@@ -13,102 +13,117 @@ export default class TemplateParser {
     const parsedTemplate = {
       schema: this.json.$schema,
       contentVersion: this.json.contentVersion,
-      outputs: this.getOutputs(this.json),
-      parameters: this.getParameters(this.json),
-      resources: this.getResources(this.json),
-      variables: this.getVariables(this.json)
+      outputs: this.getOutputs(),
+      parameters: this.getParameters(),
+      resources: this.getResources(),
+      variables: this.getVariables()
     };
 
     return parsedTemplate;
   }
 
-  getVariables(json: Object): Array<Variable> {
-    const variables = json.variables;
+  getVariables(): Array<Variable> {
+    const variables = this.json.variables;
     const result = [];
 
-    for (let variable in variables) {
-      result.push({
-        id: `variables('${variable}')`,
-        name: variable,
-        value: variables[variable]
-      })
-    }
-
-    return result;
-  }
-
-  getParameters(json: Object): Array<Parameter> {
-    const parameters = json.parameters;
-    const result = [];
-
-    for (let parameter in parameters) {
-      result.push({
-        id: `parameters('${parameter}')`,
-        type: parameters[parameter].type,
-        name: parameter,
-        defaultValue: parameters[parameter].defaultValue
+    if (variables) {
+      Object.keys(variables).forEach((variable) => {
+        result.push({
+          id: `variables('${variable}')`,
+          name: variable,
+          value: variables[variable]
+        });
       });
     }
 
     return result;
   }
 
-  getResources(json: Object): Array<Resource> {
-    const resources = json.resources;
+  getParameters(): Array<Parameter> {
+    const parameters = this.json.parameters;
     const result = [];
 
-    for (let index = 0; index < resources.length; index += 1) {
-      const resource = resources[index];
-      const dependsOn = [];
+    if (parameters) {
+      Object.keys(parameters).forEach((parameter) => {
+        result.push({
+          id: `parameters('${parameter}')`,
+          type: parameters[parameter].type,
+          name: parameter,
+          defaultValue: parameters[parameter].defaultValue
+        });
+      });
+    }
 
-      if (resource.dependsOn) {
-        for (let dependsOnIndex = 0; dependsOnIndex < resource.dependsOn.length; dependsOnIndex += 1) {
-          dependsOn.push({
-            id: resource.dependsOn[dependsOnIndex],
-            name: resource.dependsOn[dependsOnIndex]
-          });
+    return result;
+  }
+
+  getResources(): Array<Resource> {
+    const resources = this.json.resources;
+    const result = [];
+
+    if (resources) {
+      for (let index = 0; index < resources.length; index += 1) {
+        const resource = resources[index];
+        const dependsOn = [];
+
+        if (resource.dependsOn) {
+          for (let dependsOnIndex = 0;
+            dependsOnIndex < resource.dependsOn.length;
+            dependsOnIndex += 1) {
+            dependsOn.push({
+              id: resource.dependsOn[dependsOnIndex],
+              name: resource.dependsOn[dependsOnIndex]
+            });
+          }
         }
-      }
 
-      result.push({
-        name: resource.name,
-        displayName: resource.name,
-        type: resource.type,
-        dependsOn
-      });
+        result.push({
+          name: resource.name,
+          displayName: resource.name,
+          type: resource.type,
+          dependsOn
+        });
+      }
     }
 
     return result;
   }
 
-  getOutputs(json: Object): Array<Output> {
-    const outputs = json.outputs;
+  getOutputs(): Array<Output> {
+    const outputs = this.json.outputs;
     const result = [];
 
-    for (let output in outputs) {
-      result.push({
-        type: outputs[output].type,
-        name: output,
-        value: outputs[output].value
+    if (outputs) {
+      Object.keys(outputs).forEach((output) => {
+        result.push({
+          type: outputs[output].type,
+          name: output,
+          value: outputs[output].value
+        });
       });
     }
 
     return result;
   }
 
-  normalizeNames(parsedTemplate: Template): void {
+  static normalizeNames(parsedTemplate: Template): void {
     for (let index = 0; index < parsedTemplate.resources.length; index += 1) {
       const resource = parsedTemplate.resources[index];
-      resource.displayName = this.parseResourceName(resource.name, parsedTemplate);
-      resource.displayName = this.parseResourceName(resource.displayName, parsedTemplate);
+      resource.displayName = TemplateParser.parseResourceName(resource.name, parsedTemplate);
+      resource.displayName = TemplateParser.parseResourceName(resource.displayName, parsedTemplate);
 
-      for (let dependencyIndex = 0; dependencyIndex < resource.dependsOn.length; dependencyIndex += 1) {
-        resource.dependsOn[dependencyIndex].name = this.parseResourceName(resource.dependsOn[dependencyIndex].name, parsedTemplate);
+      for (let dependencyIndex = 0;
+        dependencyIndex < resource.dependsOn.length;
+        dependencyIndex += 1) {
+        resource.dependsOn[dependencyIndex].name =
+          TemplateParser.parseResourceName(
+            resource.dependsOn[dependencyIndex].name,
+            parsedTemplate);
       }
     }
   }
 
-  parseResourceName(name: string, parsedTemplate: Template): string {
+  static parseResourceName(name: string, parsedTemplate: Template): string {
     let normalizedName = name;
 
     const variablesRegex = /variables\([a-zA-Z-0-9-_']{0,}\)/g;
@@ -116,11 +131,14 @@ export default class TemplateParser {
 
     if (variablesMatches !== null) {
       for (let index = 0; index < variablesMatches.length; index += 1) {
-        for (let variablesIndex = 0; variablesIndex < parsedTemplate.variables.length; variablesIndex += 1) {
-
+        for (let variablesIndex = 0;
+          variablesIndex < parsedTemplate.variables.length;
+          variablesIndex += 1) {
           // Remember that by default string comparison is case-sensitive
-          if (parsedTemplate.variables[variablesIndex].id.toUpperCase() === variablesMatches[index].toUpperCase()) {
-            normalizedName = normalizedName.replace(variablesMatches[index], parsedTemplate.variables[variablesIndex].value);
+          if (parsedTemplate.variables[variablesIndex].id.toUpperCase()
+            === variablesMatches[index].toUpperCase()) {
+            normalizedName = normalizedName.replace(variablesMatches[index],
+              parsedTemplate.variables[variablesIndex].value);
           }
         }
       }
@@ -131,9 +149,13 @@ export default class TemplateParser {
 
     if (parametersMatches !== null) {
       for (let index = 0; index < parametersMatches.length; index += 1) {
-        for (let parametersIndex = 0; parametersIndex < parsedTemplate.parameters.length; parametersIndex += 1) {
+        for (let parametersIndex = 0;
+          parametersIndex < parsedTemplate.parameters.length;
+          parametersIndex += 1) {
           if (parsedTemplate.parameters[parametersIndex].id === parametersMatches[index]) {
-            const nameToDisplay = parsedTemplate.parameters[parametersIndex].defaultValue || parsedTemplate.parameters[parametersIndex].name;
+            const nameToDisplay =
+              parsedTemplate.parameters[parametersIndex].defaultValue ||
+              parsedTemplate.parameters[parametersIndex].name;
             normalizedName = normalizedName.replace(parametersMatches[index], nameToDisplay);
           }
         }
@@ -151,15 +173,13 @@ export default class TemplateParser {
         replaceMatch = replaceMatch.replace(')', '');
 
         const replaceArgs = replaceMatch.split(',');
-        const evalReplace = (s, searchValue, replaceValue) => {
-          return s.replace(searchValue, replaceValue);
-        };
+        const evalReplace = (s, searchValue, replaceValue) => s.replace(searchValue, replaceValue);
         const replaceValue = evalReplace(replaceArgs[0], replaceArgs[1], replaceArgs[2]);
         normalizedName = normalizedName.replace(replaceMatches[index], replaceValue);
       }
     }
 
-    const concatRegex = /concat\([a-zA-Z0-9\-, '\[\]]{0,}\)/g;
+    const concatRegex = /concat\([a-zA-Z0-9\-, '[\]]{0,}\)/g;
     const concatMatches = concatRegex.exec(normalizedName);
 
     if (concatMatches !== null) {
@@ -168,17 +188,17 @@ export default class TemplateParser {
 
         concatMatch = concatMatch.replace('concat(', '');
         concatMatch = concatMatch.replace(')', '');
-        concatMatch = concatMatch.replace(/\'/g, '');
+        concatMatch = concatMatch.replace(/'/g, '');
 
         const concatArgs = concatMatch.split(',');
         const evalConcat = (values) => {
           let concated = '';
-          for (let index = 0; index < values.length; index += 1) {
-            concated = concated.concat(values[index]);
+          for (let concatIndex = 0; concatIndex < values.length; concatIndex += 1) {
+            concated = concated.concat(values[concatIndex]);
           }
 
           return concated;
-        }
+        };
         const concatedValue = evalConcat(concatArgs);
         normalizedName = normalizedName.replace(concatMatches[index], concatedValue);
       }

@@ -3,7 +3,7 @@ import React, { Component, Element } from 'react';
 import Subheader from 'material-ui/Subheader';
 import { List, ListItem } from 'material-ui/List';
 import Toggle from 'material-ui/Toggle';
-import { Template, Variable, Output, Resource, Parameter } from '../types/template';
+import { Template } from '../types/template';
 import styles from './Structure.css'; // eslint-disable-line flowtype-errors/show-errors
 
 const inlineStyles = {
@@ -29,7 +29,10 @@ export default class Structure extends Component {
 
     for (let index = 0; index < this.props.json.variables.length; index += 1) {
       const variable = this.props.json.variables[index];
-      variables.push(<ListItem className={styles.structureItem} key={variable.id}>{variable.name}</ListItem>);
+      variables.push(<ListItem
+        className={styles.structureItem}
+        key={variable.id}>{variable.name}
+      </ListItem>);
     }
 
     return variables;
@@ -40,7 +43,10 @@ export default class Structure extends Component {
 
     for (let index = 0; index < this.props.json.parameters.length; index += 1) {
       const parameter = this.props.json.parameters[index];
-      parameters.push(<ListItem className={styles.structureItem} key={parameter.id}>{parameter.name}</ListItem>);
+      parameters.push(<ListItem
+        className={styles.structureItem}
+        key={parameter.id}>{parameter.name}
+      </ListItem>);
     }
 
     return parameters;
@@ -51,7 +57,10 @@ export default class Structure extends Component {
 
     for (let index = 0; index < this.props.json.outputs.length; index += 1) {
       const output = this.props.json.outputs[index];
-      outputs.push(<ListItem className={styles.structureItem} key={output.name}>{output.name}</ListItem>);
+      outputs.push(<ListItem
+        className={styles.structureItem}
+        key={output.name}>{output.name}
+      </ListItem>);
     }
 
     return outputs;

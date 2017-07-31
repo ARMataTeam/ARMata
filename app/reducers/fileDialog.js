@@ -1,7 +1,7 @@
 // @flow
 import { OPEN_FILE } from '../actions/fileDialog';
 import TemplateParser from '../parsers/templateParser';
-import { Template, Variable, Output, Resource, Parameter } from '../types/template';
+import { Template } from '../types/template';
 
 const stripJsonComments = require('strip-json-comments');
 
@@ -34,7 +34,7 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
       const templateParser = new TemplateParser(json);
       const parsedTemplate = templateParser.parseTemplate();
 
-      templateParser.normalizeNames(parsedTemplate);
+      TemplateParser.normalizeNames(parsedTemplate);
 
       return Object.assign({}, state, {
         selectedFilename: action.selectedFilename,
