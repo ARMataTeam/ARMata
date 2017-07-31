@@ -45,6 +45,8 @@ export default class Visualization extends Component {
         return `${dir}Azure Virtual Network_COLOR.png`;
       case 'Microsoft.Network/publicIpAddresses':
         return `${dir}Azure Virtual Network.png`;
+      case 'Microsoft.Network/publicIPAddresses':
+        return `${dir}Azure Virtual Network.png`;
       case 'Microsoft.Network/networkSecurityGroups':
         return `${dir}Azure Virtual Network.png`;
       case 'Microsoft.Compute/virtualMachines':
@@ -63,7 +65,7 @@ export default class Visualization extends Component {
     const dependencies = [];
     for (let i = 0; i < this.resources.length; i += 1) {
       const resource = this.resources[i];
-      const id = `${resource.displayName}`;
+      const id = `${resource.type}/${resource.displayName}`;
 
       const dependsOn = resource.dependsOn || [];
       for (let y = 0; y < dependsOn.length; y += 1) {
@@ -73,6 +75,7 @@ export default class Visualization extends Component {
         });
       }
 
+      console.log(id, resource.dependsOn);
       resources.push({
         id,
         label: resource.displayName,
