@@ -10,6 +10,7 @@ type layoutStateType = {
   hierarchicalLayout: boolean,
   view: string,
   message: string,
+  title: string,
   isError: boolean,
   buttons: Object[],
   progress: ProgressInfo
@@ -19,6 +20,7 @@ const initialState = {
   hierarchicalLayout: false,
   view: 'Structure',
   message: '',
+  title: '',
   isError: false,
   buttons: [],
   progress: {}
@@ -37,15 +39,19 @@ export default function layout(state: layoutStateType = initialState, action: ac
     case CLEAR_ERRORS:
       return Object.assign({}, state, {
         message: '',
+        title: '',
         isError: false
       });
     case ERROR:
       return Object.assign({}, state, {
         message: action.message,
-        isError: true
+        title: action.title,
+        isError: true,
+        buttons: action.buttons
       });
     case ALERT:
       return Object.assign({}, state, {
+        title: action.title,
         message: action.message,
         buttons: action.buttons
       });
