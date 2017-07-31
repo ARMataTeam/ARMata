@@ -36,11 +36,11 @@ export function dispatchButtonClick(action: string) {
   };
 }
 
-export function error(errorMessage: string) {
+export function error(errorMessage: string, title: string = 'Error occured') {
   const buttons = [{ label: 'Got it', action: CLEAR_ERRORS }];
 
   return {
-    type: ERROR, message: errorMessage, buttons
+    type: ERROR, message: errorMessage, buttons, title
   };
 }
 

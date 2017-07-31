@@ -53,6 +53,10 @@ app.on('window-all-closed', () => {
   }
 });
 
+app.on('errorInWindow', (e, data) => {
+  console.log(e, data);
+});
+
 app.on('ready', async () => {
   if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
     await installExtensions();

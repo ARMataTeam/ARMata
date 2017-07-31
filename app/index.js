@@ -50,7 +50,18 @@ ipcRenderer.on('open-file', (event, filename) => {
       return;
     }
 
-    store.dispatch(fileDialogActions.open(selectedFilename, data));
+    try {
+      store.dispatch(fileDialogActions.open(selectedFilename, data));
+      return;
+    } catch (e) {
+      if (e instanceof TypeError) {
+        store.dispatch(layoutActions.error(e.message));
+      } else {
+        store.dispatch(layoutActions.error(e));
+      }
+
+      return;
+    }
   });
 });
 

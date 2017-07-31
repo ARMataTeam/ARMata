@@ -7,6 +7,7 @@ import * as LayoutActions from '../actions/layout';
 function mapStateToProps(state) {
   return {
     message: state.layout.message,
+    title: state.layout.title,
     currentView: state.layout.view,
     buttons: state.layout.buttons,
     progressState: state.layout.progress

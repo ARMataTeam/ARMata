@@ -7,6 +7,7 @@ import styles from './Alert.css'; // eslint-disable-line flowtype-errors/show-er
 export default class Alert extends Component {
   props: {
     message: string,
+    title: string,
     buttons: Object[],
     dispatchButtonClick: (action: string) => void
   };
@@ -24,6 +25,7 @@ export default class Alert extends Component {
     }
 
     return (<Dialog
+      title={this.props.title}
       actions={actions}
       modal={false}
       open={this.props.message !== ''}

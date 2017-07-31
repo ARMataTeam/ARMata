@@ -12,6 +12,7 @@ export default class App extends Component {
     changeView: () => void,
     children: Children,
     message: string,
+    title: string,
     currentView: string,
     buttons: Object[],
     progressState: ProgressInfo
@@ -23,7 +24,8 @@ export default class App extends Component {
         <Alert
           message={this.props.message}
           dispatchButtonClick={this.props.dispatchButtonClick}
-          buttons={this.props.buttons} />
+          buttons={this.props.buttons}
+          title={this.props.title} />
         <SideMenu changeView={this.props.changeView} currentView={this.props.currentView} />
         <Progress progress={this.props.progressState} />
         {this.props.children}
