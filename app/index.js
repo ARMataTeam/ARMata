@@ -59,8 +59,6 @@ ipcRenderer.on('open-file', (event, filename) => {
       } else {
         store.dispatch(layoutActions.error(e));
       }
-
-      return;
     }
   });
 });

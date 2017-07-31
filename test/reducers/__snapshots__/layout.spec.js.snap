@@ -23,6 +23,7 @@ Object {
   "hierarchicalLayout": false,
   "isError": false,
   "message": "",
+  "title": "",
   "view": "Structure",
 }
 `;
@@ -34,6 +35,7 @@ Object {
   "isError": false,
   "message": "",
   "progress": Object {},
+  "title": "",
   "view": "Structure",
 }
 `;
