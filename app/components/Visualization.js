@@ -75,7 +75,6 @@ export default class Visualization extends Component {
         });
       }
 
-      console.log(id, resource.dependsOn);
       resources.push({
         id,
         label: resource.displayName,
