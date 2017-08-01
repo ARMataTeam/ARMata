@@ -1,4 +1,4 @@
-# ARMata [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/ARMataTeam/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
+# ARMata [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/ARMataTeam/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link) [![Build Status](https://travis-ci.org/ARMataTeam/ARMata.svg?branch=develop)](https://travis-ci.org/ARMataTeam/ARMata) [![Build status](https://ci.appveyor.com/api/projects/status/ao4tcsxoh1te8elk/branch/develop?svg=true)](https://ci.appveyor.com/project/kamil-mrzyglod/armata/branch/develop) [![Dependency Status](https://gemnasium.com/badges/github.com/ARMataTeam/ARMata.svg)](https://gemnasium.com/github.com/ARMataTeam/ARMata) [![Coverage Status](https://coveralls.io/repos/github/ARMataTeam/ARMata/badge.svg?branch=develop)](https://coveralls.io/github/ARMataTeam/ARMata?branch=develop)
 ARM templates visualizer
 
 ## Our goal
@@ -13,3 +13,17 @@ Anyone can join and we'll welcome all new contributors. Currently we need people
 * ideas  
 
 if you feel you could help, please either post an issue in this repo or join our chat on Gitter.
+
+## Run
+To run a project you can use either [Yarn](https://yarnpkg.com/lang/en/) or NPM:
+```
+$ cd your_project
+$ yarn
+$ npm run dev
+```
+or
+```
+$ cd your_project
+$ npm install
+$ npm run dev
+```

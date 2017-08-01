@@ -1,0 +1,17 @@
+{
+  "name": "ARMata",
+  "productName": "ARMata",
+  "version": "v1.0.0-prealpha",
+  "description": "ARM templates visualizer & editor",
+  "main": "./main.prod.js",
+  "author": {
+    "name": "ARMata Team",
+    "email": "nomail@mail.com",
+    "url": "https://github.com/ARMataTeam/ARMata"
+  },
+  "scripts": {
+    "postinstall": "npm rebuild --runtime=electron --target=1.6.6 --disturl=https://atom.io/download/atom-shell --build-from-source"
+  },
+  "license": "MIT",
+  "dependencies": {}
+}

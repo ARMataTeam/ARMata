@@ -1,0 +1,16 @@
+.sideMenu {
+  background-color: rgb(50, 50, 50);
+  left: 0;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 54px;
+}
+
+.sideMenu div {
+  height: auto !important;
+}
+
+.menuItemIcon {
+  padding: 0;
+}

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reducers fileDialog should handle OPEN_FILE 1`] = `
+Object {
+  "fileData": Object {
+    "contentVersion": undefined,
+    "outputs": Array [],
+    "parameters": Array [],
+    "resources": Array [],
+    "schema": undefined,
+    "variables": Array [],
+  },
+  "hierarchicalLayout": false,
+  "selectedFilename": undefined,
+}
+`;
+
+exports[`reducers fileDialog should handle OPEN_FILE_ERROR 1`] = `
+Object {
+  "fileData": null,
+  "selectedFilename": "",
+}
+`;
+
+exports[`reducers fileDialog should handle initial state 1`] = `
+Object {
+  "fileData": Object {
+    "contentVersion": "",
+    "outputs": Array [],
+    "parameters": Array [],
+    "resources": Array [],
+    "schema": "",
+    "variables": Array [],
+  },
+  "selectedFilename": "",
+}
+`;

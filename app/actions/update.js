@@ -1,0 +1,3 @@
+// @flow
+export const DOWNLOAD_UPDATE = 'DOWNLOAD_UPDATE';
+export const UPDATE_DOWNLOADED = 'UPDATE_DOWNLOADED';

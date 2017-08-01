@@ -1,0 +1,16 @@
+.jsonView {
+  color: #fff;
+  left: 4%;
+  overflow-y: auto;
+  position: fixed !important;
+  min-width: 96%;
+}
+
+.jsonView div  {
+  height: auto !important;
+  color: #fff;
+}
+
+.react-json-view {
+  height: auto !important;
+}

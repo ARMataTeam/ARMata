@@ -1,0 +1,28 @@
+.structure {
+    background-color: rgb(40, 40, 40);
+    font-size: 12px;
+    left: 54px;
+    max-width: 300px;
+    min-width: 200px;
+    position: fixed;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    text-align: left;
+    text-overflow: clip;
+    top: 0;
+    z-index: 100;
+}
+
+.structure > div {
+  height: auto;
+}
+
+.structureHeader {
+  background-color: rgb(70, 70, 70) !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+}
+
+.structureItem {
+  font-size: 12px !important;
+}

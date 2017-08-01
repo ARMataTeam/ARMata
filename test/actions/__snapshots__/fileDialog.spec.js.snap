@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actions should open should create open action 1`] = `
+Object {
+  "data": undefined,
+  "selectedFilename": undefined,
+  "type": "OPEN_FILE",
+}
+`;
