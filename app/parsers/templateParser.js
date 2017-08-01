@@ -179,7 +179,7 @@ export default class TemplateParser {
       }
     }
 
-    const concatRegex = /concat\([a-zA-Z0-9\-, '[\]]{0,}\)/g;
+    const concatRegex = /concat\([a-zA-Z0-9\-_,. '[\]()]{0,}\)/g;
     const concatMatches = concatRegex.exec(normalizedName);
 
     if (concatMatches !== null) {
