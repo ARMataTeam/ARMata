@@ -55,5 +55,36 @@ describe('parsers', () => {
       expect(result.resources[0].dependsOn[1].name).toBe('nic-2');
       expect(result.resources[0].dependsOn[2].name).toBe('diagssome_unique_string');
     });
+
+    it('should handle resourceId in resource name', () => {
+      const json = {
+        $schema: 'some_schema',
+        contentVersion: '1.0.0.0',
+        resources: [
+          {
+            name: '[variables(\'virtualMachineName\')]',
+            dependsOn: [
+              '[resourceId(\'Microsoft.Web/sites\', variables(\'webappName\'))]'
+            ]
+          }
+        ],
+        parameters: {
+          "ifttt-prefix": {
+            type: "string"
+          }
+        },
+        variables: {
+          webAppName: '[concat(parameters(\'ifttt-prefix\'), \'-webapp-api\')]'
+        }
+      };
+      const tp = new TemplateParser(json);
+
+      const result = tp.parseTemplate();
+      TemplateParser.normalizeNames(result);
+
+      expect(result.schema).toBe('some_schema');
+      expect(result.contentVersion).toBe('1.0.0.0');
+      expect(result.resources[0].dependsOn[0].name).toBe('Microsoft.Web/sitesifttt-prefix-webapp-api');
+    });
   });
 });
