@@ -144,7 +144,7 @@ export default class TemplateParser {
       }
     }
 
-    const parametersRegex = /parameters\('[a-zA-Z0-0-9-_]{0,}'\)/g;
+    const parametersRegex = /parameters\(['a-zA-Z0-0-9\-_]{0,}\)/g;
     const parametersMatches = parametersRegex.exec(normalizedName);
 
     if (parametersMatches !== null) {
@@ -159,6 +159,18 @@ export default class TemplateParser {
             normalizedName = normalizedName.replace(parametersMatches[index], nameToDisplay);
           }
         }
+      }
+    }
+
+    // TODO: Instead of replacing 'resourceId' to 'concat' it should
+    // extract logic responsible for concatening and call it here by
+    // adding '/' to the end of the string
+    const resourceIdRegex = /resourceId\(['a-zA-Z0-9-._, ()\/[\]]{0,}\)/g;
+    const resourceIdMatches = resourceIdRegex.exec(normalizedName);
+
+    if (resourceIdMatches !== null) {
+      for (let index = 0; index < resourceIdMatches.length; index += 1) {
+        normalizedName = normalizedName.replace('resourceId', 'concat');
       }
     }
 
@@ -179,28 +191,33 @@ export default class TemplateParser {
       }
     }
 
-    const concatRegex = /concat\([a-zA-Z0-9\-_,. '[\]()]{0,}\)/g;
-    const concatMatches = concatRegex.exec(normalizedName);
+    const matches = normalizedName.match(/concat/g);
+    if (matches !== null) {
+      for (var matchIndex = 0; matchIndex < matches.length; matchIndex += 1) {
+        const concatRegex = /concat\([a-zA-Z0-9\-_,.\/ '[\]()]{0,}\)/g;
+        const concatMatches = concatRegex.exec(normalizedName);
 
-    if (concatMatches !== null) {
-      for (let index = 0; index < concatMatches.length; index += 1) {
-        let concatMatch = concatMatches[index];
+        if (concatMatches !== null) {
+          for (let index = 0; index < concatMatches.length; index += 1) {
+            let concatMatch = concatMatches[index];
 
-        concatMatch = concatMatch.replace('concat(', '');
-        concatMatch = concatMatch.replace(')', '');
-        concatMatch = concatMatch.replace(/'/g, '');
+            concatMatch = concatMatch.replace('concat(', '');
+            concatMatch = concatMatch.replace(')', '');
+            concatMatch = concatMatch.replace(/'/g, '');
 
-        const concatArgs = concatMatch.split(',');
-        const evalConcat = (values) => {
-          let concated = '';
-          for (let concatIndex = 0; concatIndex < values.length; concatIndex += 1) {
-            concated = concated.concat(values[concatIndex]);
+            const concatArgs = concatMatch.split(',');
+            const evalConcat = (values) => {
+              let concated = '';
+              for (let concatIndex = 0; concatIndex < values.length; concatIndex += 1) {
+                concated = concated.concat(values[concatIndex]);
+              }
+
+              return concated;
+            };
+            const concatedValue = evalConcat(concatArgs);
+            normalizedName = normalizedName.replace(concatMatches[index], concatedValue);
           }
-
-          return concated;
-        };
-        const concatedValue = evalConcat(concatArgs);
-        normalizedName = normalizedName.replace(concatMatches[index], concatedValue);
+        }
       }
     }
 
