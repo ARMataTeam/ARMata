@@ -65,7 +65,7 @@ export default class Visualization extends Component {
     const dependencies = [];
     for (let i = 0; i < this.resources.length; i += 1) {
       const resource = this.resources[i];
-      const id = `${resource.type}/${resource.displayName}`;
+      const id = `${resource.type}${resource.displayName}`;
 
       const dependsOn = resource.dependsOn || [];
       for (let y = 0; y < dependsOn.length; y += 1) {

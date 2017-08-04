@@ -69,8 +69,8 @@ describe('parsers', () => {
           }
         ],
         parameters: {
-          "ifttt-prefix": {
-            type: "string"
+          'ifttt-prefix': {
+            type: 'string'
           }
         },
         variables: {
@@ -85,6 +85,47 @@ describe('parsers', () => {
       expect(result.schema).toBe('some_schema');
       expect(result.contentVersion).toBe('1.0.0.0');
       expect(result.resources[0].dependsOn[0].name).toBe('Microsoft.Web/sitesifttt-prefix-webapp-api');
+    });
+
+    it('should connect resource and dependency', () => {
+      const json = {
+        $schema: 'some_schema',
+        contentVersion: '1.0.0.0',
+        resources: [
+          {
+            name: '[variables(\'functionAppName\')]',
+            dependsOn: [
+              '[resourceId(\'Microsoft.Web/serverfarms\', parameters(\'liczniknetFunctionAppServicePlanName\'))]'
+            ]
+          },
+          {
+            name: '[parameters(\'liczniknetFunctionAppServicePlanName\')]'
+          }
+        ],
+        parameters: {
+          liczniknetReleaseType: {
+            type: 'string'
+          },
+          liczniknetFunctionAppName: {
+            type: 'string'
+          },
+          liczniknetFunctionAppServicePlanName: {
+            type: 'string'
+          }
+        },
+        variables: {
+          webAppName: '[concat(parameters(\'liczniknetFunctionAppName\'), \'-\', parameters(\'liczniknetReleaseType\'))]'
+        }
+      };
+      const tp = new TemplateParser(json);
+
+      const result = tp.parseTemplate();
+      TemplateParser.normalizeNames(result);
+
+      expect(result.schema).toBe('some_schema');
+      expect(result.contentVersion).toBe('1.0.0.0');
+      expect(result.resources[0].dependsOn[0].name).toBe('Microsoft.Web/serverfarmsliczniknetFunctionAppServicePlanName');
+      expect(result.resources[1].displayName).toBe('liczniknetFunctionAppServicePlanName');
     });
   });
 });

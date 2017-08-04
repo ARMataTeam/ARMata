@@ -165,7 +165,7 @@ export default class TemplateParser {
     // TODO: Instead of replacing 'resourceId' to 'concat' it should
     // extract logic responsible for concatening and call it here by
     // adding '/' to the end of the string
-    const resourceIdRegex = /resourceId\(['a-zA-Z0-9-._, ()\/[\]]{0,}\)/g;
+    const resourceIdRegex = /resourceId\(['a-zA-Z0-9-._, ()/[\]]{0,}\)/g;
     const resourceIdMatches = resourceIdRegex.exec(normalizedName);
 
     if (resourceIdMatches !== null) {
@@ -192,9 +192,9 @@ export default class TemplateParser {
     }
 
     const matches = normalizedName.match(/concat/g);
-    if (matches !== null) {
-      for (var matchIndex = 0; matchIndex < matches.length; matchIndex += 1) {
-        const concatRegex = /concat\([a-zA-Z0-9\-_,.\/ '[\]()]{0,}\)/g;
+    if (typeof matches !== 'undefined' && matches !== null) {
+      for (let matchIndex = 0; matchIndex < matches.length; matchIndex += 1) {
+        const concatRegex = /concat\([a-zA-Z0-9\-_,./ '[\]()]{0,}\)/g;
         const concatMatches = concatRegex.exec(normalizedName);
 
         if (concatMatches !== null) {
