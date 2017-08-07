@@ -1,7 +1,7 @@
 {
   "name": "ARMata",
   "productName": "ARMata",
-  "version": "v1.0.0-prealpha",
+  "version": "v1.0.0-alpha",
   "description": "ARM templates visualizer & editor",
   "main": "./main.prod.js",
   "author": {
