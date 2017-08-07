@@ -110,7 +110,6 @@ export default class TemplateParser {
     for (let index = 0; index < parsedTemplate.resources.length; index += 1) {
       const resource = parsedTemplate.resources[index];
       resource.displayName = TemplateParser.parseResourceName(resource.name, parsedTemplate);
-      resource.displayName = TemplateParser.parseResourceName(resource.displayName, parsedTemplate);
 
       for (let dependencyIndex = 0;
         dependencyIndex < resource.dependsOn.length;
@@ -126,42 +125,97 @@ export default class TemplateParser {
   static parseResourceName(name: string, parsedTemplate: Template): string {
     let normalizedName = name;
 
-    const variablesRegex = /variables\([a-zA-Z-0-9-_']{0,}\)/g;
-    const variablesMatches = variablesRegex.exec(name);
+    normalizedName = TemplateParser.parseVariables(normalizedName, parsedTemplate);
+    normalizedName = TemplateParser.parseParameters(normalizedName, parsedTemplate);
+    normalizedName = TemplateParser.parseResourceId(normalizedName);
+    normalizedName = TemplateParser.parseReplace(normalizedName);
+    normalizedName = TemplateParser.parseConcat(normalizedName);
 
-    if (variablesMatches !== null) {
-      for (let index = 0; index < variablesMatches.length; index += 1) {
-        for (let variablesIndex = 0;
-          variablesIndex < parsedTemplate.variables.length;
-          variablesIndex += 1) {
-          // Remember that by default string comparison is case-sensitive
-          if (parsedTemplate.variables[variablesIndex].id.toUpperCase()
-            === variablesMatches[index].toUpperCase()) {
-            normalizedName = normalizedName.replace(variablesMatches[index],
-              parsedTemplate.variables[variablesIndex].value);
+    // Remove whitespaces just for the sake of normalizing names
+    normalizedName = normalizedName.replace(/\s+/g, '');
+
+    // Removed [[ and ]] which have left now
+    normalizedName = normalizedName.replace(/\[/g, '');
+    normalizedName = normalizedName.replace(/\]/g, '');
+
+    return normalizedName;
+  }
+
+  static parseVariables(name: string, parsedTemplate: Template): string {
+    let normalizedName = name;
+    const matches = normalizedName.match(/variables/g);
+    if (typeof matches !== 'undefined' && matches !== null) {
+      for (let matchIndex = 0; matchIndex < matches.length; matchIndex += 1) {
+        const variablesRegex = /variables\([a-zA-Z0-9-_']{0,}\)/g;
+        const variablesMatches = variablesRegex.exec(normalizedName);
+
+        if (variablesMatches !== null) {
+          for (let index = 0; index < variablesMatches.length; index += 1) {
+            for (let variablesIndex = 0;
+              variablesIndex < parsedTemplate.variables.length;
+              variablesIndex += 1) {
+              // Remember that by default string comparison is case-sensitive
+              if (parsedTemplate.variables[variablesIndex].id.toUpperCase()
+                === variablesMatches[index].toUpperCase()) {
+                normalizedName = normalizedName.replace(variablesMatches[index],
+                  parsedTemplate.variables[variablesIndex].value);
+              }
+            }
           }
         }
       }
     }
 
-    const parametersRegex = /parameters\('[a-zA-Z0-0-9-_]{0,}'\)/g;
-    const parametersMatches = parametersRegex.exec(normalizedName);
+    return normalizedName;
+  }
 
-    if (parametersMatches !== null) {
-      for (let index = 0; index < parametersMatches.length; index += 1) {
-        for (let parametersIndex = 0;
-          parametersIndex < parsedTemplate.parameters.length;
-          parametersIndex += 1) {
-          if (parsedTemplate.parameters[parametersIndex].id === parametersMatches[index]) {
-            const nameToDisplay =
-              parsedTemplate.parameters[parametersIndex].defaultValue ||
-              parsedTemplate.parameters[parametersIndex].name;
-            normalizedName = normalizedName.replace(parametersMatches[index], nameToDisplay);
+  static parseParameters(name: string, parsedTemplate: Template): string {
+    let normalizedName = name;
+    const matches = normalizedName.match(/parameters/g);
+    if (typeof matches !== 'undefined' && matches !== null) {
+      for (let matchIndex = 0; matchIndex < matches.length; matchIndex += 1) {
+        const parametersRegex = /parameters\(['a-zA-Z0-0-9\-_]{0,}\)/g;
+        const parametersMatches = parametersRegex.exec(normalizedName);
+
+        if (parametersMatches !== null) {
+          for (let index = 0; index < parametersMatches.length; index += 1) {
+            for (let parametersIndex = 0;
+              parametersIndex < parsedTemplate.parameters.length;
+              parametersIndex += 1) {
+              if (parsedTemplate.parameters[parametersIndex].id === parametersMatches[index]) {
+                const nameToDisplay =
+                  parsedTemplate.parameters[parametersIndex].defaultValue ||
+                  parsedTemplate.parameters[parametersIndex].name;
+                normalizedName = normalizedName.replace(parametersMatches[index], nameToDisplay);
+              }
+            }
           }
         }
       }
     }
 
+    return normalizedName;
+  }
+
+  static parseResourceId(name: string): string {
+    let normalizedName = name;
+    // TODO: Instead of replacing 'resourceId' to 'concat' it should
+    // extract logic responsible for concatening and call it here by
+    // adding '/' to the end of the string
+    const resourceIdRegex = /resourceId\(['a-zA-Z0-9-._, ()/[\]]{0,}\)/g;
+    const resourceIdMatches = resourceIdRegex.exec(normalizedName);
+
+    if (resourceIdMatches !== null) {
+      for (let index = 0; index < resourceIdMatches.length; index += 1) {
+        normalizedName = normalizedName.replace('resourceId', 'concat');
+      }
+    }
+
+    return normalizedName;
+  }
+
+  static parseReplace(name: string): string {
+    let normalizedName = name;
     const replaceRegex = /replace\([a-zA-Z0-9\-, ']{0,}\)/g;
     const replaceMatches = replaceRegex.exec(normalizedName);
 
@@ -179,37 +233,40 @@ export default class TemplateParser {
       }
     }
 
-    const concatRegex = /concat\([a-zA-Z0-9\-_,. '[\]()]{0,}\)/g;
-    const concatMatches = concatRegex.exec(normalizedName);
+    return normalizedName;
+  }
 
-    if (concatMatches !== null) {
-      for (let index = 0; index < concatMatches.length; index += 1) {
-        let concatMatch = concatMatches[index];
+  static parseConcat(name: string): string {
+    let normalizedName = name;
+    const matches = normalizedName.match(/concat/g);
+    if (typeof matches !== 'undefined' && matches !== null) {
+      for (let matchIndex = 0; matchIndex < matches.length; matchIndex += 1) {
+        const concatRegex = /concat\([a-zA-Z0-9\-_,./ '[\]()]{0,}\)/g;
+        const concatMatches = concatRegex.exec(normalizedName);
 
-        concatMatch = concatMatch.replace('concat(', '');
-        concatMatch = concatMatch.replace(')', '');
-        concatMatch = concatMatch.replace(/'/g, '');
+        if (concatMatches !== null) {
+          for (let index = 0; index < concatMatches.length; index += 1) {
+            let concatMatch = concatMatches[index];
 
-        const concatArgs = concatMatch.split(',');
-        const evalConcat = (values) => {
-          let concated = '';
-          for (let concatIndex = 0; concatIndex < values.length; concatIndex += 1) {
-            concated = concated.concat(values[concatIndex]);
+            concatMatch = concatMatch.replace('concat(', '');
+            concatMatch = concatMatch.replace(')', '');
+            concatMatch = concatMatch.replace(/'/g, '');
+
+            const concatArgs = concatMatch.split(',');
+            const evalConcat = (values) => {
+              let concated = '';
+              for (let concatIndex = 0; concatIndex < values.length; concatIndex += 1) {
+                concated = concated.concat(values[concatIndex]);
+              }
+
+              return concated;
+            };
+            const concatedValue = evalConcat(concatArgs);
+            normalizedName = normalizedName.replace(concatMatches[index], concatedValue);
           }
-
-          return concated;
-        };
-        const concatedValue = evalConcat(concatArgs);
-        normalizedName = normalizedName.replace(concatMatches[index], concatedValue);
+        }
       }
     }
-
-    // Remove whitespaces just for the sake or normalizing names
-    normalizedName = normalizedName.replace(/\s+/g, '');
-
-    // Removed [[ and ]] which have left now
-    normalizedName = normalizedName.replace(/\[/g, '');
-    normalizedName = normalizedName.replace(/\]/g, '');
 
     return normalizedName;
   }

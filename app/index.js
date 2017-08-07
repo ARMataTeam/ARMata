@@ -56,6 +56,8 @@ ipcRenderer.on('open-file', (event, filename) => {
     } catch (e) {
       if (e instanceof TypeError) {
         store.dispatch(layoutActions.error(e.message));
+      } else if (e instanceof SyntaxError) {
+        store.dispatch(layoutActions.error(e.message));
       } else {
         store.dispatch(layoutActions.error(e));
       }
