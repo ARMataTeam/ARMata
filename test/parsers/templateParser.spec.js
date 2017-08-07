@@ -127,5 +127,36 @@ describe('parsers', () => {
       expect(result.resources[0].dependsOn[0].name).toBe('Microsoft.Web/serverfarmsliczniknetFunctionAppServicePlanName');
       expect(result.resources[1].displayName).toBe('liczniknetFunctionAppServicePlanName');
     });
+
+    it('should resolve concated variables correctly in name', () => {
+      const json = {
+        $schema: 'some_schema',
+        contentVersion: '1.0.0.0',
+        resources: [
+          {
+            name: '[concat(variables(\'ifttt-trafficmanagerName\'), \'/\', variables(\'webappName\'))]',
+            dependsOn: [
+            ]
+          }
+        ],
+        parameters: {
+          'ifttt-prefix': {
+            type: 'string'
+          }
+        },
+        variables: {
+          'ifttt-trafficmanagerName': '[concat(parameters(\'ifttt-prefix\'), \'-trafficmanager\')]',
+          webappName: '[concat(parameters(\'ifttt-prefix\'), \'-webapp-api\')]'
+        }
+      };
+      const tp = new TemplateParser(json);
+
+      const result = tp.parseTemplate();
+      TemplateParser.normalizeNames(result);
+
+      expect(result.schema).toBe('some_schema');
+      expect(result.contentVersion).toBe('1.0.0.0');
+      expect(result.resources[0].displayName).toBe('ifttt-prefix-trafficmanager/ifttt-prefix-webapp-api');
+    });
   });
 });
