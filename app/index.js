@@ -77,6 +77,10 @@ ipcRenderer.on('update-available', () => {
   store.dispatch(layoutActions.alert('An update is being downloaded, please wait...', []));
 });
 
+ipcRenderer.on('update-not-available', () => {
+  store.dispatch(layoutActions.clearErrors());
+});
+
 ipcRenderer.on('update-progress', (event, progress) => {
   store.dispatch(layoutActions.notifyProgress(progress));
 });

@@ -14,6 +14,7 @@ export default class Updater {
     autoUpdater.on('error', err => mainWindow.webContents.send('update-error', err.toString()));
     autoUpdater.on('checking-for-update', () => mainWindow.webContents.send('checking-for-update'));
     autoUpdater.on('update-available', () => mainWindow.webContents.send('update-available'));
+    autoUpdater.on('update-not-available', () => mainWindow.webContents.send('update-not-available'));
     autoUpdater.on('update-downloaded', () => autoUpdater.quitAndInstall());
     autoUpdater.on('download-progress', (progress: ProgressInfo) => mainWindow.webContents.send('update-progress', progress));
 
