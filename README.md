@@ -1,6 +1,9 @@
 # ARMata [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/ARMataTeam/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link) [![Build Status](https://travis-ci.org/ARMataTeam/ARMata.svg?branch=develop)](https://travis-ci.org/ARMataTeam/ARMata) [![Build status](https://ci.appveyor.com/api/projects/status/ao4tcsxoh1te8elk/branch/develop?svg=true)](https://ci.appveyor.com/project/kamil-mrzyglod/armata/branch/develop) [![Dependency Status](https://gemnasium.com/badges/github.com/ARMataTeam/ARMata.svg)](https://gemnasium.com/github.com/ARMataTeam/ARMata) [![Coverage Status](https://coveralls.io/repos/github/ARMataTeam/ARMata/badge.svg?branch=develop)](https://coveralls.io/github/ARMataTeam/ARMata?branch=develop)
 ARM templates visualizer
 
+## Installation [![release](http://github-release-version.herokuapp.com/github/armatateam/armata/release.svg?style=flat)](https://github.com/armatateam/armata/releases/latest)
+You can obtain current version of ARMata from our [Releases](https://github.com/ARMataTeam/ARMata/releases) page.
+
 ## Our goal
 We decided to create new ARM visualizer(apart from currently existing ones like ARMVIZ) because there's no tool, which is being currently maintained and developed. Our goal is to provide a solution, which will fill the gap of ARM visualizers and help people when working with them on daily basis.
 
@@ -27,3 +30,12 @@ $ cd your_project
 $ npm install
 $ npm run dev
 ```
+
+## Roadmap
+ARMata is currently at the very beginning of development phase and yet there're many thing, which are not implemented. The current roadmap:
+* toolbox
+* live editing of a template
+* template validation
+* refreshed UI
+* active resources with linked paramteres and variables
+* and many more!
