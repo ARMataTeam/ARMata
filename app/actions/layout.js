@@ -55,3 +55,9 @@ export function notifyProgress(progress: ProgressInfo) {
     type: PROGRESS, progress
   };
 }
+
+export function clearErrors() {
+  return {
+    type: CLEAR_ERRORS
+  };
+}
