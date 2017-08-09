@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import LinearProgress from 'material-ui/LinearProgress';
 import { ProgressInfo } from 'electron-updater';
+import { Progress } from 'semantic-ui-react';
+import styles from './Progress.css'; // eslint-disable-line flowtype-errors/show-errors
 
-export default class Progress extends Component {
+export default class ProgressBar extends Component {
 
   props: {
     progress: ProgressInfo
@@ -10,7 +11,7 @@ export default class Progress extends Component {
 
   render() {
     return (
-      <LinearProgress mode="determinate" value={this.props.progress.total} />
+      <div className={styles.progress}><Progress percent={this.props.progress.total} /></div>
     );
   }
 }

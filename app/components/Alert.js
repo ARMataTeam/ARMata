@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import { Button, Confirm } from 'semantic-ui-react';
 import styles from './Alert.css'; // eslint-disable-line flowtype-errors/show-errors
 
 export default class Alert extends Component {
@@ -13,25 +12,13 @@ export default class Alert extends Component {
   };
 
   render() {
-    const actions = [];
-    for (let i = 0; i < this.props.buttons.length; i += 1) {
-      const button = this.props.buttons[i];
-      actions.push(
-        <FlatButton
-          label={button.label}
-          onTouchTap={() => this.props.dispatchButtonClick(button.action)}
-          />
-      );
-    }
-
-    return (<Dialog
-      title={this.props.title}
-      actions={actions}
-      modal={false}
+    return (<Confirm
+      header={this.props.title}
       open={this.props.message !== ''}
-      onRequestClose={() => this.props.dispatchButtonClick('CLEAR_ERRORS')}
-      bodyClassName={styles.alert}
-      contentClassName={styles.alert}>
-      {this.props.message}</Dialog>);
+      content={this.props.message}
+      cancelButton={this.props.buttons.length > 0 ? this.props.buttons[0].label : ''}
+      confirmButton={this.props.buttons.length > 1 ? this.props.buttons[1].label : ''}
+      onCancel={() => this.props.dispatchButtonClick(this.props.buttons.length > 0 ? this.props.buttons[0].action : '')}
+      onConfirm={() => this.props.dispatchButtonClick(this.props.buttons.length > 1 ? this.props.buttons[1].action : '')} />);
   }
 }

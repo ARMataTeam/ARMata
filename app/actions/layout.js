@@ -7,6 +7,7 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const ERROR = 'ERROR';
 export const ALERT = 'ALERT';
 export const PROGRESS = 'PROGRESS';
+export const REPORT_ERROR = 'REPORT_ERROR';
 
 type actionType = {
   type: string
@@ -37,7 +38,7 @@ export function dispatchButtonClick(action: string) {
 }
 
 export function error(errorMessage: string, title: string = 'Error occured') {
-  const buttons = [{ label: 'Got it', action: CLEAR_ERRORS }];
+  const buttons = [{ label: 'Got it', action: CLEAR_ERRORS }, { label: 'Report', action: REPORT_ERROR }];
 
   return {
     type: ERROR, message: errorMessage, buttons, title

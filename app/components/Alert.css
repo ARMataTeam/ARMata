@@ -1,3 +1,8 @@
 .alert {
   height: auto !important;
+  color: #000;
+}
+
+.ui.modal>.content {
+  color: #000 !important;
 }

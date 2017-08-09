@@ -1,10 +1,12 @@
 .sideMenu {
   background-color: rgb(50, 50, 50);
+  height: 100%;
   left: 0;
   position: fixed;
   text-align: center;
   top: 0;
   width: 54px;
+  z-index: 10;
 }
 
 .sideMenu div {
