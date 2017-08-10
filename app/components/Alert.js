@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Button, Confirm } from 'semantic-ui-react';
-import styles from './Alert.css'; // eslint-disable-line flowtype-errors/show-errors
+import { Confirm } from 'semantic-ui-react';
 
 export default class Alert extends Component {
   props: {

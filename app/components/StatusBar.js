@@ -14,7 +14,11 @@ export default class StatusBar extends Component {
     return (
       <div className={styles.statusBar}>
         <div className={styles.filenamePart}>{this.props.selectedFilename ? this.props.selectedFilename : 'Template not loaded'}</div>
-        <div className={styles.informationPart}>Lines: {this.props.lines} | Characters: {this.props.characters} | Loaded in ~{this.props.loadedIn}ms</div>
+        <div className={styles.informationPart}>
+          Lines: {this.props.lines} |
+          Characters: {this.props.characters} |
+          Loaded in ~{this.props.loadedIn}ms
+        </div>
       </div>);
   }
 }

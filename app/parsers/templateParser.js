@@ -22,7 +22,7 @@ export default class TemplateParser {
 
   static removeBOM(data: string) {
     let clearedData = data;
-    if (clearedData.charCodeAt(0) === 0xFEFF) {
+    if (clearedData !== null && clearedData.charCodeAt(0) === 0xFEFF) {
       clearedData = clearedData.slice(1);
     }
 

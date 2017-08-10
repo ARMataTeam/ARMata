@@ -61,7 +61,7 @@ export default class Structure extends Component {
           <List.Item className={styles.structureHeader} primaryText="Parameters" initiallyOpen={false} nestedItems={this.displayParameters()} />
           <List.Item className={styles.structureHeader} primaryText="Outputs" initiallyOpen={false} nestedItems={this.displayOutputs()} />
         </List>
-        <Checkbox toggle label="Hierarchical layout?" />
+        <Checkbox toggle label="Hierarchical layout?" onChange={() => this.props.toggleHierarchicalLayout()} checked={this.props.hierarchicalLayout} />
       </div>);
   }
 }
