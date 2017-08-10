@@ -1,12 +1,32 @@
 // @flow
 import { Template, Variable, Output, Resource, Parameter } from '../types/template';
 
+const stripJsonComments = require('strip-json-comments');
+
 export default class TemplateParser {
 
   json: Object;
+  lines: number;
+  characters: number;
+  startTime: Date
 
-  constructor(json: Object) {
+  constructor(jsonData: string) {
+    const rawData = stripJsonComments(TemplateParser.removeBOM(jsonData));
+    const json = JSON.parse(rawData);
+
+    this.lines = rawData.split('\n').length;
+    this.characters = rawData.length;
     this.json = json;
+    this.startTime = new Date();
+  }
+
+  static removeBOM(data: string) {
+    let clearedData = data;
+    if (clearedData.charCodeAt(0) === 0xFEFF) {
+      clearedData = clearedData.slice(1);
+    }
+
+    return clearedData;
   }
 
   parseTemplate(): Template {
@@ -16,7 +36,10 @@ export default class TemplateParser {
       outputs: this.getOutputs(),
       parameters: this.getParameters(),
       resources: this.getResources(),
-      variables: this.getVariables()
+      variables: this.getVariables(),
+      lines: this.lines,
+      characters: this.characters,
+      loadedIn: (new Date().getMilliseconds() - this.startTime.getMilliseconds())
     };
 
     return parsedTemplate;
