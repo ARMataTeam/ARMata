@@ -10,7 +10,11 @@ function mapStateToProps(state) {
     title: state.layout.title,
     currentView: state.layout.view,
     buttons: state.layout.buttons,
-    progressState: state.layout.progress
+    progressState: state.layout.progress,
+    selectedFilename: state.fileDialog.selectedFilename,
+    lines: state.fileDialog.fileData.lines,
+    characters: state.fileDialog.fileData.characters,
+    loadedIn: state.fileDialog.fileData.loadedIn
   };
 }
 

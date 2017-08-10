@@ -1,6 +1,5 @@
 .container {
   height: 100%;
-  left: 4%;
   padding: 0;
   margin: 0;
   display: flex;
@@ -17,4 +16,8 @@
 
 .container a {
   font-size: 1.4rem;
+}
+
+.subheader {
+  color: #999;
 }

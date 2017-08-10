@@ -4,7 +4,7 @@ describe('parsers', () => {
   describe('templateParser', () => {
     it('should handle template with blank fields', () => {
       const json = { $schema: 'some_schema', contentVersion: '1.0.0.0', resources: [] };
-      const tp = new TemplateParser(json);
+      const tp = new TemplateParser(JSON.stringify(json));
 
       const result = tp.parseTemplate();
 
@@ -14,7 +14,7 @@ describe('parsers', () => {
 
     it('should handle variable in resource name', () => {
       const json = { $schema: 'some_schema', contentVersion: '1.0.0.0', resources: [{ name: '[variables(\'virtualMachineName\')]' }], variables: { virtualMachineName: 'VM-MultiNic' } };
-      const tp = new TemplateParser(json);
+      const tp = new TemplateParser(JSON.stringify(json));
 
       const result = tp.parseTemplate();
       TemplateParser.normalizeNames(result);
@@ -44,7 +44,7 @@ describe('parsers', () => {
           diagStorageAccountName: '[concat(\'diags\',\'some_unique_string\')]'
         }
       };
-      const tp = new TemplateParser(json);
+      const tp = new TemplateParser(JSON.stringify(json));
 
       const result = tp.parseTemplate();
       TemplateParser.normalizeNames(result);
@@ -77,7 +77,7 @@ describe('parsers', () => {
           webAppName: '[concat(parameters(\'ifttt-prefix\'), \'-webapp-api\')]'
         }
       };
-      const tp = new TemplateParser(json);
+      const tp = new TemplateParser(JSON.stringify(json));
 
       const result = tp.parseTemplate();
       TemplateParser.normalizeNames(result);
@@ -117,7 +117,7 @@ describe('parsers', () => {
           webAppName: '[concat(parameters(\'liczniknetFunctionAppName\'), \'-\', parameters(\'liczniknetReleaseType\'))]'
         }
       };
-      const tp = new TemplateParser(json);
+      const tp = new TemplateParser(JSON.stringify(json));
 
       const result = tp.parseTemplate();
       TemplateParser.normalizeNames(result);
@@ -149,7 +149,7 @@ describe('parsers', () => {
           webappName: '[concat(parameters(\'ifttt-prefix\'), \'-webapp-api\')]'
         }
       };
-      const tp = new TemplateParser(json);
+      const tp = new TemplateParser(JSON.stringify(json));
 
       const result = tp.parseTemplate();
       TemplateParser.normalizeNames(result);

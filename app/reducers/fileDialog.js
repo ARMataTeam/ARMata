@@ -3,8 +3,6 @@ import { OPEN_FILE } from '../actions/fileDialog';
 import TemplateParser from '../parsers/templateParser';
 import { Template } from '../types/template';
 
-const stripJsonComments = require('strip-json-comments');
-
 type actionType = {
   type: string
 };
@@ -22,16 +20,17 @@ const initialState = {
     variables: [],
     outputs: [],
     resources: [],
-    parameters: []
+    parameters: [],
+    lines: 0,
+    characters: 0,
+    loadedIn: 0
   }
 };
 
 export default function fileDialog(state: fileDialogStateType = initialState, action: actionType) {
   switch (action.type) {
     case OPEN_FILE: {
-      const rawData = stripJsonComments(removeBOM(action.data));
-      const json = JSON.parse(rawData);
-      const templateParser = new TemplateParser(json);
+      const templateParser = new TemplateParser(action.data);
       const parsedTemplate = templateParser.parseTemplate();
 
       TemplateParser.normalizeNames(parsedTemplate);
@@ -46,13 +45,4 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
       return state;
     }
   }
-}
-
-function removeBOM(data: string) {
-  let clearedData = data;
-  if (clearedData.charCodeAt(0) === 0xFEFF) {
-    clearedData = clearedData.slice(1);
-  }
-
-  return clearedData;
 }
