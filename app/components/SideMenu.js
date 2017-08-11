@@ -6,14 +6,19 @@ import styles from './SideMenu.css'; // eslint-disable-line flowtype-errors/show
 export default class SideMenu extends Component {
   props: {
     changeView: (view: string) => void,
+    openSettings: () => void,
     currentView: string
   }
 
   render() {
+    console
     return (
       <Menu fixed="left" icon inverted vertical className={styles.sideMenu}>
-        <Menu.Item onClick={() => ''}>
+        <Menu.Item onClick={() => ''} active={this.props.currentView === 'Structure'}>
           <Icon name="cloud" size="big" />
+        </Menu.Item>
+        <Menu.Item onClick={() => this.props.openSettings()} active={this.props.currentView === 'Settings'}>
+          <Icon name="settings" size="big" />
         </Menu.Item>
       </Menu>);
   }

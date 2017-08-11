@@ -42,6 +42,6 @@ a:hover {
   cursor: pointer;
 }
 
-div {
-  height: auto;
+#root {
+  height: 100%;
 }
