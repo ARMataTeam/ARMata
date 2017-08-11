@@ -57,7 +57,7 @@ export default class App extends Component {
             <Form.Field><Checkbox toggle label="Hierarchical layout?" /></Form.Field>
             <Form.Field><Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_SETTINGS')}>Close</Button></Form.Field>
           </Sidebar>
-          <Sidebar.Pusher dimmed={this.props.isSettingsWindowOpen}>
+          <Sidebar.Pusher dimmed={this.props.isSettingsWindowOpen} style={{ height: '100%' }}>
             {this.props.children}
           </Sidebar.Pusher>
         </Sidebar.Pushable>
