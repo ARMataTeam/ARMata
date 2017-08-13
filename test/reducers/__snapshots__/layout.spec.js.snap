@@ -33,6 +33,7 @@ Object {
   "buttons": Array [],
   "hierarchicalLayout": false,
   "isError": false,
+  "isSettingsWindowOpen": false,
   "message": "",
   "progress": Object {},
   "title": "",

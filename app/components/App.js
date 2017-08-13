@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import type { Children } from 'react';
 import { ProgressInfo } from 'electron-builder-http';
-import { Sidebar, Segment, Button, Form, Checkbox, Header, Icon } from 'semantic-ui-react';
+import { Sidebar, Button, Form, Checkbox, Header, Icon } from 'semantic-ui-react';
 import SideMenu from '../components/SideMenu';
 import Alert from '../components/Alert';
 import ProgressBar from '../components/Progress';
@@ -14,6 +14,7 @@ export default class App extends Component {
     dispatchButtonClick: (action: string) => void,
     changeView: () => void,
     openSettings: () => void,
+    toggleHierarchicalLayout: () => void,
     children: Children,
     message: string,
     title: string,
@@ -46,15 +47,15 @@ export default class App extends Component {
           characters={this.props.characters}
           loadedIn={this.props.loadedIn} />
         <Sidebar.Pushable>
-          <Sidebar as={Form} className={styles.sideBar} animation='scale down' width='wide' visible={this.props.isSettingsWindowOpen} icon='labeled' inverted>
-            <Header as='h3' icon style={{ color: "#FFF" }}>
-              <Icon name='settings' />
+          <Sidebar as={Form} className={styles.sideBar} animation="scale down" width="wide" visible={this.props.isSettingsWindowOpen} icon="labeled" inverted>
+            <Header as="h3" icon style={{ color: '#FFF' }}>
+              <Icon name="settings" />
               Settings
-    <Header.Subheader style={{ color: "#FFF" }}>
+    <Header.Subheader style={{ color: '#FFF' }}>
                 Manage graph settings and set preferences.
     </Header.Subheader>
             </Header>
-            <Form.Field><Checkbox toggle label="Hierarchical layout?" /></Form.Field>
+            <Form.Field><Checkbox toggle label="Hierarchical layout?" onChange={() => this.props.toggleHierarchicalLayout()} /></Form.Field>
             <Form.Field><Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_SETTINGS')}>Close</Button></Form.Field>
           </Sidebar>
           <Sidebar.Pusher dimmed={this.props.isSettingsWindowOpen} style={{ height: '100%' }}>

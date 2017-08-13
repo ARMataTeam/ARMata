@@ -6,7 +6,8 @@ import Visualization from './Visualization';
 export default class Home extends Component {
   props: {
     json: Object,
-    selectedFilename: string
+    selectedFilename: string,
+    hierarchicalLayout: boolean
   }
 
   render() {
@@ -29,7 +30,7 @@ export default class Home extends Component {
       <div className={styles.container} data-tid="container">
         <Visualization
           json={this.props.json}
-          hierarchicalLayout={false}
+          hierarchicalLayout={this.props.hierarchicalLayout}
         />
       </div>
     );
