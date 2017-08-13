@@ -8,6 +8,8 @@ export const ERROR = 'ERROR';
 export const ALERT = 'ALERT';
 export const PROGRESS = 'PROGRESS';
 export const REPORT_ERROR = 'REPORT_ERROR';
+export const OPEN_SETTINGS = 'OPEN_SETTINGS';
+export const CLOSE_SETTINGS = 'CLOSE_SETTINGS';
 
 type actionType = {
   type: string
@@ -34,6 +36,12 @@ export function dispatchButtonClick(action: string) {
   return (dispatch: (action: actionType) => void) => {
     dispatch({ type: action });
     dispatch({ type: CLEAR_ERRORS });
+  };
+}
+
+export function openSettings() {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({ type: OPEN_SETTINGS });
   };
 }
 

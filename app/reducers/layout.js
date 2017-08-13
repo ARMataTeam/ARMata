@@ -1,6 +1,6 @@
 // @flow
 import { ProgressInfo } from 'electron-builder-http';
-import { CHANGE_LAYOUT, CHANGE_VIEW, CLEAR_ERRORS, ERROR, ALERT, PROGRESS } from '../actions/layout';
+import { CHANGE_LAYOUT, CHANGE_VIEW, CLEAR_ERRORS, ERROR, ALERT, PROGRESS, OPEN_SETTINGS, CLOSE_SETTINGS } from '../actions/layout';
 
 type actionType = {
   type: string
@@ -13,7 +13,8 @@ type layoutStateType = {
   title: string,
   isError: boolean,
   buttons: Object[],
-  progress: ProgressInfo
+  progress: ProgressInfo,
+  isSettingsWindowOpen: boolean
 };
 
 const initialState = {
@@ -23,7 +24,8 @@ const initialState = {
   title: '',
   isError: false,
   buttons: [],
-  progress: {}
+  progress: {},
+  isSettingsWindowOpen: false
 };
 
 export default function layout(state: layoutStateType = initialState, action: actionType) {
@@ -58,6 +60,14 @@ export default function layout(state: layoutStateType = initialState, action: ac
     case PROGRESS:
       return Object.assign({}, state, {
         progress: action.progress
+      });
+    case OPEN_SETTINGS:
+      return Object.assign({}, state, {
+        isSettingsWindowOpen: true
+      });
+    case CLOSE_SETTINGS:
+      return Object.assign({}, state, {
+        isSettingsWindowOpen: false
       });
     default:
       return state;

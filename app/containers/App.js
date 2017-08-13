@@ -14,7 +14,8 @@ function mapStateToProps(state) {
     selectedFilename: state.fileDialog.selectedFilename,
     lines: state.fileDialog.fileData.lines,
     characters: state.fileDialog.fileData.characters,
-    loadedIn: state.fileDialog.fileData.loadedIn
+    loadedIn: state.fileDialog.fileData.loadedIn,
+    isSettingsWindowOpen: state.layout.isSettingsWindowOpen
   };
 }
 
