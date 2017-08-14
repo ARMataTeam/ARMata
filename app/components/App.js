@@ -25,7 +25,8 @@ export default class App extends Component {
     lines: number,
     characters: number,
     loadedIn: number,
-    isSettingsWindowOpen: boolean
+    isSettingsWindowOpen: boolean,
+    isNodeWindowOpen: boolean
   };
 
   render() {
@@ -57,6 +58,16 @@ export default class App extends Component {
             </Header>
             <Form.Field><Checkbox toggle label="Hierarchical layout?" onChange={() => this.props.toggleHierarchicalLayout()} /></Form.Field>
             <Form.Field><Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_SETTINGS')}>Close</Button></Form.Field>
+          </Sidebar>
+          <Sidebar direction="right" as={Form} className={styles.sideBarRight} animation="scale down" width="wide" visible={this.props.isNodeWindowOpen} icon="labeled" inverted>
+            <Header as="h3" icon style={{ color: '#FFF' }}>
+              <Icon name="share alternate" />
+              Selected resource
+    <Header.Subheader style={{ color: '#FFF' }}>
+                Resource detailed information
+    </Header.Subheader>
+            </Header>
+            <Form.Field><Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_NODE_WINDOW')}>Close</Button></Form.Field>
           </Sidebar>
           <Sidebar.Pusher dimmed={this.props.isSettingsWindowOpen} style={{ height: '100%' }}>
             {this.props.children}

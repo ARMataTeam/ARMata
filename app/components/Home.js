@@ -5,6 +5,7 @@ import Visualization from './Visualization';
 
 export default class Home extends Component {
   props: {
+    openNodeWindow: (nodes: Array<string>) => void,
     json: Object,
     selectedFilename: string,
     hierarchicalLayout: boolean
@@ -31,6 +32,7 @@ export default class Home extends Component {
         <Visualization
           json={this.props.json}
           hierarchicalLayout={this.props.hierarchicalLayout}
+          openNodeWindow={(nodes: Array<string>) => this.props.openNodeWindow(nodes)}
         />
       </div>
     );

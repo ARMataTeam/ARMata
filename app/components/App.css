@@ -5,3 +5,12 @@
   padding-top: 10px;
   background-color: #586f80;
 }
+
+.sideBarRight {
+  color: #fff !important;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  text-align: center;
+  background-color: #586f80;
+}

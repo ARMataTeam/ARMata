@@ -10,6 +10,8 @@ export const PROGRESS = 'PROGRESS';
 export const REPORT_ERROR = 'REPORT_ERROR';
 export const OPEN_SETTINGS = 'OPEN_SETTINGS';
 export const CLOSE_SETTINGS = 'CLOSE_SETTINGS';
+export const OPEN_NODE_WINDOW = 'OPEN_NODE_WINDOW';
+export const CLOSE_NODE_WINDOW = 'CLOSE_NODE_WINDOW';
 
 type actionType = {
   type: string
@@ -42,6 +44,12 @@ export function dispatchButtonClick(action: string) {
 export function openSettings() {
   return (dispatch: (action: actionType) => void) => {
     dispatch({ type: OPEN_SETTINGS });
+  };
+}
+
+export function openNodeWindow(nodes: Array<string>) {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({ type: OPEN_NODE_WINDOW, nodes });
   };
 }
 

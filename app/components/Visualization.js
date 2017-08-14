@@ -6,6 +6,7 @@ import styles from './Visualization.css'; // eslint-disable-line flowtype-errors
 
 export default class Visualization extends Component {
   props: {
+    openNodeWindow: (nodes: Array<string>) => void,
     json: Object,
     hierarchicalLayout: boolean
   }
@@ -61,6 +62,7 @@ export default class Visualization extends Component {
   }
 
   render() {
+    const props = this.props;
     this.resources = this.props.json.resources;
 
     const resources = [];
@@ -80,6 +82,7 @@ export default class Visualization extends Component {
       resources.push({
         id,
         label: resource.displayName,
+        title: resource.displayName,
         shape: 'image',
         image: Visualization.findImage(this.resources[i].type)
       });
@@ -89,6 +92,15 @@ export default class Visualization extends Component {
       nodes: resources,
       edges: dependencies
     };
+
+    const events = {
+      select: function (event) {
+        props.openNodeWindow(event.nodes);
+      },
+      showPopup: (params) => {
+        console.log(params);
+      }
+    }
 
     const options = {
       nodes: {
@@ -111,6 +123,6 @@ export default class Visualization extends Component {
       autoResize: true
     };
 
-    return (<div className={styles.visualization}><Graph graph={graph} options={options} style={{ width: '100%', height: '100%' }} /></div>);
+    return (<div className={styles.visualization}><Graph graph={graph} options={options} events={events} style={{ width: '100%', height: '100%' }} /></div>);
   }
 }
