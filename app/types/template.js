@@ -26,6 +26,7 @@ export type Parameter = {
 };
 
 export type Resource = {
+  id: string,
   name: string,
   displayName: string,
   dependsOn: Array<DependsOn>,

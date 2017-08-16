@@ -101,6 +101,7 @@ export default class TemplateParser {
         }
 
         result.push({
+          id: resource.name,
           name: resource.name,
           displayName: resource.name,
           type: resource.type,
@@ -132,7 +133,10 @@ export default class TemplateParser {
   static normalizeNames(parsedTemplate: Template): void {
     for (let index = 0; index < parsedTemplate.resources.length; index += 1) {
       const resource = parsedTemplate.resources[index];
-      resource.displayName = TemplateParser.parseResourceName(resource.name, parsedTemplate);
+      const parsedName = TemplateParser.parseResourceName(resource.name, parsedTemplate);
+
+      resource.id = `${resource.type}${parsedName}`;
+      resource.displayName = parsedName;
 
       for (let dependencyIndex = 0;
         dependencyIndex < resource.dependsOn.length;

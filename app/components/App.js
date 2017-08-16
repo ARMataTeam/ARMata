@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 import type { Children } from 'react';
 import { ProgressInfo } from 'electron-builder-http';
 import { Sidebar, Button, Form, Checkbox, Header, Icon } from 'semantic-ui-react';
-import SideMenu from '../components/SideMenu';
-import Alert from '../components/Alert';
-import ProgressBar from '../components/Progress';
-import StatusBar from '../components/StatusBar';
+import SideMenu from './SideMenu';
+import Alert from './Alert';
+import ProgressBar from './Progress';
+import StatusBar from './StatusBar';
+import RightSidebar from './RightSidebar';
+import { Resource } from '../types/template';
 import styles from './App.css'; // eslint-disable-line flowtype-errors/show-errors
 
 export default class App extends Component {
@@ -25,7 +27,10 @@ export default class App extends Component {
     lines: number,
     characters: number,
     loadedIn: number,
-    isSettingsWindowOpen: boolean
+    isSettingsWindowOpen: boolean,
+    isNodeWindowOpen: boolean,
+    nodes: Array<string>,
+    resources: Array<Resource>
   };
 
   render() {
@@ -58,6 +63,11 @@ export default class App extends Component {
             <Form.Field><Checkbox toggle label="Hierarchical layout?" onChange={() => this.props.toggleHierarchicalLayout()} /></Form.Field>
             <Form.Field><Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_SETTINGS')}>Close</Button></Form.Field>
           </Sidebar>
+          <RightSidebar
+            dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}
+            isNodeWindowOpen={this.props.isNodeWindowOpen}
+            nodes={this.props.nodes}
+            resources={this.props.resources} />
           <Sidebar.Pusher dimmed={this.props.isSettingsWindowOpen} style={{ height: '100%' }}>
             {this.props.children}
           </Sidebar.Pusher>
