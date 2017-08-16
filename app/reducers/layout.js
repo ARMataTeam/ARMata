@@ -15,7 +15,8 @@ type layoutStateType = {
   buttons: Object[],
   progress: ProgressInfo,
   isSettingsWindowOpen: boolean,
-  isNodeWindowOpen: boolean
+  isNodeWindowOpen: boolean,
+  nodes: Array<string>
 };
 
 const initialState = {
@@ -27,7 +28,8 @@ const initialState = {
   buttons: [],
   progress: {},
   isSettingsWindowOpen: false,
-  isNodeWindowOpen: false
+  isNodeWindowOpen: false,
+  nodes: []
 };
 
 export default function layout(state: layoutStateType = initialState, action: actionType) {
@@ -73,11 +75,13 @@ export default function layout(state: layoutStateType = initialState, action: ac
       });
     case OPEN_NODE_WINDOW:
       return Object.assign({}, state, {
-        isNodeWindowOpen: true
+        isNodeWindowOpen: true,
+        nodes: action.nodes
       });
     case CLOSE_NODE_WINDOW:
       return Object.assign({}, state, {
-        isNodeWindowOpen: false
+        isNodeWindowOpen: false,
+        nodes: []
       });
     default:
       return state;

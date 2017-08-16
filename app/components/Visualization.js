@@ -6,7 +6,7 @@ import styles from './Visualization.css'; // eslint-disable-line flowtype-errors
 
 export default class Visualization extends Component {
   props: {
-    openNodeWindow: (nodes: Array<string>) => void,
+    openNodeWindow: (Array<string>) => void, // eslint-disable-line react/no-unused-prop-types
     json: Object,
     hierarchicalLayout: boolean
   }
@@ -94,13 +94,13 @@ export default class Visualization extends Component {
     };
 
     const events = {
-      select: function (event) {
+      select: (event) => {
         props.openNodeWindow(event.nodes);
       },
       showPopup: (params) => {
         console.log(params);
       }
-    }
+    };
 
     const options = {
       nodes: {

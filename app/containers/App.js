@@ -16,7 +16,9 @@ function mapStateToProps(state) {
     characters: state.fileDialog.fileData.characters,
     loadedIn: state.fileDialog.fileData.loadedIn,
     isSettingsWindowOpen: state.layout.isSettingsWindowOpen,
-    isNodeWindowOpen: state.layout.isNodeWindowOpen
+    isNodeWindowOpen: state.layout.isNodeWindowOpen,
+    nodes: state.layout.nodes,
+    resources: state.fileDialog.fileData.resources
   };
 }
 
