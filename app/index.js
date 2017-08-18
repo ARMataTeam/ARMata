@@ -81,3 +81,7 @@ ipcRenderer.on('update-not-available', () => {
 ipcRenderer.on('update-progress', (event, progress) => {
   store.dispatch(layoutActions.notifyProgress(progress));
 });
+
+ipcRenderer.on('open-window', (event, name) => {
+  store.dispatch(layoutActions.openWindow(name));
+});

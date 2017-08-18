@@ -8,6 +8,7 @@ import Alert from './Alert';
 import ProgressBar from './Progress';
 import StatusBar from './StatusBar';
 import RightSidebar from './RightSidebar';
+import Window from './Window';
 import { Resource } from '../types/template';
 import styles from './App.css'; // eslint-disable-line flowtype-errors/show-errors
 
@@ -30,7 +31,8 @@ export default class App extends Component {
     isSettingsWindowOpen: boolean,
     isNodeWindowOpen: boolean,
     nodes: Array<string>,
-    resources: Array<Resource>
+    resources: Array<Resource>,
+    activeWindow: string
   };
 
   render() {
@@ -46,6 +48,7 @@ export default class App extends Component {
           currentView={this.props.currentView}
           openSettings={this.props.openSettings} />
         <ProgressBar progress={this.props.progressState} />
+        <Window activeWindow={this.props.activeWindow} />
         <StatusBar
           selectedFilename={this.props.selectedFilename}
           lines={this.props.lines}

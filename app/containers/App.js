@@ -18,7 +18,8 @@ function mapStateToProps(state) {
     isSettingsWindowOpen: state.layout.isSettingsWindowOpen,
     isNodeWindowOpen: state.layout.isNodeWindowOpen,
     nodes: state.layout.nodes,
-    resources: state.fileDialog.fileData.resources
+    resources: state.fileDialog.fileData.resources,
+    activeWindow: state.layout.activeWindow
   };
 }
 
