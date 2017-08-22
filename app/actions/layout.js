@@ -7,6 +7,13 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const ERROR = 'ERROR';
 export const ALERT = 'ALERT';
 export const PROGRESS = 'PROGRESS';
+export const REPORT_ERROR = 'REPORT_ERROR';
+export const OPEN_SETTINGS = 'OPEN_SETTINGS';
+export const CLOSE_SETTINGS = 'CLOSE_SETTINGS';
+export const OPEN_NODE_WINDOW = 'OPEN_NODE_WINDOW';
+export const CLOSE_NODE_WINDOW = 'CLOSE_NODE_WINDOW';
+export const OPEN_WINDOW = 'OPEN_WINDOW';
+export const CLOSE_WINDOW = 'CLOSE_WINDOW';
 
 type actionType = {
   type: string
@@ -36,8 +43,20 @@ export function dispatchButtonClick(action: string) {
   };
 }
 
+export function openSettings() {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({ type: OPEN_SETTINGS });
+  };
+}
+
+export function openNodeWindow(nodes: Array<string>) {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({ type: OPEN_NODE_WINDOW, nodes });
+  };
+}
+
 export function error(errorMessage: string, title: string = 'Error occured') {
-  const buttons = [{ label: 'Got it', action: CLEAR_ERRORS }];
+  const buttons = [{ label: 'Got it', action: CLEAR_ERRORS }, { label: 'Report', action: REPORT_ERROR }];
 
   return {
     type: ERROR, message: errorMessage, buttons, title
@@ -59,5 +78,17 @@ export function notifyProgress(progress: ProgressInfo) {
 export function clearErrors() {
   return {
     type: CLEAR_ERRORS
+  };
+}
+
+export function openWindow(name: string, title: string, content: string) {
+  return {
+    type: OPEN_WINDOW, windowName: name, window: { title, content }
+  };
+}
+
+export function closeWindow() {
+  return {
+    type: CLOSE_WINDOW
   };
 }

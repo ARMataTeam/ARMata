@@ -3,7 +3,10 @@
 exports[`reducers fileDialog should handle OPEN_FILE 1`] = `
 Object {
   "fileData": Object {
+    "characters": 31,
     "contentVersion": undefined,
+    "lines": 1,
+    "loadedIn": 0,
     "outputs": Array [],
     "parameters": Array [],
     "resources": Array [],
@@ -25,7 +28,10 @@ Object {
 exports[`reducers fileDialog should handle initial state 1`] = `
 Object {
   "fileData": Object {
+    "characters": 0,
     "contentVersion": "",
+    "lines": 0,
+    "loadedIn": 0,
     "outputs": Array [],
     "parameters": Array [],
     "resources": Array [],

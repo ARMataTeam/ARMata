@@ -1,12 +1,32 @@
 // @flow
 import { Template, Variable, Output, Resource, Parameter } from '../types/template';
 
+const stripJsonComments = require('strip-json-comments');
+
 export default class TemplateParser {
 
   json: Object;
+  lines: number;
+  characters: number;
+  startTime: Date
 
-  constructor(json: Object) {
+  constructor(jsonData: string) {
+    const rawData = stripJsonComments(TemplateParser.removeBOM(jsonData));
+    const json = JSON.parse(rawData);
+
+    this.lines = rawData.split('\n').length;
+    this.characters = rawData.length;
     this.json = json;
+    this.startTime = new Date();
+  }
+
+  static removeBOM(data: string) {
+    let clearedData = data;
+    if (clearedData !== null && clearedData.charCodeAt(0) === 0xFEFF) {
+      clearedData = clearedData.slice(1);
+    }
+
+    return clearedData;
   }
 
   parseTemplate(): Template {
@@ -16,7 +36,10 @@ export default class TemplateParser {
       outputs: this.getOutputs(),
       parameters: this.getParameters(),
       resources: this.getResources(),
-      variables: this.getVariables()
+      variables: this.getVariables(),
+      lines: this.lines,
+      characters: this.characters,
+      loadedIn: (new Date().getMilliseconds() - this.startTime.getMilliseconds())
     };
 
     return parsedTemplate;
@@ -78,6 +101,7 @@ export default class TemplateParser {
         }
 
         result.push({
+          id: resource.name,
           name: resource.name,
           displayName: resource.name,
           type: resource.type,
@@ -109,7 +133,10 @@ export default class TemplateParser {
   static normalizeNames(parsedTemplate: Template): void {
     for (let index = 0; index < parsedTemplate.resources.length; index += 1) {
       const resource = parsedTemplate.resources[index];
-      resource.displayName = TemplateParser.parseResourceName(resource.name, parsedTemplate);
+      const parsedName = TemplateParser.parseResourceName(resource.name, parsedTemplate);
+
+      resource.id = `${resource.type}${parsedName}`;
+      resource.displayName = parsedName;
 
       for (let dependencyIndex = 0;
         dependencyIndex < resource.dependsOn.length;

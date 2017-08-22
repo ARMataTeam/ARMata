@@ -6,11 +6,13 @@ import * as LayoutActions from '../actions/layout';
 
 function mapStateToProps(state) {
   return {
-    message: state.layout.message,
-    title: state.layout.title,
-    currentView: state.layout.view,
-    buttons: state.layout.buttons,
-    progressState: state.layout.progress
+    layout: state.layout,
+    selectedFilename: state.fileDialog.selectedFilename,
+    lines: state.fileDialog.fileData.lines,
+    characters: state.fileDialog.fileData.characters,
+    loadedIn: state.fileDialog.fileData.loadedIn,
+    resources: state.fileDialog.fileData.resources,
+    isSettingsWindowOpen: state.layout.isSettingsWindowOpen
   };
 }
 

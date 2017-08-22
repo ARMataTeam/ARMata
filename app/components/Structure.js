@@ -1,21 +1,8 @@
 // @flow
 import React, { Component, Element } from 'react';
-import Subheader from 'material-ui/Subheader';
-import { List, ListItem } from 'material-ui/List';
-import Toggle from 'material-ui/Toggle';
+import { List, Checkbox } from 'semantic-ui-react';
 import { Template } from '../types/template';
 import styles from './Structure.css'; // eslint-disable-line flowtype-errors/show-errors
-
-const inlineStyles = {
-  element: {
-    marginLeft: '10px',
-    width: '95% !important'
-  },
-  label: {
-    fontSize: '11px',
-    width: 'auto !important'
-  }
-};
 
 export default class Structure extends Component {
   props: {
@@ -29,10 +16,9 @@ export default class Structure extends Component {
 
     for (let index = 0; index < this.props.json.variables.length; index += 1) {
       const variable = this.props.json.variables[index];
-      variables.push(<ListItem
-        className={styles.structureItem}
+      variables.push(<List.Item
         key={variable.id}>{variable.name}
-      </ListItem>);
+      </List.Item>);
     }
 
     return variables;
@@ -43,10 +29,9 @@ export default class Structure extends Component {
 
     for (let index = 0; index < this.props.json.parameters.length; index += 1) {
       const parameter = this.props.json.parameters[index];
-      parameters.push(<ListItem
-        className={styles.structureItem}
+      parameters.push(<List.Item
         key={parameter.id}>{parameter.name}
-      </ListItem>);
+      </List.Item>);
     }
 
     return parameters;
@@ -57,10 +42,9 @@ export default class Structure extends Component {
 
     for (let index = 0; index < this.props.json.outputs.length; index += 1) {
       const output = this.props.json.outputs[index];
-      outputs.push(<ListItem
-        className={styles.structureItem}
+      outputs.push(<List.Item
         key={output.name}>{output.name}
-      </ListItem>);
+      </List.Item>);
     }
 
     return outputs;
@@ -68,16 +52,16 @@ export default class Structure extends Component {
 
   render() {
     return (
-      <div className={styles.structure}>
+      <div>
         <List>
-          <Subheader>Structure</Subheader>
-          <ListItem className={styles.structureHeader} primaryText="Schema" initiallyOpen={false} nestedItems={[<ListItem className={styles.structureItem} key={1} primaryText={this.props.json.schema} />]} />
-          <ListItem className={styles.structureHeader} primaryText="Content Version" initiallyOpen={false} nestedItems={[<ListItem className={styles.structureItem} key={1} primaryText={this.props.json.contentVersion} />]} />
-          <ListItem className={styles.structureHeader} primaryText="Variables" initiallyOpen={false} nestedItems={this.displayVariables()} />
-          <ListItem className={styles.structureHeader} primaryText="Parameters" initiallyOpen={false} nestedItems={this.displayParameters()} />
-          <ListItem className={styles.structureHeader} primaryText="Outputs" initiallyOpen={false} nestedItems={this.displayOutputs()} />
+          Structure
+          <List.Item className={styles.structureHeader} primaryText="Schema" initiallyOpen={false} nestedItems={[<List.Item className={styles.structureItem} key={1} primaryText={this.props.json.schema} />]} />
+          <List.Item className={styles.structureHeader} primaryText="Content Version" initiallyOpen={false} nestedItems={[<List.Item className={styles.structureItem} key={1} primaryText={this.props.json.contentVersion} />]} />
+          <List.Item className={styles.structureHeader} primaryText="Variables" initiallyOpen={false} nestedItems={this.displayVariables()} />
+          <List.Item className={styles.structureHeader} primaryText="Parameters" initiallyOpen={false} nestedItems={this.displayParameters()} />
+          <List.Item className={styles.structureHeader} primaryText="Outputs" initiallyOpen={false} nestedItems={this.displayOutputs()} />
         </List>
-        <Toggle label="Hierarchical layout?" labelStyle={inlineStyles.label} style={inlineStyles.element} toggled={this.props.hierarchicalLayout} onToggle={this.props.toggleHierarchicalLayout} />
+        <Checkbox toggle label="Hierarchical layout?" onChange={() => this.props.toggleHierarchicalLayout()} checked={this.props.hierarchicalLayout} />
       </div>);
   }
 }

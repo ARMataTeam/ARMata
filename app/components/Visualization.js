@@ -6,6 +6,7 @@ import styles from './Visualization.css'; // eslint-disable-line flowtype-errors
 
 export default class Visualization extends Component {
   props: {
+    openNodeWindow: (Array<string>) => void, // eslint-disable-line react/no-unused-prop-types
     json: Object,
     hierarchicalLayout: boolean
   }
@@ -53,12 +54,15 @@ export default class Visualization extends Component {
         return `${dir}Azure Virtual Machine_COLOR.png`;
       case 'Microsoft.Network/applicationGateways':
         return `${dir}Azure Application Gateway_COLOR.png`;
+      case 'Microsoft.Search/searchServices':
+        return `${dir}Azure Search_COLOR.png`;
       default:
         return `${dir}Unidentified feature object_COLOR.png`;
     }
   }
 
   render() {
+    const props = this.props;
     this.resources = this.props.json.resources;
 
     const resources = [];
@@ -78,6 +82,7 @@ export default class Visualization extends Component {
       resources.push({
         id,
         label: resource.displayName,
+        title: resource.displayName,
         shape: 'image',
         image: Visualization.findImage(this.resources[i].type)
       });
@@ -86,6 +91,15 @@ export default class Visualization extends Component {
     const graph = {
       nodes: resources,
       edges: dependencies
+    };
+
+    const events = {
+      select: (event) => {
+        props.openNodeWindow(event.nodes);
+      },
+      showPopup: (params) => {
+        console.log(params);
+      }
     };
 
     const options = {
@@ -104,11 +118,21 @@ export default class Visualization extends Component {
         hierarchical: this.props.hierarchicalLayout
       },
       edges: {
-        color: '#FFFFFF'
+        color: '#FFFFFF',
+        smooth: {
+          type: 'continuous'
+        }
+      },
+      physics: {
+        forceAtlas2Based: {
+          centralGravity: 0.03,
+          gravitationalConstant: -300
+        },
+        solver: "forceAtlas2Based"
       },
       autoResize: true
     };
 
-    return (<div className={styles.visualization}><Graph graph={graph} options={options} style={{ width: '100%', height: '100%' }} /></div>);
+    return (<div className={styles.visualization}><Graph graph={graph} options={options} events={events} style={{ width: '100%', height: '100%' }} /></div>);
   }
 }

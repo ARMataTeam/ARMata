@@ -4,9 +4,6 @@ import { ipcRenderer } from 'electron';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { configureStore, history } from './store/configureStore';
 import Root from './containers/Root';
 import './app.global.css';
@@ -20,11 +17,9 @@ const store = configureStore();
 injectTapEventPlugin();
 
 render(
-  <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-    <AppContainer>
-      <Root store={store} history={history} />
-    </AppContainer>
-  </MuiThemeProvider>,
+  <AppContainer>
+    <Root store={store} history={history} />
+  </AppContainer>,
   document.getElementById('root')
 );
 
@@ -58,6 +53,8 @@ ipcRenderer.on('open-file', (event, filename) => {
         store.dispatch(layoutActions.error(e.message));
       } else if (e instanceof SyntaxError) {
         store.dispatch(layoutActions.error(e.message));
+      } else if (e instanceof ReferenceError) {
+        store.dispatch(layoutActions.error(e.message));
       } else {
         store.dispatch(layoutActions.error(e));
       }
@@ -83,4 +80,8 @@ ipcRenderer.on('update-not-available', () => {
 
 ipcRenderer.on('update-progress', (event, progress) => {
   store.dispatch(layoutActions.notifyProgress(progress));
+});
+
+ipcRenderer.on('open-window', (event, data) => {
+  store.dispatch(layoutActions.openWindow(data.name, data.title, data.content));
 });

@@ -1,9 +1,8 @@
 @import "~font-awesome/css/font-awesome.css";
+@import '~semantic-ui-css/semantic.min.css';
 
 body {
   position: relative;
-  color: white;
-  height: 100vh;
   background-color: rgb(20, 20, 20);
   font-family: Arial, Helvetica, Helvetica Neue, serif;
   margin: 0;
@@ -43,6 +42,14 @@ a:hover {
   cursor: pointer;
 }
 
-div {
+#root {
   height: 100%;
+}
+
+.ui.toggle.checkbox input:focus:checked~.box, .ui.toggle.checkbox input:focus:checked~label, .ui.toggle.checkbox input:checked~.box, .ui.toggle.checkbox input:checked~label {
+  color: #fff !important;
+}
+
+.ui.toggle.checkbox input:focus:checked~.box:before, .ui.toggle.checkbox input:focus:checked~label:before, .ui.toggle.checkbox input:checked~.box:before, .ui.toggle.checkbox input:checked~label:before {
+  background-color: #85abc7 !important;
 }

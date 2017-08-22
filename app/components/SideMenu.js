@@ -1,25 +1,23 @@
 // @flow
 import React, { Component } from 'react';
-import { List, ListItem } from 'material-ui/List';
-import ContentPaste from 'material-ui/svg-icons/content/content-paste';
-import { grey100, grey500, grey50 } from 'material-ui/styles/colors';
-import { Link } from 'react-router-dom';
+import { Icon, Menu } from 'semantic-ui-react';
 import styles from './SideMenu.css'; // eslint-disable-line flowtype-errors/show-errors
 
 export default class SideMenu extends Component {
   props: {
-    changeView: (view: string) => void,
+    openSettings: () => void,
     currentView: string
   }
 
   render() {
     return (
-      <div className={styles.sideMenu}>
-        <List>
-          <ListItem className={styles.menuItemIcon} onTouchTap={() => this.props.changeView('Structure')}>
-            <Link to="/"><ContentPaste color={this.props.currentView === 'Structure' ? grey50 : grey500} hoverColor={grey100} /></Link>
-          </ListItem>
-        </List>
-      </div>);
+      <Menu fixed="left" icon inverted vertical className={styles.sideMenu}>
+        <Menu.Item onClick={() => ''} active={this.props.currentView === 'Structure'}>
+          <Icon name="cloud" size="big" />
+        </Menu.Item>
+        <Menu.Item onClick={() => this.props.openSettings()} active={this.props.currentView === 'Settings'}>
+          <Icon name="settings" size="big" />
+        </Menu.Item>
+      </Menu>);
   }
 }

@@ -6,7 +6,10 @@ export type Template = {
   outputs: Array<Output>,
   parameters: Array<Parameter>,
   resources: Array<Resource>,
-  variables: Array<Variable>
+  variables: Array<Variable>,
+  lines: number,
+  characters: number,
+  loadedIn: number
 };
 
 export type Output = {
@@ -23,6 +26,7 @@ export type Parameter = {
 };
 
 export type Resource = {
+  id: string,
   name: string,
   displayName: string,
   dependsOn: Array<DependsOn>,

@@ -1,6 +1,19 @@
 // @flow
 import { ProgressInfo } from 'electron-builder-http';
-import { CHANGE_LAYOUT, CHANGE_VIEW, CLEAR_ERRORS, ERROR, ALERT, PROGRESS } from '../actions/layout';
+import {
+  CHANGE_LAYOUT,
+  CHANGE_VIEW,
+  CLEAR_ERRORS,
+  ERROR, ALERT,
+  PROGRESS,
+  OPEN_SETTINGS,
+  CLOSE_SETTINGS,
+  OPEN_NODE_WINDOW,
+  CLOSE_NODE_WINDOW,
+  OPEN_WINDOW,
+  CLOSE_WINDOW
+} from '../actions/layout';
+import Window from '../types/window';
 
 type actionType = {
   type: string
@@ -13,7 +26,12 @@ type layoutStateType = {
   title: string,
   isError: boolean,
   buttons: Object[],
-  progress: ProgressInfo
+  progress: ProgressInfo,
+  isSettingsWindowOpen: boolean,
+  isNodeWindowOpen: boolean,
+  nodes: Array<string>,
+  activeWindow: string,
+  window: Window
 };
 
 const initialState = {
@@ -23,7 +41,12 @@ const initialState = {
   title: '',
   isError: false,
   buttons: [],
-  progress: {}
+  progress: {},
+  isSettingsWindowOpen: false,
+  isNodeWindowOpen: false,
+  nodes: [],
+  activeWindow: '',
+  window: {}
 };
 
 export default function layout(state: layoutStateType = initialState, action: actionType) {
@@ -58,6 +81,37 @@ export default function layout(state: layoutStateType = initialState, action: ac
     case PROGRESS:
       return Object.assign({}, state, {
         progress: action.progress
+      });
+    case OPEN_SETTINGS:
+      return Object.assign({}, state, {
+        isSettingsWindowOpen: true
+      });
+    case CLOSE_SETTINGS:
+      return Object.assign({}, state, {
+        isSettingsWindowOpen: false
+      });
+    case OPEN_NODE_WINDOW:
+      return Object.assign({}, state, {
+        isNodeWindowOpen: true,
+        nodes: action.nodes
+      });
+    case CLOSE_NODE_WINDOW:
+      return Object.assign({}, state, {
+        isNodeWindowOpen: false,
+        nodes: []
+      });
+    case OPEN_WINDOW:
+      return Object.assign({}, state, {
+        activeWindow: action.windowName,
+        window: {
+          title: action.window.title,
+          content: action.window.content
+        }
+      });
+    case CLOSE_WINDOW:
+      return Object.assign({}, state, {
+        activeWindow: '',
+        window: {}
       });
     default:
       return state;
