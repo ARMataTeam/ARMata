@@ -82,6 +82,6 @@ ipcRenderer.on('update-progress', (event, progress) => {
   store.dispatch(layoutActions.notifyProgress(progress));
 });
 
-ipcRenderer.on('open-window', (event, name) => {
-  store.dispatch(layoutActions.openWindow(name));
+ipcRenderer.on('open-window', (event, data) => {
+  store.dispatch(layoutActions.openWindow(data.name, data.title, data.content));
 });
