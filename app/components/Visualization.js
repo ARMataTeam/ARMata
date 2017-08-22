@@ -118,7 +118,17 @@ export default class Visualization extends Component {
         hierarchical: this.props.hierarchicalLayout
       },
       edges: {
-        color: '#FFFFFF'
+        color: '#FFFFFF',
+        smooth: {
+          type: 'continuous'
+        }
+      },
+      physics: {
+        forceAtlas2Based: {
+          centralGravity: 0.03,
+          gravitationalConstant: -300
+        },
+        solver: "forceAtlas2Based"
       },
       autoResize: true
     };
