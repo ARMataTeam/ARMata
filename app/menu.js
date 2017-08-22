@@ -115,6 +115,12 @@ export default class MenuBuilder {
       {
         label: 'Check for updates',
         click: () => { Updater.checkForUpdates(); }
+      },
+      {
+        label: 'About ARMata',
+        click: () => {
+          this.mainWindow.webContents.send('open-window', { name: 'about', title: 'About', content: 'AboutWindow' });
+        }
       }]
     }];
 

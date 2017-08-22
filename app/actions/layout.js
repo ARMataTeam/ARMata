@@ -12,6 +12,8 @@ export const OPEN_SETTINGS = 'OPEN_SETTINGS';
 export const CLOSE_SETTINGS = 'CLOSE_SETTINGS';
 export const OPEN_NODE_WINDOW = 'OPEN_NODE_WINDOW';
 export const CLOSE_NODE_WINDOW = 'CLOSE_NODE_WINDOW';
+export const OPEN_WINDOW = 'OPEN_WINDOW';
+export const CLOSE_WINDOW = 'CLOSE_WINDOW';
 
 type actionType = {
   type: string
@@ -76,5 +78,17 @@ export function notifyProgress(progress: ProgressInfo) {
 export function clearErrors() {
   return {
     type: CLEAR_ERRORS
+  };
+}
+
+export function openWindow(name: string, title: string, content: string) {
+  return {
+    type: OPEN_WINDOW, windowName: name, window: { title, content }
+  };
+}
+
+export function closeWindow() {
+  return {
+    type: CLOSE_WINDOW
   };
 }
