@@ -14,15 +14,8 @@ import { app, BrowserWindow } from 'electron';
 import Updater from './updater';
 import MenuBuilder from './menu';
 
-let mainWindow,
-  loadingScreen,
-  windowParams = {
-    width: 1000,
-    height: 700,
-    show: false,
-    transparent: true,
-    frame: true
-  };
+let mainWindow = null;
+let loadingScreen = null;
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -71,7 +64,11 @@ app.on('ready', async () => {
   }
 
   createLoadingScreen();
-  mainWindow = new BrowserWindow(Object.assign(windowParams, { frame: true }));
+  mainWindow = new BrowserWindow({
+    width: 1366,
+    height: 768,
+    show: false
+  });
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
   // @TODO: Use 'ready-to-show' event
@@ -80,13 +77,14 @@ app.on('ready', async () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
     }
-    mainWindow.show();
-    mainWindow.focus();
-    mainWindow.maximize();
 
     if (loadingScreen) {
       loadingScreen.close();
     }
+
+    mainWindow.show();
+    mainWindow.focus();
+    mainWindow.setMaximizable(true);
 
     const updater = new Updater(mainWindow);
     updater.initialize();
@@ -101,7 +99,14 @@ app.on('ready', async () => {
 });
 
 function createLoadingScreen() {
-  loadingScreen = new BrowserWindow(Object.assign(windowParams, { frame: false }));
+  loadingScreen = new BrowserWindow({
+    width: 1000,
+    height: 700,
+    show: false,
+    transparent: true,
+    frame: false,
+    parent: mainWindow
+  });
   loadingScreen.loadURL('file://' + __dirname + '/loading.html');
   loadingScreen.on('closed', () => loadingScreen = null);
   loadingScreen.webContents.on('did-finish-load', () => {
