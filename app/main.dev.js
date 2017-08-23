@@ -14,7 +14,15 @@ import { app, BrowserWindow } from 'electron';
 import Updater from './updater';
 import MenuBuilder from './menu';
 
-let mainWindow = null;
+let mainWindow,
+  loadingScreen,
+  windowParams = {
+    width: 1000,
+    height: 700,
+    show: false,
+    transparent: true,
+    frame: true
+  };
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -62,12 +70,8 @@ app.on('ready', async () => {
     await installExtensions();
   }
 
-  mainWindow = new BrowserWindow({
-    show: false,
-    width: 1366,
-    height: 768
-  });
-
+  createLoadingScreen();
+  mainWindow = new BrowserWindow(Object.assign(windowParams, { frame: true }));
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
   // @TODO: Use 'ready-to-show' event
@@ -78,6 +82,11 @@ app.on('ready', async () => {
     }
     mainWindow.show();
     mainWindow.focus();
+    mainWindow.maximize();
+
+    if (loadingScreen) {
+      loadingScreen.close();
+    }
 
     const updater = new Updater(mainWindow);
     updater.initialize();
@@ -90,3 +99,12 @@ app.on('ready', async () => {
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
 });
+
+function createLoadingScreen() {
+  loadingScreen = new BrowserWindow(Object.assign(windowParams, { frame: false }));
+  loadingScreen.loadURL('file://' + __dirname + '/loading.html');
+  loadingScreen.on('closed', () => loadingScreen = null);
+  loadingScreen.webContents.on('did-finish-load', () => {
+    loadingScreen.show();
+  });
+}
