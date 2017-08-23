@@ -15,7 +15,7 @@ export default class SideMenu extends Component {
         <Menu.Item onClick={() => ''} active={this.props.currentView === 'Structure'}>
           <Icon name="cloud" size="big" />
         </Menu.Item>
-        <Menu.Item onClick={() => this.props.openSettings()} active={this.props.currentView === 'Settings'}>
+        <Menu.Item onClick={() => this.props.openSettings()} active={this.props.currentView === 'Settings'} className={styles.settings}>
           <Icon name="settings" size="big" />
         </Menu.Item>
       </Menu>);

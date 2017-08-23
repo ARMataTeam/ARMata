@@ -1,3 +1,8 @@
 .sideMenu {
   width: 5rem !important;
 }
+
+.settings {
+  position: absolute !important;
+  bottom: 17px;
+}
