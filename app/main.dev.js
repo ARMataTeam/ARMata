@@ -107,8 +107,8 @@ function createLoadingScreen() {
     frame: false,
     parent: mainWindow
   });
-  loadingScreen.loadURL('file://' + __dirname + '/loading.html');
-  loadingScreen.on('closed', () => loadingScreen = null);
+  loadingScreen.loadURL(`file://${__dirname}/loading.html`);
+  loadingScreen.on('closed', () => { loadingScreen = null; });
   loadingScreen.webContents.on('did-finish-load', () => {
     loadingScreen.show();
   });
