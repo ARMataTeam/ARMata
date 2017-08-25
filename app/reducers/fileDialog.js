@@ -23,7 +23,8 @@ const initialState = {
     parameters: [],
     lines: 0,
     characters: 0,
-    loadedIn: 0
+    loadedIn: 0,
+    rawJson: ''
   }
 };
 
@@ -38,7 +39,8 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
       return Object.assign({}, state, {
         selectedFilename: action.selectedFilename,
         fileData: parsedTemplate,
-        hierarchicalLayout: false
+        hierarchicalLayout: false,
+        rawJson: action.data
       });
     }
     default: {
