@@ -13,10 +13,10 @@ export default class SideMenu extends Component {
   render() {
     return (
       <Menu fixed="left" icon inverted vertical className={styles.sideMenu}>
-        <Menu.Item active={this.props.currentView === 'Structure'}>
+        <Menu.Item active={this.props.currentView === '/'}>
           <Link to="/"><Icon name="cloud" size="big" /></Link>
         </Menu.Item>
-        <Menu.Item active={this.props.currentView === 'JsonEditor'}>
+        <Menu.Item active={this.props.currentView === '/editor'}>
           <Link to="/editor"><Icon name="write" size="big" /></Link>
         </Menu.Item>
         <Menu.Item onClick={() => this.props.openSettings()} active={this.props.currentView === 'Settings'} className={styles.settings}>

@@ -12,7 +12,6 @@ export default class Editor extends Component {
   }
 
   render() {
-    console.log(this.props.json);
     return <AceEditor
       height='100%'
       width='100%'

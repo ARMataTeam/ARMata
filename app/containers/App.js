@@ -12,7 +12,8 @@ function mapStateToProps(state) {
     characters: state.fileDialog.fileData.characters,
     loadedIn: state.fileDialog.fileData.loadedIn,
     resources: state.fileDialog.fileData.resources,
-    isSettingsWindowOpen: state.layout.isSettingsWindowOpen
+    isSettingsWindowOpen: state.layout.isSettingsWindowOpen,
+    currentView: state.router.location.pathname
   };
 }
 
