@@ -24,7 +24,8 @@ export default class App extends Component {
     loadedIn: number,
     resources: Array<Resource>,
     layout: Object,
-    isSettingsWindowOpen: boolean
+    isSettingsWindowOpen: boolean,
+    currentView: string
   };
 
   render() {
@@ -37,7 +38,7 @@ export default class App extends Component {
           title={this.props.layout.title} />
         <SideMenu
           changeView={this.props.changeView}
-          currentView={this.props.layout.view}
+          currentView={this.props.currentView}
           openSettings={this.props.openSettings} />
         <ProgressBar progress={this.props.layout.progress} />
         <CustomWindow

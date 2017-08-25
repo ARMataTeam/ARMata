@@ -14,6 +14,7 @@ Object {
     "variables": Array [],
   },
   "hierarchicalLayout": false,
+  "rawJson": "{\\"foo\\":\\"bar\\", \\"parameters\\": []}",
   "selectedFilename": undefined,
 }
 `;
@@ -34,6 +35,7 @@ Object {
     "loadedIn": 0,
     "outputs": Array [],
     "parameters": Array [],
+    "rawJson": "",
     "resources": Array [],
     "schema": "",
     "variables": Array [],
