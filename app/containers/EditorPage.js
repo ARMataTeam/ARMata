@@ -1,6 +1,5 @@
 // @flow
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import Editor from '../components/Editor';
 
 function mapStateToProps(state) {
