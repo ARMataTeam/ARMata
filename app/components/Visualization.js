@@ -128,7 +128,7 @@ export default class Visualization extends Component {
           centralGravity: 0.03,
           gravitationalConstant: -300
         },
-        solver: "forceAtlas2Based"
+        solver: 'forceAtlas2Based'
       },
       autoResize: true
     };

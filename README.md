@@ -1,6 +1,8 @@
 # ARMata [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/ARMataTeam/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link) [![Build Status](https://travis-ci.org/ARMataTeam/ARMata.svg?branch=develop)](https://travis-ci.org/ARMataTeam/ARMata) [![Build status](https://ci.appveyor.com/api/projects/status/ao4tcsxoh1te8elk/branch/develop?svg=true)](https://ci.appveyor.com/project/kamil-mrzyglod/armata/branch/develop) [![Dependency Status](https://gemnasium.com/badges/github.com/ARMataTeam/ARMata.svg)](https://gemnasium.com/github.com/ARMataTeam/ARMata) [![Coverage Status](https://coveralls.io/repos/github/ARMataTeam/ARMata/badge.svg?branch=develop)](https://coveralls.io/github/ARMataTeam/ARMata?branch=develop)
 ARM templates visualizer
 
+<p align="center"><img src="https://media.giphy.com/media/l3fA18K918mmRsm64/giphy.gif" /></p>
+
 ## Installation [![release](http://github-release-version.herokuapp.com/github/armatateam/armata/release.svg?style=flat)](https://github.com/armatateam/armata/releases/latest)
 You can obtain current version of ARMata from our [Releases](https://github.com/ARMataTeam/ARMata/releases) page.
 
@@ -36,6 +38,7 @@ ARMata is currently at the very beginning of development phase and yet there're 
 * toolbox
 * live editing of a template
 * template validation
-* refreshed UI
-* active resources with linked paramteres and variables
+* ability to generate an image from a parsed template
+* ~~refreshed UI~~
+* ~~active resources with linked parameters and variables~~
 * and many more!
