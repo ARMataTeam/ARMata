@@ -56,6 +56,20 @@ export default class Visualization extends Component {
         return `${dir}Azure Application Gateway_COLOR.png`;
       case 'Microsoft.Search/searchServices':
         return `${dir}Azure Search_COLOR.png`;
+      case 'Microsoft.ContainerService/containerServices':
+        return `${dir}Azure Container Service_COLOR.png`;
+      case 'Microsoft.Web/sites/domainOwnershipIdentifiers':
+        return `${dir}Azure App Service - Web App (was Websites).png`;
+      case 'Microsoft.Automation/automationAccounts':
+        return `${dir}Azure Automation_COLOR.png`;
+      case 'Microsoft.Compute/availabilitySets':
+        return `${dir}Azure Virtual Machines - Availability Set_COLOR.png`;
+      case 'Microsoft.ApiManagement/service':
+        return `${dir}Azure API Management_COLOR.png`;
+      case 'Microsoft.Backup/BackupVault/registeredContainers/protectedItems':
+        return `${dir}Azure Backup_COLOR.png`;
+      case 'Microsoft.Backup/BackupVault':
+        return `${dir}Azure Backup - Recovery Vault.png`;
       default:
         return `${dir}Unidentified feature object_COLOR.png`;
     }
