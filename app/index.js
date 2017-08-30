@@ -62,6 +62,10 @@ ipcRenderer.on('open-file', (event, filename) => {
   });
 });
 
+ipcRenderer.on('save-file', (event, filename) => {
+  store.dispatch(fileDialogActions.save(filename));
+});
+
 ipcRenderer.on('update-error', (event, err) => {
   store.dispatch(layoutActions.error(err));
 });

@@ -55,6 +55,22 @@ export default class MenuBuilder {
             this.mainWindow.webContents.send('open-file', selectedFilename);
           });
         }
+      },
+      {
+        label: '&Save a template',
+        accelerator: 'Ctrl+S',
+        click: () => {
+          dialog.showSaveDialog({
+            filters: [
+              {
+                name: 'ARM Template (JSON files)',
+                extensions: ['json']
+              }
+            ]
+          }, (selectedFilename) => {
+            this.mainWindow.webContents.send('save-file', selectedFilename);
+          });
+        }
       }, {
         label: '&Close',
         accelerator: 'Ctrl+W',

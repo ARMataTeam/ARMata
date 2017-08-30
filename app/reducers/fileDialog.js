@@ -1,7 +1,9 @@
 // @flow
-import { OPEN_FILE } from '../actions/fileDialog';
+import { OPEN_FILE, SAVE_FILE } from '../actions/fileDialog';
 import TemplateParser from '../parsers/templateParser';
 import { Template } from '../types/template';
+
+const fs = require('fs');
 
 type actionType = {
   type: string
@@ -42,6 +44,10 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
         hierarchicalLayout: false,
         rawJson: action.data
       });
+    }
+    case SAVE_FILE: {
+      fs.writeFileSync(action.selectedFilename, state.rawJson, 'utf-8');
+      return Object.assign({}, state, {});
     }
     default: {
       return state;
