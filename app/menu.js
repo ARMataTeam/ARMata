@@ -72,6 +72,21 @@ export default class MenuBuilder {
           });
         }
       }, {
+        label: '&Save as image',
+        accelerator: 'Ctrl+G',
+        click: () => {
+          dialog.showSaveDialog({
+            filters: [
+              {
+                name: 'Image (PNG files)',
+                extensions: ['png']
+              }
+            ]
+          }, (selectedFilename) => {
+            this.mainWindow.webContents.send('generate-image', selectedFilename);
+          });
+        }
+      }, {
         label: '&Close',
         accelerator: 'Ctrl+W',
         click: () => {

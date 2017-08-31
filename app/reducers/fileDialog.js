@@ -1,5 +1,5 @@
 // @flow
-import { OPEN_FILE, SAVE_FILE } from '../actions/fileDialog';
+import { OPEN_FILE, SAVE_FILE, GENERATE_IMAGE } from '../actions/fileDialog';
 import TemplateParser from '../parsers/templateParser';
 import { Template } from '../types/template';
 
@@ -47,6 +47,16 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
     }
     case SAVE_FILE: {
       fs.writeFileSync(action.selectedFilename, state.rawJson, 'utf-8');
+      return Object.assign({}, state, {});
+    }
+    case GENERATE_IMAGE: {
+      const canvas = document.getElementsByTagName('canvas');
+      if (canvas.length === 0) {
+        return Object.assign({}, state, {});
+      }
+
+      const image = canvas[0].toDataURL().split(',')[1];
+      fs.writeFileSync(action.selectedFilename, image, 'base64');
       return Object.assign({}, state, {});
     }
     default: {
