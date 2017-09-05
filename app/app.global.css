@@ -53,3 +53,7 @@ a:hover {
 .ui.toggle.checkbox input:focus:checked~.box:before, .ui.toggle.checkbox input:focus:checked~label:before, .ui.toggle.checkbox input:checked~.box:before, .ui.toggle.checkbox input:checked~label:before {
   background-color: #85abc7 !important;
 }
+
+.ace_content {
+  height: 100% !important;
+}
