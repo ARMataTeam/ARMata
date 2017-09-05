@@ -25,9 +25,9 @@ const initialState = {
     parameters: [],
     lines: 0,
     characters: 0,
-    loadedIn: 0,
-    rawJson: ''
-  }
+    loadedIn: 0
+  },
+  rawJson: ''
 };
 
 export default function fileDialog(state: fileDialogStateType = initialState, action: actionType) {
