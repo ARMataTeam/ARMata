@@ -14,6 +14,7 @@ export const OPEN_NODE_WINDOW = 'OPEN_NODE_WINDOW';
 export const CLOSE_NODE_WINDOW = 'CLOSE_NODE_WINDOW';
 export const OPEN_WINDOW = 'OPEN_WINDOW';
 export const CLOSE_WINDOW = 'CLOSE_WINDOW';
+export const OPEN_VISUALIZATION = 'OPEN_VISUALIZATION';
 
 type actionType = {
   type: string
@@ -52,6 +53,12 @@ export function openSettings() {
 export function openNodeWindow(nodes: Array<string>) {
   return (dispatch: (action: actionType) => void) => {
     dispatch({ type: OPEN_NODE_WINDOW, nodes });
+  };
+}
+
+export function openVisualization() {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({ type: OPEN_VISUALIZATION });
   };
 }
 

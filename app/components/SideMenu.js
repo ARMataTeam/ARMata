@@ -7,12 +7,13 @@ import styles from './SideMenu.css'; // eslint-disable-line flowtype-errors/show
 export default class SideMenu extends Component {
   props: {
     openSettings: () => void,
+    openVisualization: () => void,
     currentView: string
   }
 
   render() {
     return (
-      <Menu fixed="left" icon inverted vertical className={styles.sideMenu}>
+      <Menu fixed="left" icon inverted vertical className={styles.sideMenu} onClick={() => this.props.openVisualization()}>
         <Popup
           trigger={<Menu.Item active={this.props.currentView === '/'}>
             <Link to="/"><Icon name="cloud" size="big" /></Link>

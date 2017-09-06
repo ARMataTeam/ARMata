@@ -16,6 +16,7 @@ export default class App extends Component {
     dispatchButtonClick: (action: string) => void,
     changeView: () => void,
     openSettings: () => void,
+    openVisualization: () => void,
     toggleHierarchicalLayout: () => void,
     children: Children,
     selectedFilename: string,
@@ -39,7 +40,8 @@ export default class App extends Component {
         <SideMenu
           changeView={this.props.changeView}
           currentView={this.props.currentView}
-          openSettings={this.props.openSettings} />
+          openSettings={this.props.openSettings}
+          openVisualization={this.props.openVisualization} />
         <ProgressBar progress={this.props.layout.progress} />
         <CustomWindow
           activeWindow={this.props.layout.activeWindow}
