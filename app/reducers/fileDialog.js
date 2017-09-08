@@ -1,7 +1,7 @@
 // @flow
 import { OPEN_FILE, SAVE_FILE, GENERATE_IMAGE } from '../actions/fileDialog';
 import { SET_TEMPLATE } from '../actions/editor';
-import { OPEN_VISUALIZATION } from '../actions/layout';
+import { OPEN_VISUALIZATION, CLEAR_ERRORS } from '../actions/layout';
 import TemplateParser from '../parsers/templateParser';
 import { Template } from '../types/template';
 
@@ -33,7 +33,9 @@ const initialState = {
   '"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",\r\n' +
   '"contentVersion": "1.0.0.0",\r\n' +
   '"resources": []\r\n' +
-  '}'
+  '}',
+  title: '',
+  message: ''
 };
 
 export default function fileDialog(state: fileDialogStateType = initialState, action: actionType) {
@@ -71,19 +73,34 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
       });
     }
     case OPEN_VISUALIZATION: {
-      const templateParser = new TemplateParser(state.rawJson);
-      const parsedTemplate = templateParser.parseTemplate();
+      try {
+        const templateParser = new TemplateParser(state.rawJson);
+        const parsedTemplate = templateParser.parseTemplate();
 
-      TemplateParser.normalizeNames(parsedTemplate);
+        TemplateParser.normalizeNames(parsedTemplate);
 
-      const filename = state.selectedFilename !== '' ? state.selectedFilename : 'EDITED TEMPLATE';
+        const filename = state.selectedFilename !== '' ? state.selectedFilename : 'EDITED TEMPLATE';
 
-      return Object.assign({}, state, {
-        selectedFilename: filename,
-        fileData: parsedTemplate,
-        hierarchicalLayout: false
-      });
+        return Object.assign({}, state, {
+          selectedFilename: filename,
+          fileData: parsedTemplate,
+          hierarchicalLayout: false
+        });
+      }
+      catch (e) {
+        return Object.assign({}, state, {
+          message: e.message,
+          title: 'Error ocurred',
+          isError: true
+        });
+      }
     }
+    case CLEAR_ERRORS:
+      return Object.assign({}, state, {
+        message: '',
+        title: '',
+        isError: false
+      });
     default: {
       return state;
     }

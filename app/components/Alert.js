@@ -11,7 +11,11 @@ export default class Alert extends Component {
   };
 
   render() {
-    return (<Confirm
+    if (this.props.buttons.length === 0) {
+      this.props.buttons.push({ label: 'Close', action: 'CLEAR_ERRORS' });
+    }
+
+    return (<Confirm key={this.props.title}
       header={this.props.title}
       open={this.props.message !== ''}
       content={this.props.message}

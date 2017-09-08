@@ -19,24 +19,21 @@ export default class App extends Component {
     openVisualization: () => void,
     toggleHierarchicalLayout: () => void,
     children: Children,
-    selectedFilename: string,
-    lines: number,
-    characters: number,
-    loadedIn: number,
     resources: Array<Resource>,
     layout: Object,
     isSettingsWindowOpen: boolean,
-    currentView: string
+    currentView: string,
+    fileDialog: Object
   };
 
   render() {
     return (
       <div style={{ height: '100%' }}>
         <Alert
-          message={this.props.layout.message}
+          message={this.props.layout.message === '' ? this.props.fileDialog.message : this.props.layout.message}
           dispatchButtonClick={this.props.dispatchButtonClick}
           buttons={this.props.layout.buttons}
-          title={this.props.layout.title} />
+          title={this.props.layout.title === '' ? this.props.fileDialog.title : this.props.layout.title} />
         <SideMenu
           changeView={this.props.changeView}
           currentView={this.props.currentView}
@@ -48,10 +45,10 @@ export default class App extends Component {
           window={this.props.layout.window}
           dispatchButtonClick={this.props.dispatchButtonClick} />
         <StatusBar
-          selectedFilename={this.props.selectedFilename}
-          lines={this.props.lines}
-          characters={this.props.characters}
-          loadedIn={this.props.loadedIn} />
+          selectedFilename={this.props.fileDialog.selectedFilename}
+          lines={this.props.fileDialog.fileData.lines}
+          characters={this.props.fileDialog.fileData.characters}
+          loadedIn={this.props.fileDialog.fileData.loadedIn} />
         <Sidebar.Pushable>
           <Sidebar as={Form} className={styles.sideBar} animation="scale down" width="wide" visible={this.props.isSettingsWindowOpen} icon="labeled" inverted>
             <Header as="h3" icon style={{ color: '#FFF' }}>
