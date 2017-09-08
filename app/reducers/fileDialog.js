@@ -29,7 +29,11 @@ const initialState = {
     characters: 0,
     loadedIn: 0
   },
-  rawJson: '{}'
+  rawJson: '{\r\n' +
+  '"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",\r\n' +
+  '"contentVersion": "1.0.0.0",\r\n' +
+  '"resources": []\r\n' +
+  '}'
 };
 
 export default function fileDialog(state: fileDialogStateType = initialState, action: actionType) {
