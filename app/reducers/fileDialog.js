@@ -86,8 +86,7 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
           fileData: parsedTemplate,
           hierarchicalLayout: false
         });
-      }
-      catch (e) {
+      } catch (e) {
         return Object.assign({}, state, {
           message: e.message,
           title: 'Error ocurred',
