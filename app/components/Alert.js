@@ -21,7 +21,7 @@ export default class Alert extends Component {
       open={this.props.message !== ''}
       content={this.props.message}
       cancelButton={this.props.buttons.length > 0 ? this.props.buttons[0].label : ''}
-      confirmButton={this.props.buttons.length > 1 ? this.props.buttons[1].label : ''}
+      confirmButton={this.props.buttons.length > 1 ? this.props.buttons[1].label : null}
       onCancel={() => this.props.dispatchButtonClick(this.props.buttons.length > 0 ? this.props.buttons[0].action : '')}
       onConfirm={() => this.props.dispatchButtonClick(this.props.buttons.length > 1 ? this.props.buttons[1].action : '')} />);
   }
