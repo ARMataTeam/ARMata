@@ -13,9 +13,9 @@ export default class SideMenu extends Component {
 
   render() {
     return (
-      <Menu fixed="left" icon inverted vertical className={styles.sideMenu} onClick={() => this.props.openVisualization()}>
+      <Menu fixed="left" icon inverted vertical className={styles.sideMenu}>
         <Popup
-          trigger={<Menu.Item active={this.props.currentView === '/'}>
+          trigger={<Menu.Item active={this.props.currentView === '/'} onClick={() => this.props.openVisualization()}>
             <Link to="/"><Icon name="cloud" size="big" /></Link>
           </Menu.Item>}
           content="Visualization"
