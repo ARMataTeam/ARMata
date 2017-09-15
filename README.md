@@ -36,7 +36,7 @@ $ npm run dev
 ## Roadmap
 ARMata is currently at the very beginning of development phase and yet there're many thing, which are not implemented. The current roadmap:
 * toolbox
-* live editing of a template
+* ~~live editing of a template~~
 * template validation
 * ~~ability to generate an image from a parsed template~~
 * ~~refreshed UI~~
