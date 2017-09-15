@@ -7,10 +7,7 @@ import * as LayoutActions from '../actions/layout';
 function mapStateToProps(state) {
   return {
     layout: state.layout,
-    selectedFilename: state.fileDialog.selectedFilename,
-    lines: state.fileDialog.fileData.lines,
-    characters: state.fileDialog.fileData.characters,
-    loadedIn: state.fileDialog.fileData.loadedIn,
+    fileDialog: state.fileDialog,
     resources: state.fileDialog.fileData.resources,
     isSettingsWindowOpen: state.layout.isSettingsWindowOpen,
     currentView: state.router.location.pathname

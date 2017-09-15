@@ -1,6 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Editor from '../components/Editor';
+import * as EditorActions from '../actions/editor';
 
 function mapStateToProps(state) {
   return {
@@ -8,4 +10,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Editor);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(EditorActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Editor);

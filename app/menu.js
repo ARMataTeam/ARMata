@@ -55,6 +55,37 @@ export default class MenuBuilder {
             this.mainWindow.webContents.send('open-file', selectedFilename);
           });
         }
+      },
+      {
+        label: '&Save a template',
+        accelerator: 'Ctrl+S',
+        click: () => {
+          dialog.showSaveDialog({
+            filters: [
+              {
+                name: 'ARM Template (JSON files)',
+                extensions: ['json']
+              }
+            ]
+          }, (selectedFilename) => {
+            this.mainWindow.webContents.send('save-file', selectedFilename);
+          });
+        }
+      }, {
+        label: '&Save as image',
+        accelerator: 'Ctrl+G',
+        click: () => {
+          dialog.showSaveDialog({
+            filters: [
+              {
+                name: 'Image (PNG files)',
+                extensions: ['png']
+              }
+            ]
+          }, (selectedFilename) => {
+            this.mainWindow.webContents.send('generate-image', selectedFilename);
+          });
+        }
       }, {
         label: '&Close',
         accelerator: 'Ctrl+W',

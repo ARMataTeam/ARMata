@@ -39,7 +39,8 @@
       "app.html",
       "main.prod.js",
       "main.prod.js.map",
-      "package.json"
+      "package.json",
+      "loading.html"
     ],
     "extraResources": [
       "assets/azure/"

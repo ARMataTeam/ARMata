@@ -8,7 +8,12 @@ import monokai from 'brace/theme/monokai'; // eslint-disable-line no-unused-vars
 
 export default class Editor extends Component {
   props: {
+    setNewTemplate: (template: string) => void,
     json: string
+  }
+
+  onChange(newValue: string) {
+    this.props.setNewTemplate(newValue);
   }
 
   render() {
@@ -21,6 +26,7 @@ export default class Editor extends Component {
       value={this.props.json}
       editorProps={{ $blockScrolling: true }}
       style={{ marginLeft: '70px' }}
+      onChange={this.onChange.bind(this)}
     />);
   }
 }

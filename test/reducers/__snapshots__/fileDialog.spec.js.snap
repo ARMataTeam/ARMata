@@ -35,11 +35,17 @@ Object {
     "loadedIn": 0,
     "outputs": Array [],
     "parameters": Array [],
-    "rawJson": "",
     "resources": Array [],
     "schema": "",
     "variables": Array [],
   },
+  "message": "",
+  "rawJson": "{
+\\"$schema\\": \\"http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#\\",
+\\"contentVersion\\": \\"1.0.0.0\\",
+\\"resources\\": []
+}",
   "selectedFilename": "",
+  "title": "",
 }
 `;
