@@ -8,7 +8,8 @@ export default class Home extends Component {
     openNodeWindow: (nodes: Array<string>) => void,
     json: Object,
     selectedFilename: string,
-    hierarchicalLayout: boolean
+    hierarchicalLayout: boolean,
+    physicsEnabled: boolean
   }
 
   render() {
@@ -33,6 +34,7 @@ export default class Home extends Component {
           json={this.props.json}
           hierarchicalLayout={this.props.hierarchicalLayout}
           openNodeWindow={(nodes: Array<string>) => this.props.openNodeWindow(nodes)}
+          physicsEnabled={this.props.physicsEnabled}
         />
       </div>
     );

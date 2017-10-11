@@ -38,6 +38,7 @@ Object {
   "isSettingsWindowOpen": false,
   "message": "",
   "nodes": Array [],
+  "physicsEnabled": true,
   "progress": Object {},
   "title": "",
   "view": "Structure",

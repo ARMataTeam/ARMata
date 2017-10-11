@@ -18,6 +18,7 @@ export default class App extends Component {
     openSettings: () => void,
     openVisualization: () => void,
     toggleHierarchicalLayout: () => void,
+    togglePhysics(): () => void,
     children: Children,
     resources: Array<Resource>,
     layout: Object,
@@ -59,6 +60,7 @@ export default class App extends Component {
     </Header.Subheader>
             </Header>
             <Form.Field><Checkbox toggle label="Hierarchical layout?" onChange={() => this.props.toggleHierarchicalLayout()} /></Form.Field>
+            <Form.Field><Checkbox toggle label="Disable physics?" onChange={() => this.props.togglePhysics()} /></Form.Field>
             <Form.Field><Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_SETTINGS')}>Close</Button></Form.Field>
           </Sidebar>
           <RightSidebar

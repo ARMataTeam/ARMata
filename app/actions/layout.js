@@ -15,6 +15,7 @@ export const CLOSE_NODE_WINDOW = 'CLOSE_NODE_WINDOW';
 export const OPEN_WINDOW = 'OPEN_WINDOW';
 export const CLOSE_WINDOW = 'CLOSE_WINDOW';
 export const OPEN_VISUALIZATION = 'OPEN_VISUALIZATION';
+export const TOGGLE_PHYSICS = 'TOGGLE_PHYSICS';
 
 type actionType = {
   type: string
@@ -28,6 +29,12 @@ type changeViewType = {
 export function toggleHierarchicalLayout() {
   return (dispatch: (action: actionType) => void) => {
     dispatch({ type: CHANGE_LAYOUT });
+  };
+}
+
+export function togglePhysics() {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({ type: TOGGLE_PHYSICS });
   };
 }
 

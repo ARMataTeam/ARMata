@@ -8,7 +8,8 @@ export default class Visualization extends Component {
   props: {
     openNodeWindow: (Array<string>) => void, // eslint-disable-line react/no-unused-prop-types
     json: Object,
-    hierarchicalLayout: boolean
+    hierarchicalLayout: boolean,
+    physicsEnabled: boolean
   }
 
   resources: any;
@@ -138,6 +139,7 @@ export default class Visualization extends Component {
         }
       },
       physics: {
+        enabled: this.props.physicsEnabled,
         forceAtlas2Based: {
           centralGravity: 0.03,
           gravitationalConstant: -300

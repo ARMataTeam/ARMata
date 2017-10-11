@@ -11,7 +11,8 @@ import {
   OPEN_NODE_WINDOW,
   CLOSE_NODE_WINDOW,
   OPEN_WINDOW,
-  CLOSE_WINDOW
+  CLOSE_WINDOW,
+  TOGGLE_PHYSICS
 } from '../actions/layout';
 import Window from '../types/window';
 
@@ -31,7 +32,8 @@ type layoutStateType = {
   isNodeWindowOpen: boolean,
   nodes: Array<string>,
   activeWindow: string,
-  window: Window
+  window: Window,
+  physicsEnabled: boolean
 };
 
 const initialState = {
@@ -46,7 +48,8 @@ const initialState = {
   isNodeWindowOpen: false,
   nodes: [],
   activeWindow: '',
-  window: {}
+  window: {},
+  physicsEnabled: true
 };
 
 export default function layout(state: layoutStateType = initialState, action: actionType) {
@@ -112,6 +115,10 @@ export default function layout(state: layoutStateType = initialState, action: ac
       return Object.assign({}, state, {
         activeWindow: '',
         window: {}
+      });
+    case TOGGLE_PHYSICS:
+      return Object.assign({}, state, {
+        physicsEnabled: !state.physicsEnabled
       });
     default:
       return state;
