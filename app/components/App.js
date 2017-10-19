@@ -7,6 +7,7 @@ import Alert from './Alert';
 import ProgressBar from './Progress';
 import StatusBar from './StatusBar';
 import RightSidebar from './RightSidebar';
+import Toolbox from './Toolbox';
 import CustomWindow from './Window';
 import { Resource } from '../types/template';
 import styles from './App.css'; // eslint-disable-line flowtype-errors/show-errors
@@ -63,16 +64,7 @@ export default class App extends Component {
             </Header>
             <Form.Field><Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_SETTINGS')}>Close</Button></Form.Field>
           </Sidebar>
-          <Sidebar as={Form} className={styles.sideBar} animation="overlay" width="wide" visible={this.props.layout.isToolboxOpen} icon="labeled" inverted>
-            <Header as="h3" icon style={{ color: '#FFF' }}>
-              <Icon name="sitemap" />
-              Toolbox
-    <Header.Subheader style={{ color: '#FFF' }}>
-                Build & customize a template
-    </Header.Subheader>
-            </Header>
-            <Form.Field><Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_TOOLBOX')}>Close</Button></Form.Field>
-          </Sidebar>
+          <Toolbox dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)} isToolboxOpen={this.props.layout.isToolboxOpen} />
           <RightSidebar
             dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}
             isNodeWindowOpen={this.props.layout.isNodeWindowOpen}
