@@ -12,7 +12,9 @@ import {
   CLOSE_NODE_WINDOW,
   OPEN_WINDOW,
   CLOSE_WINDOW,
-  TOGGLE_PHYSICS
+  TOGGLE_PHYSICS,
+  OPEN_TOOLBOX,
+  CLOSE_TOOLBOX
 } from '../actions/layout';
 import Window from '../types/window';
 
@@ -33,7 +35,8 @@ type layoutStateType = {
   nodes: Array<string>,
   activeWindow: string,
   window: Window,
-  physicsEnabled: boolean
+  physicsEnabled: boolean,
+  isToolboxOpen: boolean
 };
 
 const initialState = {
@@ -49,7 +52,8 @@ const initialState = {
   nodes: [],
   activeWindow: '',
   window: {},
-  physicsEnabled: true
+  physicsEnabled: true,
+  isToolboxOpen: false
 };
 
 export default function layout(state: layoutStateType = initialState, action: actionType) {
@@ -119,6 +123,14 @@ export default function layout(state: layoutStateType = initialState, action: ac
     case TOGGLE_PHYSICS:
       return Object.assign({}, state, {
         physicsEnabled: !state.physicsEnabled
+      });
+    case OPEN_TOOLBOX:
+      return Object.assign({}, state, {
+        isToolboxOpen: true
+      });
+    case CLOSE_TOOLBOX:
+      return Object.assign({}, state, {
+        isToolboxOpen: false
       });
     default:
       return state;

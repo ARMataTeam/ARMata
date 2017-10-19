@@ -17,6 +17,7 @@ export default class App extends Component {
     changeView: () => void,
     openSettings: () => void,
     openVisualization: () => void,
+    openToolbox: () => void,
     toggleHierarchicalLayout: () => void,
     togglePhysics(): () => void,
     children: Children,
@@ -39,7 +40,8 @@ export default class App extends Component {
           changeView={this.props.changeView}
           currentView={this.props.currentView}
           openSettings={this.props.openSettings}
-          openVisualization={this.props.openVisualization} />
+          openVisualization={this.props.openVisualization}
+          openToolbox={this.props.openToolbox} />
         <ProgressBar progress={this.props.layout.progress} />
         <CustomWindow
           activeWindow={this.props.layout.activeWindow}
@@ -59,9 +61,17 @@ export default class App extends Component {
                 Manage graph settings and set preferences.
     </Header.Subheader>
             </Header>
-            <Form.Field><Checkbox toggle label="Hierarchical layout?" onChange={() => this.props.toggleHierarchicalLayout()} /></Form.Field>
-            <Form.Field><Checkbox toggle label="Disable physics?" onChange={() => this.props.togglePhysics()} /></Form.Field>
             <Form.Field><Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_SETTINGS')}>Close</Button></Form.Field>
+          </Sidebar>
+          <Sidebar as={Form} className={styles.sideBar} animation="overlay" width="wide" visible={this.props.layout.isToolboxOpen} icon="labeled" inverted>
+            <Header as="h3" icon style={{ color: '#FFF' }}>
+              <Icon name="sitemap" />
+              Toolbox
+    <Header.Subheader style={{ color: '#FFF' }}>
+                Build & customize a template
+    </Header.Subheader>
+            </Header>
+            <Form.Field><Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_TOOLBOX')}>Close</Button></Form.Field>
           </Sidebar>
           <RightSidebar
             dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}
@@ -71,6 +81,9 @@ export default class App extends Component {
           <Sidebar.Pusher dimmed={this.props.isSettingsWindowOpen} style={{ height: '100%' }}>
             {this.props.children}
           </Sidebar.Pusher>
+        </Sidebar.Pushable>
+        <Sidebar.Pushable>
+
         </Sidebar.Pushable>
       </div>
     );
