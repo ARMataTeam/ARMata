@@ -22,7 +22,8 @@ export default class App extends Component {
     openVisualization: () => void,
     openToolbox: () => void,
     toggleHierarchicalLayout: () => void,
-    togglePhysics(): () => void,
+    togglePhysics: () => void,
+    addResource: (resourceType: string) => void,
     children: Children,
     resources: Array<Resource>,
     layout: Object,
@@ -67,7 +68,10 @@ export default class App extends Component {
               </Header>
               <Form.Field><Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_SETTINGS')}>Close</Button></Form.Field>
             </Sidebar>
-            <Toolbox dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)} isToolboxOpen={this.props.layout.isToolboxOpen} />
+            <Toolbox
+              dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}
+              addResource={(type) => this.props.addResource(type)}
+              isToolboxOpen={this.props.layout.isToolboxOpen} />
             <RightSidebar
               dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}
               isNodeWindowOpen={this.props.layout.isNodeWindowOpen}

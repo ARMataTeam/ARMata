@@ -18,6 +18,7 @@ export const OPEN_VISUALIZATION = 'OPEN_VISUALIZATION';
 export const OPEN_TOOLBOX = 'OPEN_TOOLBOX';
 export const CLOSE_TOOLBOX = 'CLOSE_TOOLBOX';
 export const TOGGLE_PHYSICS = 'TOGGLE_PHYSICS';
+export const ADD_RESOURCE = 'ADD_RESOURCE';
 
 type actionType = {
   type: string
@@ -120,3 +121,10 @@ export function closeWindow() {
     type: CLOSE_WINDOW
   };
 }
+
+export function addResource(resourceType: string) {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({ type: ADD_RESOURCE, resourceType });
+  };
+}
+

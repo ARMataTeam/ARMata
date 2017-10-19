@@ -1,7 +1,7 @@
 // @flow
 import { OPEN_FILE, SAVE_FILE, GENERATE_IMAGE } from '../actions/fileDialog';
 import { SET_TEMPLATE } from '../actions/editor';
-import { OPEN_VISUALIZATION, CLEAR_ERRORS } from '../actions/layout';
+import { OPEN_VISUALIZATION, CLEAR_ERRORS, ADD_RESOURCE } from '../actions/layout';
 import TemplateParser from '../parsers/templateParser';
 import { Template } from '../types/template';
 
@@ -100,6 +100,10 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
         title: '',
         isError: false
       });
+    case ADD_RESOURCE: {
+      return Object.assign({}, state, {
+      });
+    }
     default: {
       return state;
     }

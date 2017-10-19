@@ -5,7 +5,7 @@ import { remote } from 'electron';
 import { Image } from 'semantic-ui-react';
 import { DragSource } from 'react-dnd';
 
-const boxSource = {
+const componentSource = {
   beginDrag(props) {
     return {
       name: props.name,
@@ -13,16 +13,17 @@ const boxSource = {
   },
 
   endDrag(props, monitor) {
-    const item = monitor.getItem()
     const dropResult = monitor.getDropResult()
+
     if (dropResult) {
-      alert(`You dropped ${item.name} into ${dropResult.name}!`) // eslint-disable-line no-alert
+      props.addResource(props.resourceType);
     }
   },
 }
 
 class ToolboxComponent extends Component {
   props: {
+    addResource: (resourceType: string) => void,
     resourceType: string
   }
 
@@ -93,7 +94,7 @@ class ToolboxComponent extends Component {
   }
 }
 
-export default DragSource('Component', boxSource, (connect, monitor) => ({
+export default DragSource('Component', componentSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging(),
 }))(ToolboxComponent)

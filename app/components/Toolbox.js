@@ -8,6 +8,7 @@ import styles from './Toolbox.css'; // eslint-disable-line flowtype-errors/show-
 export default class Toolbox extends Component {
   props: {
     dispatchButtonClick: (action: string) => void,
+    addResource: (resourceType: string) => void,
     isToolboxOpen: boolean
   }
 
@@ -23,31 +24,31 @@ export default class Toolbox extends Component {
       <Grid>
         <Grid.Row columns={2}>
           <Grid.Column>
-            <ToolboxComponent resourceType='Microsoft.Web/serverfarms' />
+            <ToolboxComponent resourceType='Microsoft.Web/serverfarms' addResource={(type) => this.props.addResource(type)} />
             App Service
           </Grid.Column>
           <Grid.Column>
-            <ToolboxComponent resourceType='Microsoft.Web/sites' />
+            <ToolboxComponent resourceType='Microsoft.Web/sites' addResource={(type) => this.props.addResource(type)} />
             Web App
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={2}>
           <Grid.Column>
-            <ToolboxComponent resourceType='Microsoft.Insights/components' />
+            <ToolboxComponent resourceType='Microsoft.Insights/components' addResource={(type) => this.props.addResource(type)} />
             Application Insights
           </Grid.Column>
           <Grid.Column>
-            <ToolboxComponent resourceType='Microsoft.Storage/storageAccounts' />
+            <ToolboxComponent resourceType='Microsoft.Storage/storageAccounts' addResource={(type) => this.props.addResource(type)} />
             Storage Account
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={2}>
           <Grid.Column>
-            <ToolboxComponent resourceType='Microsoft.EventHub/namespaces' />
+            <ToolboxComponent resourceType='Microsoft.EventHub/namespaces' addResource={(type) => this.props.addResource(type)} />
             Event Hub
           </Grid.Column>
           <Grid.Column>
-            <ToolboxComponent resourceType='Microsoft.Network/trafficManagerProfiles' />
+            <ToolboxComponent resourceType='Microsoft.Network/trafficManagerProfiles' addResource={(type) => this.props.addResource(type)} />
             Traffic Manager
           </Grid.Column>
         </Grid.Row>
