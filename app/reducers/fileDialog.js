@@ -4,6 +4,7 @@ import { SET_TEMPLATE } from '../actions/editor';
 import { OPEN_VISUALIZATION, CLEAR_ERRORS, ADD_RESOURCE } from '../actions/layout';
 import TemplateParser from '../parsers/templateParser';
 import { Template } from '../types/template';
+import Uuid from '../utils/uuid';
 
 const fs = require('fs');
 
@@ -101,7 +102,15 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
         isError: false
       });
     case ADD_RESOURCE: {
+      state.fileData.resources.push({
+        id: Uuid.uuidv4(),
+        displayName: action.resourceType,
+        name: action.resourceType,
+        dependsOn: [],
+        type: action.resourceType
+      });
       return Object.assign({}, state, {
+        fileData: state.fileData
       });
     }
     default: {

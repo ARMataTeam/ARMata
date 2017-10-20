@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import type { Children } from 'react';
-import { Sidebar, Button, Form, Checkbox, Header, Icon } from 'semantic-ui-react';
-import { DragDropContextProvider } from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
+import { Sidebar, Button, Form, Header, Icon } from 'semantic-ui-react';
+import { DragDropContextProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 import SideMenu from './SideMenu';
 import Alert from './Alert';
 import ProgressBar from './Progress';
@@ -21,8 +21,6 @@ export default class App extends Component {
     openSettings: () => void,
     openVisualization: () => void,
     openToolbox: () => void,
-    toggleHierarchicalLayout: () => void,
-    togglePhysics: () => void,
     addResource: (resourceType: string) => void,
     children: Children,
     resources: Array<Resource>,
@@ -80,9 +78,6 @@ export default class App extends Component {
             <Sidebar.Pusher dimmed={this.props.isSettingsWindowOpen} style={{ height: '100%' }}>
               {this.props.children}
             </Sidebar.Pusher>
-          </Sidebar.Pushable>
-          <Sidebar.Pushable>
-
           </Sidebar.Pushable>
         </div>
       </DragDropContextProvider>

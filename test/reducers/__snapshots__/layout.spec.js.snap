@@ -36,6 +36,7 @@ Object {
   "isError": false,
   "isNodeWindowOpen": false,
   "isSettingsWindowOpen": false,
+  "isToolboxOpen": false,
   "message": "",
   "nodes": Array [],
   "physicsEnabled": true,

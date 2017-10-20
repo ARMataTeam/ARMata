@@ -6,9 +6,9 @@ import Visualization from './Visualization';
 
 const boxTarget = {
   drop() {
-    return { name: 'Dustbin' }
+    return { name: 'Dustbin' };
   },
-}
+};
 
 class Home extends Component {
   props: {
@@ -21,7 +21,7 @@ class Home extends Component {
 
   render() {
     if (this.props.selectedFilename === '') {
-      return this.props.connectDropTarget(
+      return this.props.connectDropTarget( // eslint-disable-line react/prop-types
         <div className={styles.container} data-tid="container">
           {this.props.selectedFilename === '' ?
             <div>
@@ -35,7 +35,7 @@ class Home extends Component {
       );
     }
 
-    return this.props.connectDropTarget(
+    return this.props.connectDropTarget( // eslint-disable-line react/prop-types
       <div className={styles.container} data-tid="container">
         <Visualization
           json={this.props.json}
@@ -52,4 +52,4 @@ export default DropTarget('Component', boxTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop(),
-}))(Home)
+}))(Home);
