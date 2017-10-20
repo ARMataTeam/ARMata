@@ -54,11 +54,11 @@ export default class Toolbox extends Component {
         </Grid.Row>
         <Grid.Row columns={2}>
           <Grid.Column>
-            <ToolboxComponent resourceType='Microsoft.NotificationHubs/namespaces' />
+            <ToolboxComponent resourceType='Microsoft.NotificationHubs/namespaces' addResource={(type) => this.props.addResource(type)} />
             Notification Hub
           </Grid.Column>
           <Grid.Column>
-            <ToolboxComponent resourceType='Microsoft.Network/networkInterfaces' />
+            <ToolboxComponent resourceType='Microsoft.Network/networkInterfaces' addResource={(type) => this.props.addResource(type)} />
             Virtual Network
           </Grid.Column>
         </Grid.Row>
@@ -66,5 +66,33 @@ export default class Toolbox extends Component {
       <br />
       <Form.Field><Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_TOOLBOX')}>Close</Button></Form.Field>
     </Sidebar>);
+  }
+
+  generateGrid() {
+    const types = [
+      { type: 'Microsoft.Web/serverfarms', name: 'App Service' },
+      { type: 'Microsoft.Web/sites', name: 'Web App' },
+      { type: 'Microsoft.Insights/components', name: 'Application Insights' },
+      { type: 'Microsoft.Storage/storageAccounts', name: 'Storage Account' },
+      { type: 'Microsoft.EventHub/namespaces', name: 'Event Hub' },
+      { type: 'Microsoft.Network/trafficManagerProfiles', name: 'Traffic Manager' },
+      { type: 'Microsoft.NotificationHubs/namespaces', name: 'Notification Hub' },
+      { type: 'Microsoft.Network/networkInterfaces', name: 'Virtual Network' }];
+
+    let grid = '';
+    for (let i = 0; i <= types.length - 1; i += 1) {
+      grid += <Grid.Row columns={2}>
+        <Grid.Column>
+          <ToolboxComponent resourceType={types[i].type} addResource={(type) => this.props.addResource(type)} />
+          {types[i].name}
+        </Grid.Column>
+        <Grid.Column>
+          <ToolboxComponent resourceType={types[i + 1].type} addResource={(type) => this.props.addResource(type)} />
+          {types[i + 1].name}
+        </Grid.Column>
+      </Grid.Row>
+    }
+
+    return grid;
   }
 }
