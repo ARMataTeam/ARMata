@@ -103,7 +103,7 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
       });
     case ADD_RESOURCE: {
       state.fileData.resources.push({
-        id: Uuid.uuidv4(),
+        id: `${action.resourceType}${Uuid.uuidv4()}`,
         displayName: action.resourceType,
         name: action.resourceType,
         dependsOn: [],
@@ -112,7 +112,7 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
       return Object.assign({}, state, {
         selectedFilename: 'EDITED TEMPLATE',
         fileData: state.fileData,
-        rawJson: JSON.stringify(state.fileData, null, "\t")
+        rawJson: JSON.stringify(state.fileData, null, '\t')
       });
     }
     default: {
