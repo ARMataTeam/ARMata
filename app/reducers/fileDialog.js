@@ -111,7 +111,8 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
       });
       return Object.assign({}, state, {
         selectedFilename: 'EDITED TEMPLATE',
-        fileData: state.fileData
+        fileData: state.fileData,
+        rawJson: JSON.stringify(state.fileData, null, "\t")
       });
     }
     default: {
