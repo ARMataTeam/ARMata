@@ -110,6 +110,7 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
         type: action.resourceType
       });
       return Object.assign({}, state, {
+        selectedFilename: 'EDITED TEMPLATE',
         fileData: state.fileData
       });
     }

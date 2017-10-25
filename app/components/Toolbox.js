@@ -20,11 +20,17 @@ export default class Toolbox extends Component {
       { type: 'Microsoft.EventHub/namespaces', name: 'Event Hub' },
       { type: 'Microsoft.Network/trafficManagerProfiles', name: 'Traffic Manager' },
       { type: 'Microsoft.NotificationHubs/namespaces', name: 'Notification Hub' },
-      { type: 'Microsoft.Network/networkInterfaces', name: 'Virtual Network' }];
+      { type: 'Microsoft.Network/networkInterfaces', name: 'Virtual Network' },
+      { type: 'Microsoft.Compute/virtualMachines', name: 'Virtual Machine' },
+      { type: 'Microsoft.Search/searchServices', name: 'Azure Search' },
+      { type: 'Microsoft.Compute/virtualMachines', name: 'Virtual Machine' },
+      { type: 'Microsoft.Network/applicationGateways', name: 'Application Gateway' },
+      { type: 'Microsoft.ApiManagement/service', name: 'API Management' },
+      { type: 'Microsoft.Backup/BackupVault', name: 'Azure Backup' }];
 
     const grid = [];
     for (let i = 0; i <= types.length - 1; i += 2) {
-      grid.push(<Grid.Row columns={2}>
+      grid.push(<Grid.Row columns={2} key={i}>
         <Grid.Column>
           <ToolboxComponent
             resourceType={types[i].type}
