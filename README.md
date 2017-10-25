@@ -9,6 +9,9 @@ You can obtain current version of ARMata from our [Releases](https://github.com/
 ## Our goal
 We decided to create new ARM visualizer(apart from currently existing ones like ARMVIZ) because there's no tool, which is being currently maintained and developed. Our goal is to provide a solution, which will fill the gap of ARM visualizers and help people when working with them on daily basis.
 
+## What does "ARMata" mean?
+In Polish "armata" means "a cannon". It combines both the main purpose of this application and the idea to solve many issues related to working with ARM templates.
+
 ## How can I help?
 Anyone can join and we'll welcome all new contributors. Currently we need people for all kinds of different things:
 * coding
@@ -36,7 +39,7 @@ $ npm run dev
 ## Roadmap
 ARMata is currently at the very beginning of development phase and yet there're many thing, which are not implemented. The current roadmap:
 * toolbox
-* live editing of a template
+* ~~live editing of a template~~
 * template validation
 * ~~ability to generate an image from a parsed template~~
 * ~~refreshed UI~~

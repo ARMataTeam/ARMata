@@ -9,7 +9,8 @@ function mapStateToProps(state) {
     selectedFilename: state.fileDialog.selectedFilename,
     json: state.fileDialog.fileData,
     error: state.fileDialog.error,
-    hierarchicalLayout: state.layout.hierarchicalLayout
+    hierarchicalLayout: state.layout.hierarchicalLayout,
+    physicsEnabled: state.layout.physicsEnabled
   };
 }
 

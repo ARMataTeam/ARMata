@@ -1,19 +1,27 @@
 // @flow
 import React, { Component } from 'react';
+import { DropTarget } from 'react-dnd';
 import styles from './Home.css'; // eslint-disable-line flowtype-errors/show-errors
 import Visualization from './Visualization';
 
-export default class Home extends Component {
+const boxTarget = {
+  drop() {
+    return { name: 'Dustbin' };
+  },
+};
+
+class Home extends Component {
   props: {
     openNodeWindow: (nodes: Array<string>) => void,
     json: Object,
     selectedFilename: string,
-    hierarchicalLayout: boolean
+    hierarchicalLayout: boolean,
+    physicsEnabled: boolean
   }
 
   render() {
     if (this.props.selectedFilename === '') {
-      return (
+      return this.props.connectDropTarget( // eslint-disable-line react/prop-types
         <div className={styles.container} data-tid="container">
           {this.props.selectedFilename === '' ?
             <div>
@@ -27,14 +35,21 @@ export default class Home extends Component {
       );
     }
 
-    return (
+    return this.props.connectDropTarget( // eslint-disable-line react/prop-types
       <div className={styles.container} data-tid="container">
         <Visualization
           json={this.props.json}
           hierarchicalLayout={this.props.hierarchicalLayout}
           openNodeWindow={(nodes: Array<string>) => this.props.openNodeWindow(nodes)}
+          physicsEnabled={this.props.physicsEnabled}
         />
       </div>
     );
   }
 }
+
+export default DropTarget('Component', boxTarget, (connect, monitor) => ({
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver(),
+  canDrop: monitor.canDrop(),
+}))(Home);

@@ -15,6 +15,10 @@ export const CLOSE_NODE_WINDOW = 'CLOSE_NODE_WINDOW';
 export const OPEN_WINDOW = 'OPEN_WINDOW';
 export const CLOSE_WINDOW = 'CLOSE_WINDOW';
 export const OPEN_VISUALIZATION = 'OPEN_VISUALIZATION';
+export const OPEN_TOOLBOX = 'OPEN_TOOLBOX';
+export const CLOSE_TOOLBOX = 'CLOSE_TOOLBOX';
+export const TOGGLE_PHYSICS = 'TOGGLE_PHYSICS';
+export const ADD_RESOURCE = 'ADD_RESOURCE';
 
 type actionType = {
   type: string
@@ -28,6 +32,12 @@ type changeViewType = {
 export function toggleHierarchicalLayout() {
   return (dispatch: (action: actionType) => void) => {
     dispatch({ type: CHANGE_LAYOUT });
+  };
+}
+
+export function togglePhysics() {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({ type: TOGGLE_PHYSICS });
   };
 }
 
@@ -59,6 +69,18 @@ export function openNodeWindow(nodes: Array<string>) {
 export function openVisualization() {
   return (dispatch: (action: actionType) => void) => {
     dispatch({ type: OPEN_VISUALIZATION });
+  };
+}
+
+export function openToolbox() {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({ type: OPEN_TOOLBOX });
+  };
+}
+
+export function closeToolbox() {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({ type: CLOSE_TOOLBOX });
   };
 }
 
@@ -99,3 +121,10 @@ export function closeWindow() {
     type: CLOSE_WINDOW
   };
 }
+
+export function addResource(resourceType: string) {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({ type: ADD_RESOURCE, resourceType });
+  };
+}
+

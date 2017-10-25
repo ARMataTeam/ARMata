@@ -1,9 +1,10 @@
 // @flow
 import { OPEN_FILE, SAVE_FILE, GENERATE_IMAGE } from '../actions/fileDialog';
 import { SET_TEMPLATE } from '../actions/editor';
-import { OPEN_VISUALIZATION, CLEAR_ERRORS } from '../actions/layout';
+import { OPEN_VISUALIZATION, CLEAR_ERRORS, ADD_RESOURCE } from '../actions/layout';
 import TemplateParser from '../parsers/templateParser';
 import { Template } from '../types/template';
+import Uuid from '../utils/uuid';
 
 const fs = require('fs');
 
@@ -100,6 +101,20 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
         title: '',
         isError: false
       });
+    case ADD_RESOURCE: {
+      state.fileData.resources.push({
+        id: `${action.resourceType}${Uuid.uuidv4()}`,
+        displayName: action.resourceType,
+        name: action.resourceType,
+        dependsOn: [],
+        type: action.resourceType
+      });
+      return Object.assign({}, state, {
+        selectedFilename: 'EDITED TEMPLATE',
+        fileData: state.fileData,
+        rawJson: JSON.stringify(state.fileData, null, '\t')
+      });
+    }
     default: {
       return state;
     }
