@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import type { Children } from 'react';
-import { Sidebar, Button, Form, Header, Icon } from 'semantic-ui-react';
+import { Sidebar, Button, Form, Header, Icon, Checkbox } from 'semantic-ui-react';
 import { DragDropContextProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import SideMenu from './SideMenu';
@@ -22,6 +22,8 @@ export default class App extends Component {
     openVisualization: () => void,
     openToolbox: () => void,
     addResource: (resourceType: string) => void,
+    toggleHierarchicalLayout: () => void,
+    togglePhysics: () => void,
     children: Children,
     resources: Array<Resource>,
     layout: Object,
@@ -64,6 +66,8 @@ export default class App extends Component {
                   Manage graph settings and set preferences.
     </Header.Subheader>
               </Header>
+              <Form.Field><Checkbox toggle label="Hierarchical layout?" onChange={() => this.props.toggleHierarchicalLayout()} /></Form.Field>
+              <Form.Field><Checkbox toggle label="Disable physics?" onChange={() => this.props.togglePhysics()} /></Form.Field>
               <Form.Field><Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_SETTINGS')}>Close</Button></Form.Field>
             </Sidebar>
             <Toolbox
