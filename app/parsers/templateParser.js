@@ -31,7 +31,7 @@ export default class TemplateParser {
 
   parseTemplate(): Template {
     const parsedTemplate = {
-      schema: this.json.$schema,
+      schema: this.json.$schema || '',
       contentVersion: this.json.contentVersion,
       outputs: this.getOutputs(),
       parameters: this.getParameters(),
