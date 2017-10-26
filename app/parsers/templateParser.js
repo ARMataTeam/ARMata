@@ -81,7 +81,7 @@ export default class TemplateParser {
   }
 
   getResources(): Array<Resource> {
-    const resources = this.json.resources;
+    const resources = TemplateParser.convertResourceTreeToList(this.json);
     const result = [];
 
     if (resources) {
@@ -111,6 +111,22 @@ export default class TemplateParser {
     }
 
     return result;
+  }
+
+  static convertResourceTreeToList(root: object): Array<Object> {
+    var stack = [], array = [];
+    stack.push(root);
+
+    while(stack.length !== 0) {
+        var node = stack.pop();
+        if(node.resources !== null && node.resources !== undefined) {
+            for(var i = node.resources.length - 1; i >= 0; i--) {
+                stack.push(node.resources[i]);
+                array.push(node.resources[i]);
+            }
+        }
+    }
+    return array;
   }
 
   getOutputs(): Array<Output> {
