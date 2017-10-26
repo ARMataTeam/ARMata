@@ -102,7 +102,7 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
         isError: false
       });
     case ADD_RESOURCE: {
-      var uuid = Uuid.uuidv4();
+      const uuid = Uuid.uuidv4();
       state.fileData.resources.push({
         id: `${action.resourceType}${uuid}`,
         displayName: `${action.resourceType}-${uuid}`,
@@ -110,10 +110,6 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
         dependsOn: [],
         type: action.resourceType
       });
-
-      state.fileData.schema === '' ? 
-        state.fileData.schema = 'http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#' :
-        state.fileData.schema = state.fileData.schema;
 
       return Object.assign({}, state, {
         selectedFilename: 'EDITED TEMPLATE',
