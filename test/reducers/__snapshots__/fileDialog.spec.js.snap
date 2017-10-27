@@ -10,7 +10,7 @@ Object {
     "outputs": Array [],
     "parameters": Array [],
     "resources": Array [],
-    "schema": undefined,
+    "schema": "",
     "variables": Array [],
   },
   "hierarchicalLayout": false,
