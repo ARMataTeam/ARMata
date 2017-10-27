@@ -113,18 +113,19 @@ export default class TemplateParser {
     return result;
   }
 
-  static convertResourceTreeToList(root: object): Array<Object> {
-    var stack = [], array = [];
+  static convertResourceTreeToList(root: object): Array<object> {
+    const stack = [];
+    const array = [];
     stack.push(root);
 
-    while(stack.length !== 0) {
-        var node = stack.pop();
-        if(node.resources !== null && node.resources !== undefined) {
-            for(var i = node.resources.length - 1; i >= 0; i--) {
-                stack.push(node.resources[i]);
-                array.push(node.resources[i]);
-            }
+    while (stack.length !== 0) {
+      const node = stack.pop();
+      if (node.resources !== null && node.resources !== undefined) {
+        for (let i = node.resources.length - 1; i >= 0; i -= 1) {
+          stack.push(node.resources[i]);
+          array.push(node.resources[i]);
         }
+      }
     }
     return array;
   }
