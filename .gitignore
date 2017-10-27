@@ -50,3 +50,6 @@ main.js.map
 
 .idea
 npm-debug.log.*
+
+# VsCode User Files
+launch.json
