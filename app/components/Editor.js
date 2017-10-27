@@ -27,6 +27,6 @@ export default class Editor extends Component {
       editorProps={{ $blockScrolling: true }}
       style={{ marginLeft: '70px' }}
       onChange={this.onChange.bind(this)}
-    />);
+      />);
   }
 }

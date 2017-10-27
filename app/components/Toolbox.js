@@ -34,13 +34,15 @@ export default class Toolbox extends Component {
         <Grid.Column>
           <ToolboxComponent
             resourceType={types[i].type}
-            addResource={(type) => this.props.addResource(type)} />
+            addResource={(type) => this.props.addResource(type)}
+            />
           {types[i].name}
         </Grid.Column>
         <Grid.Column>
           <ToolboxComponent
             resourceType={types[i + 1].type}
-            addResource={(type) => this.props.addResource(type)} />
+            addResource={(type) => this.props.addResource(type)}
+            />
           {types[i + 1].name}
         </Grid.Column>
       </Grid.Row>);
