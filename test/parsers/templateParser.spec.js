@@ -124,8 +124,8 @@ describe('parsers', () => {
 
       expect(result.schema).toBe('some_schema');
       expect(result.contentVersion).toBe('1.0.0.0');
-      expect(result.resources[0].dependsOn[0].name).toBe('Microsoft.Web/serverfarmsliczniknetFunctionAppServicePlanName');
-      expect(result.resources[1].displayName).toBe('liczniknetFunctionAppServicePlanName');
+      expect(result.resources[1].dependsOn[0].name).toBe('Microsoft.Web/serverfarmsliczniknetFunctionAppServicePlanName');
+      expect(result.resources[0].displayName).toBe('liczniknetFunctionAppServicePlanName');
     });
 
     it('should resolve concated variables correctly in name', () => {
