@@ -17,7 +17,8 @@ export default class Structure extends Component {
     for (let index = 0; index < this.props.json.variables.length; index += 1) {
       const variable = this.props.json.variables[index];
       variables.push(<List.Item
-        key={variable.id}>{variable.name}
+        key={variable.id}
+        >{variable.name}
       </List.Item>);
     }
 
@@ -30,7 +31,8 @@ export default class Structure extends Component {
     for (let index = 0; index < this.props.json.parameters.length; index += 1) {
       const parameter = this.props.json.parameters[index];
       parameters.push(<List.Item
-        key={parameter.id}>{parameter.name}
+        key={parameter.id}
+        >{parameter.name}
       </List.Item>);
     }
 
@@ -43,7 +45,8 @@ export default class Structure extends Component {
     for (let index = 0; index < this.props.json.outputs.length; index += 1) {
       const output = this.props.json.outputs[index];
       outputs.push(<List.Item
-        key={output.name}>{output.name}
+        key={output.name}
+        >{output.name}
       </List.Item>);
     }
 

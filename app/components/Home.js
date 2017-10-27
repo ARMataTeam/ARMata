@@ -42,7 +42,7 @@ class Home extends Component {
           hierarchicalLayout={this.props.hierarchicalLayout}
           openNodeWindow={(nodes: Array<string>) => this.props.openNodeWindow(nodes)}
           physicsEnabled={this.props.physicsEnabled}
-        />
+          />
       </div>
     );
   }
