@@ -5,6 +5,7 @@ import { OPEN_VISUALIZATION, CLEAR_ERRORS, ADD_RESOURCE } from '../actions/layou
 import TemplateParser from '../parsers/templateParser';
 import { Template } from '../types/template';
 import Uuid from '../utils/uuid';
+import ResourceTemplateProvider from '../resources/resourceTemplateProvider';
 
 const fs = require('fs');
 
@@ -111,10 +112,13 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
         type: action.resourceType
       });
 
+      const rawJson = JSON.parse(state.rawJson);
+      rawJson.resources.push(JSON.parse(ResourceTemplateProvider.getTemplate(action.resourceType)));
+
       return Object.assign({}, state, {
         selectedFilename: 'EDITED TEMPLATE',
         fileData: state.fileData,
-        rawJson: JSON.stringify(state.fileData, null, '\t')
+        rawJson: JSON.stringify(rawJson, null, '\t')
       });
     }
     default: {
