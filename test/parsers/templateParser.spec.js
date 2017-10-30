@@ -128,6 +128,53 @@ describe('parsers', () => {
       expect(result.resources[0].displayName).toBe('liczniknetFunctionAppServicePlanName');
     });
 
+    it('should convert tree resources to list', () => {
+      const json = {
+        $schema: 'some_schema',
+        contentVersion: '1.0.0.0',
+        resources: [
+          {
+            apiVersion: '2017-04-01',
+            name: '[parameters(\'eventHubName\')]',
+            type: 'EventHubs',
+            properties: {
+              messageRetentionInDays: '7',
+              partitionCount: '4'
+            },
+            resources: [
+              {
+                apiVersion: '2017-04-01',
+                name: '[parameters(\'consumerGroupName\')]',
+                type: 'ConsumerGroups',
+                properties: {
+                  userMetadata: 'This is a Test Metadata'
+                }
+              }
+            ]
+          }
+        ],
+        parameters: {
+          liczniknetReleaseType: {
+            type: 'string'
+          },
+          liczniknetFunctionAppName: {
+            type: 'string'
+          },
+          liczniknetFunctionAppServicePlanName: {
+            type: 'string'
+          }
+        },
+        variables: {
+          webAppName: '[concat(parameters(\'liczniknetFunctionAppName\'), \'-\', parameters(\'liczniknetReleaseType\'))]'
+        }
+      };
+      const tp = new TemplateParser(JSON.stringify(json));
+      const result = tp.parseTemplate();
+
+      expect(result.resources.length).toBe(2);
+    });
+
+
     it('should resolve concated variables correctly in name', () => {
       const json = {
         $schema: 'some_schema',
