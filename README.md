@@ -36,9 +36,17 @@ $ npm install
 $ npm run dev
 ```
 
+## Testing
+While working with ARMata code you can test your changes with following commands:
+`
+npm run test
+npm run lint
+`
+Those commands are run while building on Travis/AppVeyor so any error will prevent a PR from merging.
+
 ## Roadmap
 ARMata is currently at the very beginning of development phase and yet there're many thing, which are not implemented. The current roadmap:
-* toolbox
+* ~~toolbox~~
 * ~~live editing of a template~~
 * template validation
 * ~~ability to generate an image from a parsed template~~
