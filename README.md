@@ -38,10 +38,12 @@ $ npm run dev
 
 ## Testing
 While working with ARMata code you can test your changes with following commands:
+
 `
 npm run test
 npm run lint
 `
+
 Those commands are run while building on Travis/AppVeyor so any error will prevent a PR from merging.
 
 ## Roadmap
