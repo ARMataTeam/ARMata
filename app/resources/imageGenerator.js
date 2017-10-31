@@ -59,6 +59,44 @@ export default class ImageGenerator {
         return `${dir}Azure Backup_COLOR.png`;
       case 'Microsoft.Backup/BackupVault':
         return `${dir}Azure Backup - Recovery Vault.png`;
+      case 'Microsoft.AnalysisServices/servers':
+        return `${dir}Analysis Service.png`;
+      case 'Microsoft.Authorization/locks':
+        return `${dir}Azure Acitve Directory Access Control.png`;
+      case 'Microsoft.Batch/batchAccounts':
+        return `${dir}Azure Batch.png`;
+      case 'Microsoft.Cdn/profiles':
+        return `${dir}Azure Content Delivery Network (CDN)_COLOR.png`;
+      case 'Microsoft.CognitiveServices/accounts':
+        return `${dir}Azure Cognative Services_COLOR.png`;
+      case 'Microsoft.ContainerInstance/containerGroups':
+        return `${dir}Azure Container Service.png`;
+      case 'Microsoft.ContainerRegistry/registries':
+        return `${dir}Azure Container Service_COLOR.png`;
+      case 'Microsoft.DataFactory/dataFactories':
+        return `${dir}Azure Data Factory_COLOR.png`;
+      case 'Microsoft.DataLakeAnalytics/accounts':
+        return `${dir}Azure Data Lake Analytics_COLOR.png`;
+      case 'Microsoft.DataLakeStore/accounts':
+        return `${dir}Azure Data Lake Store_COLOR.png`;
+      case 'Microsoft.DocumentDB/databaseAccounts':
+        return `${dir}Azure DocumentDB_COLOR.png`;
+      case 'Microsoft.DomainRegistration/domains':
+        return `${dir}Azure DNS_COLOR.png`;
+      case 'Microsoft.DevTestLab/labs':
+        return `${dir}Azure DevTest Labs_COLOR.png`;
+      case 'Microsoft.HDInsight/clusters':
+        return `${dir}Azure HDInsight_COLOR.png`;
+      case 'Microsoft.Devices/IotHubs':
+        return `${dir}Azure IoT Hub.png`;
+      case 'Microsoft.Devices/IotHubs/eventHubEndpoints/ConsumerGroups':
+        return `${dir}Azure IoT Hub.png`;
+      case 'Microsoft.KeyVault/vaults':
+        return `${dir}Azure KeyVault_COLOR.png`;
+      case 'Microsoft.Network/loadBalancers':
+        return `${dir}Azure Load Balancer (feature)_COLOR.png`;
+      case 'Microsoft.Cache/Redis':
+        return `${dir}Azure Cache Redis Product icon_COLOR.png`;
       default:
         return `${dir}Unidentified feature object_COLOR.png`;
     }
