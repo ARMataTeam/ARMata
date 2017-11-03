@@ -205,5 +205,36 @@ describe('parsers', () => {
       expect(result.contentVersion).toBe('1.0.0.0');
       expect(result.resources[0].displayName).toBe('ifttt-prefix-trafficmanager/ifttt-prefix-webapp-api');
     });
+
+    it('should resolve dependsOn correctly if given an object', () => {
+      const json = {
+        $schema: 'some_schema',
+        contentVersion: '1.0.0.0',
+        resources: [
+          {
+            name: 'someResource',
+            dependsOn: [
+              {
+                id: 'foo',
+                name: 'bar'
+              }
+            ]
+          }
+        ],
+        parameters: {
+        },
+        variables: {
+        }
+      };
+      const tp = new TemplateParser(JSON.stringify(json));
+
+      const result = tp.parseTemplate();
+      TemplateParser.normalizeNames(result);
+
+      expect(result.schema).toBe('some_schema');
+      expect(result.contentVersion).toBe('1.0.0.0');
+      expect(result.resources[0].dependsOn[0].id).toBe('foo');
+      expect(result.resources[0].dependsOn[0].name).toBe('bar');
+    });
   });
 });
