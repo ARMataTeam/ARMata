@@ -1,14 +1,15 @@
 // @flow
 import React, { Component } from 'react';
-import { Image } from 'semantic-ui-react';
+import { Image, Icon } from 'semantic-ui-react';
 import { DragSource } from 'react-dnd';
 import ImageGenerator from '../resources/imageGenerator';
+import styles from './ToolboxComponent.css'; // eslint-disable-line flowtype-errors/show-errors
 
 const componentSource = {
   beginDrag(props) {
     return {
       name: props.name,
-    };
+    }; 
   },
 
   endDrag(props, monitor) {
@@ -27,7 +28,7 @@ class ToolboxComponent extends Component {
   }
 
   render() {
-    return this.props.connectDragSource(<div><Image src={ImageGenerator.findImage(this.props.resourceType)} size="mini" centered /></div>); // eslint-disable-line react/prop-types
+    return this.props.connectDragSource(<div><Icon circular className={styles.toolboxIcon} size='big'><Image src={ImageGenerator.findImage(this.props.resourceType)} size="mini" centered /></Icon></div>); // eslint-disable-line react/prop-types
   }
 }
 
