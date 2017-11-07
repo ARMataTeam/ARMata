@@ -9,14 +9,18 @@ const componentSource = {
   beginDrag(props) {
     return {
       name: props.name,
-    }; 
+    };
   },
 
   endDrag(props, monitor) {
     const dropResult = monitor.getDropResult();
 
     if (dropResult) {
-      props.addResource(props.resourceType);
+      try {
+        props.addResource(props.resourceType);
+      } catch (ex) {
+        props.error(ex.toString());
+      }
     }
   },
 };
@@ -24,11 +28,12 @@ const componentSource = {
 class ToolboxComponent extends Component {
   props: {
     addResource: (resourceType: string) => void, // eslint-disable-line react/no-unused-prop-types
+    error: (errorMessage: string) => void, // eslint-disable-line react/no-unused-prop-types
     resourceType: string
   }
 
   render() {
-    return this.props.connectDragSource(<div><Icon circular className={styles.toolboxIcon} size='big'><Image src={ImageGenerator.findImage(this.props.resourceType)} size="mini" centered /></Icon></div>); // eslint-disable-line react/prop-types
+    return this.props.connectDragSource(<div><Icon circular className={styles.toolboxIcon} size="big"><Image src={ImageGenerator.findImage(this.props.resourceType)} size="mini" centered /></Icon></div>); // eslint-disable-line react/prop-types
   }
 }
 

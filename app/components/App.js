@@ -24,6 +24,7 @@ export default class App extends Component {
     addResource: (resourceType: string) => void,
     toggleHierarchicalLayout: () => void,
     togglePhysics: () => void,
+    error: (errorMessage: string) => void,
     children: Children,
     resources: Array<Resource>,
     layout: Object,
@@ -78,6 +79,7 @@ export default class App extends Component {
               dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}
               addResource={(type) => this.props.addResource(type)}
               isToolboxOpen={this.props.layout.isToolboxOpen}
+              error={(msg) => this.props.error(msg)}
               />
             <RightSidebar
               dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}
