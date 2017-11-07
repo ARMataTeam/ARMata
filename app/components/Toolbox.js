@@ -8,6 +8,7 @@ export default class Toolbox extends Component {
   props: {
     dispatchButtonClick: (action: string) => void,
     addResource: (resourceType: string) => void,
+    error: (errorMessage: string) => void,    
     isToolboxOpen: boolean
   }
 
@@ -75,6 +76,7 @@ export default class Toolbox extends Component {
           <ToolboxComponent
             resourceType={types[i].type}
             addResource={(type) => this.props.addResource(type)}
+            error={(msg) => this.props.error(msg)}
           />
           {types[i].name}
         </Grid.Column>
@@ -82,6 +84,7 @@ export default class Toolbox extends Component {
           <ToolboxComponent
             resourceType={types[i + 1].type}
             addResource={(type) => this.props.addResource(type)}
+            error={(msg) => this.props.error(msg)}
           />
           {types[i + 1].name}
         </Grid.Column>
