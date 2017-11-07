@@ -9,7 +9,7 @@ const componentSource = {
   beginDrag(props) {
     return {
       name: props.name,
-    }; 
+    };
   },
 
   endDrag(props, monitor) {
@@ -20,7 +20,7 @@ const componentSource = {
         props.addResource(props.resourceType);
       } catch (ex) {
         props.error(ex.toString());
-      }  
+      }
     }
   },
 };
@@ -33,7 +33,7 @@ class ToolboxComponent extends Component {
   }
 
   render() {
-    return this.props.connectDragSource(<div><Icon circular className={styles.toolboxIcon} size='big'><Image src={ImageGenerator.findImage(this.props.resourceType)} size="mini" centered /></Icon></div>); // eslint-disable-line react/prop-types
+    return this.props.connectDragSource(<div><Icon circular className={styles.toolboxIcon} size="big"><Image src={ImageGenerator.findImage(this.props.resourceType)} size="mini" centered /></Icon></div>); // eslint-disable-line react/prop-types
   }
 }
 

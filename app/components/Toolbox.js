@@ -8,7 +8,7 @@ export default class Toolbox extends Component {
   props: {
     dispatchButtonClick: (action: string) => void,
     addResource: (resourceType: string) => void,
-    error: (errorMessage: string) => void,    
+    error: (errorMessage: string) => void,
     isToolboxOpen: boolean
   }
 
