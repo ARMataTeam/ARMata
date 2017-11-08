@@ -1,10 +1,13 @@
 // @flow
-import { ProgressInfo } from 'electron-builder-http';
+import {
+  ProgressInfo
+} from 'electron-builder-http';
 import {
   CHANGE_LAYOUT,
   CHANGE_VIEW,
   CLEAR_ERRORS,
-  ERROR, ALERT,
+  ERROR,
+  ALERT,
   PROGRESS,
   OPEN_SETTINGS,
   CLOSE_SETTINGS,
@@ -14,7 +17,9 @@ import {
   CLOSE_WINDOW,
   TOGGLE_PHYSICS,
   OPEN_TOOLBOX,
-  CLOSE_TOOLBOX
+  CLOSE_TOOLBOX,
+  OPEN_QUICKTEMPLATE,
+  CLOSE_QUICKTEMPLATE
 } from '../actions/layout';
 import Window from '../types/window';
 
@@ -36,7 +41,8 @@ type layoutStateType = {
   activeWindow: string,
   window: Window,
   physicsEnabled: boolean,
-  isToolboxOpen: boolean
+  isToolboxOpen: boolean,
+  isQuickTemplateOpen: boolean
 };
 
 const initialState = {
@@ -53,7 +59,8 @@ const initialState = {
   activeWindow: '',
   window: {},
   physicsEnabled: true,
-  isToolboxOpen: false
+  isToolboxOpen: false,
+  isQuickTemplateOpen: false
 };
 
 export default function layout(state: layoutStateType = initialState, action: actionType) {
@@ -131,6 +138,14 @@ export default function layout(state: layoutStateType = initialState, action: ac
     case CLOSE_TOOLBOX:
       return Object.assign({}, state, {
         isToolboxOpen: false
+      });
+    case OPEN_QUICKTEMPLATE:
+      return Object.assign({}, state, {
+        isQuickTemplateOpen: true
+      });
+    case CLOSE_QUICKTEMPLATE:
+      return Object.assign({}, state, {
+        isQuickTemplateOpen: false
       });
     default:
       return state;
