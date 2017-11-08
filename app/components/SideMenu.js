@@ -9,7 +9,8 @@ export default class SideMenu extends Component {
     openSettings: () => void,
     openVisualization: () => void,
     openToolbox: () => void,
-    currentView: string
+    currentView: string,
+    openQuickTemplate: () => void
   }
 
   render() {
@@ -31,6 +32,14 @@ export default class SideMenu extends Component {
           position="right center"
           size="mini"
           />
+
+        <Popup
+          trigger={<Menu.Item onClick={() => this.props.openQuickTemplate()}>
+            <Link to="/quicktemplate"><Icon name="key" size="big" /></Link> </Menu.Item>}
+          content="QuickTemplate"
+          position="right center"
+          size="mini" />
+
         <Popup
           trigger={<Menu.Item active={this.props.currentView === '/editor'}>
             <Link to="/editor"><Icon name="code" size="big" /></Link>
