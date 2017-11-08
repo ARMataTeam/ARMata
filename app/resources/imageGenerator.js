@@ -97,6 +97,28 @@ export default class ImageGenerator {
         return `${dir}Azure Load Balancer (feature)_COLOR.png`;
       case 'Microsoft.Cache/Redis':
         return `${dir}Azure Cache Redis Product icon_COLOR.png`;
+      case 'Microsoft.PowerBI/workspaceCollections':
+        return `${dir}Power BI Embedded.png`;
+      case 'Microsoft.Logic/integrationAccounts':
+        return `${dir}Logic Apps_COLOR.png`;
+      case 'Microsoft.StorSimple/managers':
+        return `${dir}Azure StorSimple_COLOR.png`;
+      case 'Microsoft.Sql/servers':
+        return `${dir}Azure SQL Database (generic)_COLOR.png`;
+      case 'Microsoft.StreamAnalytics/streamingjobs':
+        return `${dir}Azure Stream Analytics_COLOR.png`;
+      case 'Microsoft.ServiceBus/namespaces':
+        return `${dir}Azure Service Bus_COLOR.png`;
+      case 'Microsoft.ServiceFabric/clusters':
+        return `${dir}Azure Service Fabric_COLOR.png`;
+      case 'Microsoft.RecoveryServices/vaults':
+        return `${dir}Azure Site Recovery _COLOR.png`;
+      case 'Microsoft.Scheduler/jobCollections':
+        return `${dir}Azure Scheduler.png`;
+      case 'Microsoft.MachineLearning/commitmentPlans':
+        return `${dir}Azure Machine Learning_COLOR.png`;
+      case 'Microsoft.Media/mediaservices':
+        return `${dir}Azure Media Services _COLOR.png`;
       default:
         return `${dir}Unidentified feature object_COLOR.png`;
     }
