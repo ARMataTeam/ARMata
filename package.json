@@ -186,6 +186,7 @@
     "electron-builder-http": "^19.27.5",
     "electron-debug": "^1.4.0",
     "font-awesome": "^4.7.0",
+    "glob": "^7.1.2",
     "history": "^4.6.1",
     "react": "^15.5.4",
     "react-ace": "^5.2.0",
