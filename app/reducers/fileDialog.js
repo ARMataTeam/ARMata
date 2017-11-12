@@ -7,6 +7,7 @@ import { Template } from '../types/template';
 import Uuid from '../utils/uuid';
 import ResourceTemplateProvider from '../resources/resourceTemplateProvider';
 
+
 const fs = require('fs');
 
 type actionType = {

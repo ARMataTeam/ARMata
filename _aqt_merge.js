@@ -9,7 +9,7 @@ glob('azure-quickstart-templates/**/metadata.json', (error, files) => {
       try {
         const content = JSON.parse(fs.readFileSync(filename, 'utf8'));
         content.deployPath = filename.replace('metadata.json', 'azuredeploy.json');
-        output.push(content);
+        output.push({ itemDisplayName: content.itemDisplayName, deployPath: content.deployPath });
       } catch (e) {
         console.log(e);
       }

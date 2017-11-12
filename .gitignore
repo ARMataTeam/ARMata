@@ -43,7 +43,7 @@ app/bundle.js
 app/bundle.js.map
 app/style.css
 app/style.css.map
-app/template
+app/template/*
 dist
 dll
 main.js

@@ -109,22 +109,6 @@ export function closeToolbox() {
   };
 }
 
-export function openQuickTemplate() {
-  return (dispatch: (action: actionType) => void) => {
-    dispatch({
-      type: OPEN_QUICKTEMPLATE
-    });
-  };
-}
-
-export function closeQuickTemplate() {
-  return (dispatch: (action: actionType) => void) => {
-    dispatch({
-      type: CLOSE_QUICKTEMPLATE
-    });
-  };
-}
-
 export function error(errorMessage: string, title: string = 'Error occured') {
   const buttons = [{
     label: 'Got it',
@@ -186,6 +170,12 @@ export function addResource(resourceType: string) {
       type: ADD_RESOURCE,
       resourceType
     });
+  };
+}
+
+export function openTemplateWindow() {
+  return {
+    type: OPEN_QUICKTEMPLATE
   };
 }
 

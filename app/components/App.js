@@ -22,7 +22,6 @@ export default class App extends Component {
     openSettings: () => void,
     openVisualization: () => void,
     openToolbox: () => void,
-    openQuickTemplate: () => void,
     addResource: (resourceType: string) => void,
     toggleHierarchicalLayout: () => void,
     togglePhysics: () => void,
@@ -52,7 +51,11 @@ export default class App extends Component {
             openSettings={this.props.openSettings}
             openVisualization={this.props.openVisualization}
             openToolbox={this.props.openToolbox}
-            openQuickTemplate={this.props.openQuickTemplate}
+            />
+          <QuickTemplate
+            dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}
+            openTemplate={(deployPath) => this.props.openTemplate(deployPath)}
+            isQuickTemplateOpen={this.props.layout.isQuickTemplateOpen}
             />
           <ProgressBar progress={this.props.layout.progress} />
           <CustomWindow
@@ -84,11 +87,6 @@ export default class App extends Component {
               addResource={(type) => this.props.addResource(type)}
               isToolboxOpen={this.props.layout.isToolboxOpen}
               error={(msg) => this.props.error(msg)}
-              />
-            <QuickTemplate
-              dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}
-              openTemplate={(deployPath) => this.props.openTemplate(deployPath)}
-              isQuickTemplateOpen={this.props.layout.isQuickTemplateOpen}
               />
             <RightSidebar
               dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}

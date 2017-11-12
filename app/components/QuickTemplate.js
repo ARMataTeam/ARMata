@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Sidebar, Button, Form, Header, Icon, Grid } from 'semantic-ui-react';
+import { Button, Form, Header, Icon, Grid, Modal } from 'semantic-ui-react';
 
 import styles from './QuickTemplate.css';
 
@@ -20,10 +20,10 @@ export default class QuickTemplate extends Component {
     for (let i = 0; i <= templates.length - 1; i += 2) {
       grid.push(<Grid.Row columns={2} key={i}>
         <Grid.Column>
-          <Form.Field><Button className="ui inverted button" type="button" fluid onClick={() => this.props.openTemplate(templates[i].deployPath)}>{templates[i].itemDisplayName}</Button></Form.Field>
+          <Form.Field><Button className="ui button" type="button" fluid onClick={() => this.props.openTemplate(templates[i].deployPath)}>{templates[i].itemDisplayName}</Button></Form.Field>
         </Grid.Column>
         <Grid.Column>
-          <Form.Field><Button className="ui inverted button" type="button" fluid onClick={() => this.props.openTemplate(templates[i].deployPath)}>{templates[i + 1].itemDisplayName}</Button></Form.Field>
+          <Form.Field><Button className="ui button" type="button" fluid onClick={() => this.props.openTemplate(templates[i].deployPath)}>{templates[i + 1].itemDisplayName}</Button></Form.Field>
         </Grid.Column>
       </Grid.Row>);
     }
@@ -32,19 +32,21 @@ export default class QuickTemplate extends Component {
   }
 
   render() {
-    return (<Sidebar as={Form} className={styles.quicktemplate} animation="overlay" width="wide" visible={this.props.isQuickTemplateOpen} icon="labeled" inverted>
-      <Header as="h3" icon style={{ color: '#FFF' }}>
-        <Icon name="sitemap" />
-        Toolbox
-<Header.Subheader style={{ color: '#FFF' }}>
-          Select template
-</Header.Subheader>
-      </Header>
-      <Form.Field><Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_QUICKTEMPLATE')}>Close</Button></Form.Field>
-      <br />
-      <Grid>
-        {this.generateGrid()}
-      </Grid>
-    </Sidebar>);
+    return (
+      <Modal open={this.props.isQuickTemplateOpen} className={styles.quicktemplate} onClose={() => this.props.dispatchButtonClick('CLOSE_QUICKTEMPLATE')} closeIcon="close">
+        <Modal.Content>
+          <Header as="h3" icon style={{ color: '#FFF' }}>
+            <Icon name="sitemap" />
+            Toolbox
+            <Header.Subheader style={{ color: '#FFF' }}>
+            Select template
+            </Header.Subheader>
+          </Header>
+          <br />
+          <Grid>
+            {this.generateGrid()}
+          </Grid>
+        </Modal.Content>
+      </Modal>);
   }
 }

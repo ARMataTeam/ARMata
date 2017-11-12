@@ -93,3 +93,7 @@ ipcRenderer.on('update-progress', (event, progress) => {
 ipcRenderer.on('open-window', (event, data) => {
   store.dispatch(layoutActions.openWindow(data.name, data.title, data.content));
 });
+
+ipcRenderer.on('open-quicktemplate', () => {
+  store.dispatch(layoutActions.openTemplateWindow());
+});
