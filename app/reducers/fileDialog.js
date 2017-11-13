@@ -1,7 +1,7 @@
 // @flow
 import { OPEN_FILE, SAVE_FILE, GENERATE_IMAGE } from '../actions/fileDialog';
 import { SET_TEMPLATE } from '../actions/editor';
-import { OPEN_VISUALIZATION, CLEAR_ERRORS, ADD_RESOURCE } from '../actions/layout';
+import { OPEN_VISUALIZATION, CLEAR_ERRORS, ADD_RESOURCE, DELETE_RESOURCE } from '../actions/layout';
 import TemplateParser from '../parsers/templateParser';
 import { Template } from '../types/template';
 import Uuid from '../utils/uuid';
@@ -119,6 +119,22 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
         selectedFilename: 'EDITED TEMPLATE',
         fileData: state.fileData,
         rawJson: JSON.stringify(rawJson, null, '\t')
+      });
+    }
+    case DELETE_RESOURCE: {
+      const resources = [];
+      const resource = state.fileData.resources.find((r) => {
+        if (r.id !== action.id) {
+          resources.push(r);
+        }
+      });
+
+      state.fileData.resources = resources;
+
+      return Object.assign({}, state, {
+        selectedFilename: 'EDITED TEMPLATE',
+        fileData: state.fileData,
+        rawJson: JSON.stringify(state.fileData, null, '\t')
       });
     }
     default: {

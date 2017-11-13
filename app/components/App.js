@@ -22,6 +22,7 @@ export default class App extends Component {
     openVisualization: () => void,
     openToolbox: () => void,
     addResource: (resourceType: string) => void,
+    deleteResource: (id: string) => void,
     toggleHierarchicalLayout: () => void,
     togglePhysics: () => void,
     error: (errorMessage: string) => void,
@@ -83,6 +84,7 @@ export default class App extends Component {
               />
             <RightSidebar
               dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}
+              deleteResource={(id) => this.props.deleteResource(id)}
               isNodeWindowOpen={this.props.layout.isNodeWindowOpen}
               nodes={this.props.layout.nodes}
               resources={this.props.resources}

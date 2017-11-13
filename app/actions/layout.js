@@ -19,6 +19,7 @@ export const OPEN_TOOLBOX = 'OPEN_TOOLBOX';
 export const CLOSE_TOOLBOX = 'CLOSE_TOOLBOX';
 export const TOGGLE_PHYSICS = 'TOGGLE_PHYSICS';
 export const ADD_RESOURCE = 'ADD_RESOURCE';
+export const DELETE_RESOURCE = 'DELETE_RESOURCE';
 
 type actionType = {
   type: string
@@ -128,3 +129,9 @@ export function addResource(resourceType: string) {
   };
 }
 
+
+export function deleteResource(id: string) {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({ type: DELETE_RESOURCE, id });
+  };
+}
