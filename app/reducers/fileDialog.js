@@ -123,13 +123,15 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
     }
     case DELETE_RESOURCE: {
       const resources = [];
-      const resource = state.fileData.resources.find((r) => {
+      state.fileData.resources.find((r) => {
         if (r.id !== action.id) {
           resources.push(r);
         }
+
+        return true;
       });
 
-      state.fileData.resources = resources;
+      state.fileData.resources = resources; // eslint-disable-line no-param-reassign
 
       return Object.assign({}, state, {
         selectedFilename: 'EDITED TEMPLATE',
