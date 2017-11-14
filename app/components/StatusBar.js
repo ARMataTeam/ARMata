@@ -7,13 +7,17 @@ export default class StatusBar extends Component {
     selectedFilename: string,
     lines: number,
     characters: number,
-    loadedIn: number
+    loadedIn: number,
+    isEdited: boolean
   }
 
   render() {
     return (
-      <div className={styles.statusBar}>
-        <div className={styles.filenamePart}>{this.props.selectedFilename ? this.props.selectedFilename : 'Template not loaded'}</div>
+      <div className={this.props.isEdited ? styles.statusBarEdited : styles.statusBar}>
+        <div className={styles.filenamePart}>
+          {this.props.selectedFilename ? this.props.selectedFilename : 'Template not loaded'}
+          {this.props.isEdited ? ' (EDITED)' : ''}
+        </div>
         <div className={styles.informationPart}>
           Lines: {this.props.lines} |
           Characters: {this.props.characters} |
