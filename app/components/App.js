@@ -63,6 +63,7 @@ export default class App extends Component {
             characters={this.props.fileDialog.fileData.characters}
             loadedIn={this.props.fileDialog.fileData.loadedIn}
             isEdited={this.props.layout.isEdited}
+            isSaved={this.props.layout.isSaved}
             />
           <Sidebar.Pushable>
             <Sidebar as={Form} className={styles.sideBar} animation="scale down" width="wide" visible={this.props.isSettingsWindowOpen} icon="labeled" inverted>

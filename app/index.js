@@ -66,6 +66,7 @@ ipcRenderer.on('open-file', (event, filename) => {
 
 ipcRenderer.on('save-file', (event, filename) => {
   store.dispatch(fileDialogActions.save(filename));
+  store.dispatch(editorActions.markSaved());
 });
 
 ipcRenderer.on('generate-image', (event, filename) => {
