@@ -17,7 +17,7 @@ import {
   CLOSE_TOOLBOX
 } from '../actions/layout';
 import Window from '../types/window';
-import {MARK_EDITED} from '../actions/editor';
+import {MARK_EDITED, MARK_IDLE} from '../actions/editor';
 
 type actionType = {
   type: string
@@ -135,9 +135,13 @@ export default function layout(state: layoutStateType = initialState, action: ac
       return Object.assign({}, state, {
         isToolboxOpen: false
       });
-      case MARK_EDITED:
+    case MARK_EDITED:
       return Object.assign({}, state, {
         isEdited: true
+      });
+    case MARK_IDLE:
+      return Object.assign({}, state, {
+        isEdited: false
       });
     default:
       return state;
