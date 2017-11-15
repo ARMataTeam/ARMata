@@ -1,0 +1,19 @@
+.quicktemplate {
+    position: relative;
+  }
+  
+  .row {
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+  }
+  
+  .buttonRight {
+    position: absolute;
+    right: 30px;
+  }
+  
+  .buttonLeft {
+    position: absolute;
+    left: 30px;
+  }
+  
