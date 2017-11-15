@@ -1,10 +1,13 @@
 // @flow
-import { ProgressInfo } from 'electron-builder-http';
+import {
+  ProgressInfo
+} from 'electron-builder-http';
 import {
   CHANGE_LAYOUT,
   CHANGE_VIEW,
   CLEAR_ERRORS,
-  ERROR, ALERT,
+  ERROR,
+  ALERT,
   PROGRESS,
   OPEN_SETTINGS,
   CLOSE_SETTINGS,
@@ -14,10 +17,14 @@ import {
   CLOSE_WINDOW,
   TOGGLE_PHYSICS,
   OPEN_TOOLBOX,
-  CLOSE_TOOLBOX
+  CLOSE_TOOLBOX,
+  OPEN_QUICKTEMPLATE,
+  CLOSE_QUICKTEMPLATE,
+  INCREMENT,
+  DECREMENT
 } from '../actions/layout';
 import Window from '../types/window';
-import {MARK_EDITED, MARK_IDLE, MARK_SAVED} from '../actions/editor';
+import { MARK_EDITED, MARK_IDLE, MARK_SAVED } from '../actions/editor';
 
 type actionType = {
   type: string
@@ -38,6 +45,8 @@ type layoutStateType = {
   window: Window,
   physicsEnabled: boolean,
   isToolboxOpen: boolean,
+  isQuickTemplateOpen: boolean,
+  currentPage: number,
   isEdited: boolean,
   isSaved: boolean
 };
@@ -57,6 +66,8 @@ const initialState = {
   window: {},
   physicsEnabled: true,
   isToolboxOpen: false,
+  isQuickTemplateOpen: false,
+  currentPage: 1,
   isEdited: false,
   isSaved: false
 };
@@ -136,6 +147,32 @@ export default function layout(state: layoutStateType = initialState, action: ac
     case CLOSE_TOOLBOX:
       return Object.assign({}, state, {
         isToolboxOpen: false
+      });
+    case OPEN_QUICKTEMPLATE:
+      return Object.assign({}, state, {
+        isQuickTemplateOpen: true
+      });
+    case CLOSE_QUICKTEMPLATE:
+      return Object.assign({}, state, {
+        isQuickTemplateOpen: false
+      });
+    case INCREMENT:
+      if (state.currentPage === 63) {
+        return Object.assign({}, state, {
+          currentPage: 63
+        });
+      }
+      return Object.assign({}, state, {
+        currentPage: state.currentPage + 1
+      });
+    case DECREMENT:
+      if (state.currentPage === 1) {
+        return Object.assign({}, state, {
+          currentPage: 1
+        });
+      }
+      return Object.assign({}, state, {
+        currentPage: state.currentPage - 1
       });
     case MARK_EDITED:
       return Object.assign({}, state, {

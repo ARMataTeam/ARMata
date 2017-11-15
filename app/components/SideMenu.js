@@ -31,6 +31,7 @@ export default class SideMenu extends Component {
           position="right center"
           size="mini"
           />
+
         <Popup
           trigger={<Menu.Item active={this.props.currentView === '/editor'}>
             <Link to="/editor"><Icon name="code" size="big" /></Link>
