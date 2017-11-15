@@ -32,7 +32,8 @@ export default class App extends Component {
     isSettingsWindowOpen: boolean,
     currentView: string,
     fileDialog: Object,
-    openTemplate: (deployPath: string) => void
+    openTemplate: (deployPath: string) => void,
+    changePage: (action: string) => void
   };
 
   render() {
@@ -56,6 +57,8 @@ export default class App extends Component {
             dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}
             openTemplate={(deployPath) => this.props.openTemplate(deployPath)}
             isQuickTemplateOpen={this.props.layout.isQuickTemplateOpen}
+            changePage={(action) => this.props.changePage(action)}
+            currentPage={this.props.layout.currentPage}
             />
           <ProgressBar progress={this.props.layout.progress} />
           <CustomWindow

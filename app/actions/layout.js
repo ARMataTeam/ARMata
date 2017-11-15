@@ -22,6 +22,8 @@ export const CLOSE_QUICKTEMPLATE = 'CLOSE_QUICKTEMPLATE';
 export const TOGGLE_PHYSICS = 'TOGGLE_PHYSICS';
 export const ADD_RESOURCE = 'ADD_RESOURCE';
 export const OPEN_TEMPLATE = 'OPEN_TEMPLATE';
+export const INCREMENT = 'INCREMENT';
+export const DECREMENT = 'DECREMENT';
 
 type actionType = {
   type: string
@@ -184,6 +186,14 @@ export function openTemplate(deployPath: string) {
     dispatch({
       type: OPEN_TEMPLATE,
       deployPath
+    });
+  };
+}
+
+export function changePage(action: string) {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({
+      type: action
     });
   };
 }

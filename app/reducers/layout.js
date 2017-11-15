@@ -19,7 +19,9 @@ import {
   OPEN_TOOLBOX,
   CLOSE_TOOLBOX,
   OPEN_QUICKTEMPLATE,
-  CLOSE_QUICKTEMPLATE
+  CLOSE_QUICKTEMPLATE,
+  INCREMENT,
+  DECREMENT
 } from '../actions/layout';
 import Window from '../types/window';
 
@@ -42,7 +44,8 @@ type layoutStateType = {
   window: Window,
   physicsEnabled: boolean,
   isToolboxOpen: boolean,
-  isQuickTemplateOpen: boolean
+  isQuickTemplateOpen: boolean,
+  currentPage: number
 };
 
 const initialState = {
@@ -60,7 +63,8 @@ const initialState = {
   window: {},
   physicsEnabled: true,
   isToolboxOpen: false,
-  isQuickTemplateOpen: false
+  isQuickTemplateOpen: false,
+  currentPage: 1
 };
 
 export default function layout(state: layoutStateType = initialState, action: actionType) {
@@ -146,6 +150,24 @@ export default function layout(state: layoutStateType = initialState, action: ac
     case CLOSE_QUICKTEMPLATE:
       return Object.assign({}, state, {
         isQuickTemplateOpen: false
+      });
+    case INCREMENT:
+      if (state.currentPage === 63) {
+        return Object.assign({}, state, {
+          currentPage: 63
+        });
+      }
+      return Object.assign({}, state, {
+        currentPage: state.currentPage + 1
+      });
+    case DECREMENT:
+      if (state.currentPage === 1) {
+        return Object.assign({}, state, {
+          currentPage: 1
+        });
+      }
+      return Object.assign({}, state, {
+        currentPage: state.currentPage - 1
       });
     default:
       return state;

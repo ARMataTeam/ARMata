@@ -1,13 +1,18 @@
 .quicktemplate {
-    left: 70px !important;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    text-align: center;
-  }
+  position: relative;
+}
 
-  .row {
-    padding-top: 2px  !important;
-    padding-bottom: 2px  !important;
-  }
- 
+.row {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+.buttonRight {
+  position: absolute;
+  right: 30px;
+}
+
+.buttonLeft {
+  position: absolute;
+  left: 30px;
+}
