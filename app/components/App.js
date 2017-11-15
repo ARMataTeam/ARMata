@@ -23,6 +23,7 @@ export default class App extends Component {
     openVisualization: () => void,
     openToolbox: () => void,
     addResource: (resourceType: string) => void,
+    deleteResource: (id: string) => void,
     toggleHierarchicalLayout: () => void,
     togglePhysics: () => void,
     error: (errorMessage: string) => void,
@@ -71,6 +72,8 @@ export default class App extends Component {
             lines={this.props.fileDialog.fileData.lines}
             characters={this.props.fileDialog.fileData.characters}
             loadedIn={this.props.fileDialog.fileData.loadedIn}
+            isEdited={this.props.layout.isEdited}
+            isSaved={this.props.layout.isSaved}
             />
           <Sidebar.Pushable>
             <Sidebar as={Form} className={styles.sideBar} animation="scale down" width="wide" visible={this.props.isSettingsWindowOpen} icon="labeled" inverted>
@@ -93,6 +96,7 @@ export default class App extends Component {
               />
             <RightSidebar
               dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}
+              deleteResource={(id) => this.props.deleteResource(id)}
               isNodeWindowOpen={this.props.layout.isNodeWindowOpen}
               nodes={this.props.layout.nodes}
               resources={this.props.resources}

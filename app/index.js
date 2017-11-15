@@ -9,6 +9,7 @@ import Root from './containers/Root';
 import './app.global.css';
 import * as fileDialogActions from './actions/fileDialog';
 import * as layoutActions from './actions/layout';
+import * as editorActions from './actions/editor';
 
 const fs = require('fs');
 
@@ -47,6 +48,7 @@ ipcRenderer.on('open-file', (event, filename) => {
 
     try {
       store.dispatch(fileDialogActions.open(selectedFilename, data));
+      store.dispatch(editorActions.markIdle());
       return;
     } catch (e) {
       if (e instanceof TypeError) {
@@ -64,6 +66,7 @@ ipcRenderer.on('open-file', (event, filename) => {
 
 ipcRenderer.on('save-file', (event, filename) => {
   store.dispatch(fileDialogActions.save(filename));
+  store.dispatch(editorActions.markSaved());
 });
 
 ipcRenderer.on('generate-image', (event, filename) => {

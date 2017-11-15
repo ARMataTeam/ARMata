@@ -24,6 +24,7 @@ import {
   DECREMENT
 } from '../actions/layout';
 import Window from '../types/window';
+import {MARK_EDITED, MARK_IDLE, MARK_SAVED} from '../actions/editor';
 
 type actionType = {
   type: string
@@ -46,6 +47,8 @@ type layoutStateType = {
   isToolboxOpen: boolean,
   isQuickTemplateOpen: boolean,
   currentPage: number
+  isEdited: boolean,
+  isSaved: boolean
 };
 
 const initialState = {
@@ -65,6 +68,8 @@ const initialState = {
   isToolboxOpen: false,
   isQuickTemplateOpen: false,
   currentPage: 1
+  isEdited: false,
+  isSaved: false
 };
 
 export default function layout(state: layoutStateType = initialState, action: actionType) {
@@ -168,6 +173,20 @@ export default function layout(state: layoutStateType = initialState, action: ac
       }
       return Object.assign({}, state, {
         currentPage: state.currentPage - 1
+    case MARK_EDITED:
+      return Object.assign({}, state, {
+        isEdited: true,
+        isSaved: false
+      });
+    case MARK_IDLE:
+      return Object.assign({}, state, {
+        isEdited: false,
+        isSaved: false
+      });
+    case MARK_SAVED:
+      return Object.assign({}, state, {
+        isEdited: false,
+        isSaved: true
       });
     default:
       return state;

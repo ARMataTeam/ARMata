@@ -7,6 +7,7 @@ import styles from './RightSidebar.css'; // eslint-disable-line flowtype-errors/
 export default class RightSidebar extends Component {
   props: {
     dispatchButtonClick: (action: string) => void,
+    deleteResource: (id: string) => void,
     isNodeWindowOpen: boolean,
     nodes: Array<string>,
     resources: Array<Resource>
@@ -64,7 +65,12 @@ export default class RightSidebar extends Component {
             {typeof (resource.id) !== 'undefined' ? RightSidebar.displayDependencies(resource) : <List.Item>None</List.Item>}
           </List.Item>
         </List>
-        <Form.Field><Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_NODE_WINDOW')}>Close</Button></Form.Field>
+        <Form.Field>
+          <Button.Group className={styles.buttons}>
+            <Button type="button" fluid onClick={() => this.props.dispatchButtonClick('CLOSE_NODE_WINDOW')}>Close</Button>
+            <Button type="button" negative fluid onClick={() => this.props.deleteResource(resource.id)}>Delete</Button>
+          </Button.Group>
+        </Form.Field>
       </Sidebar>
     );
   }

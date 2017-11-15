@@ -24,6 +24,7 @@ export const ADD_RESOURCE = 'ADD_RESOURCE';
 export const OPEN_TEMPLATE = 'OPEN_TEMPLATE';
 export const INCREMENT = 'INCREMENT';
 export const DECREMENT = 'DECREMENT';
+export const DELETE_RESOURCE = 'DELETE_RESOURCE';
 
 type actionType = {
   type: string
@@ -195,5 +196,9 @@ export function changePage(action: string) {
     dispatch({
       type: action
     });
+
+export function deleteResource(id: string) {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({ type: DELETE_RESOURCE, id });
   };
 }
