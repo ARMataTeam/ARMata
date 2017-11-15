@@ -12,6 +12,7 @@ import RightSidebar from './RightSidebar';
 import Toolbox from './Toolbox';
 import CustomWindow from './Window';
 import { Resource } from '../types/template';
+import QuickTemplate from './QuickTemplate';
 import styles from './App.css'; // eslint-disable-line flowtype-errors/show-errors
 
 export default class App extends Component {
@@ -31,7 +32,9 @@ export default class App extends Component {
     layout: Object,
     isSettingsWindowOpen: boolean,
     currentView: string,
-    fileDialog: Object
+    fileDialog: Object,
+    openTemplate: (deployPath: string) => void,
+    changePage: (action: string) => void
   };
 
   render() {
@@ -50,6 +53,13 @@ export default class App extends Component {
             openSettings={this.props.openSettings}
             openVisualization={this.props.openVisualization}
             openToolbox={this.props.openToolbox}
+            />
+          <QuickTemplate
+            dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}
+            openTemplate={(deployPath) => this.props.openTemplate(deployPath)}
+            isQuickTemplateOpen={this.props.layout.isQuickTemplateOpen}
+            changePage={(action) => this.props.changePage(action)}
+            currentPage={this.props.layout.currentPage}
             />
           <ProgressBar progress={this.props.layout.progress} />
           <CustomWindow
