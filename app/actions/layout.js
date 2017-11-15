@@ -196,9 +196,15 @@ export function changePage(action: string) {
     dispatch({
       type: action
     });
+  };
+}
+
 
 export function deleteResource(id: string) {
   return (dispatch: (action: actionType) => void) => {
-    dispatch({ type: DELETE_RESOURCE, id });
+    dispatch({
+      type: DELETE_RESOURCE,
+      id
+    });
   };
 }

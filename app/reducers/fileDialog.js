@@ -120,7 +120,6 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
         rawJson
           .resources
           .push(json);
-        
         return Object.assign({}, state, {
           selectedFilename: 'EDITED TEMPLATE',
           fileData: state.fileData,
