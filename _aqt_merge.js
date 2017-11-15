@@ -6,7 +6,6 @@ let output = [];
 const dirMetadata = 'app/data/aqt/';
 
 glob('azure-quickstart-templates/**/metadata.json', (error, files) => {
-
   if (fs.existsSync(dirMetadata) === false) {
     fs.mkdirSync(dirMetadata);
   }
