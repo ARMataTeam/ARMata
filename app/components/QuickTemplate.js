@@ -25,7 +25,7 @@ export default class QuickTemplate extends Component {
     const templates = JSON.parse(fs.readFileSync(`./${dirMetadata}/output_${this.props.quickViewSettings.currentPage}.json`, 'utf8'));
 
     const grid = [];
-    for (let i = 0; i < 10; i += 2) {
+    for (let i = 0; i < templates.length - 1; i += 2) {
       grid.push(<Grid.Row columns={2} key={i}>
         <Grid.Column>
           <Form.Field><Button className="ui button" type="button" fluid onClick={() => this.openTemplate(templates[i].deployPath)}>{templates[i].itemDisplayName}</Button></Form.Field>
