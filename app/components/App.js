@@ -59,7 +59,7 @@ export default class App extends Component {
             openTemplate={(deployPath) => this.props.openTemplate(deployPath)}
             isQuickTemplateOpen={this.props.layout.isQuickTemplateOpen}
             changePage={(action) => this.props.changePage(action)}
-            currentPage={this.props.layout.currentPage}
+            quickViewSettings={this.props.layout.quickViewSettings}
             />
           <ProgressBar progress={this.props.layout.progress} />
           <CustomWindow

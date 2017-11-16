@@ -43,9 +43,12 @@ type layoutStateType = {
   physicsEnabled: boolean,
   isToolboxOpen: boolean,
   isQuickTemplateOpen: boolean,
-  currentPage: number,
   isEdited: boolean,
-  isSaved: boolean
+  isSaved: boolean,
+  quickViewSettings: {
+    currentPage: number,
+    totalPages: number
+  }
 };
 
 const initialState = {
@@ -64,7 +67,10 @@ const initialState = {
   physicsEnabled: true,
   isToolboxOpen: false,
   isQuickTemplateOpen: false,
-  currentPage: 1,
+  quickViewSettings: {
+    currentPage: 1,
+    totalPages: 63
+  },
   isEdited: false,
   isSaved: false
 };
@@ -154,22 +160,24 @@ export default function layout(state: layoutStateType = initialState, action: ac
         isQuickTemplateOpen: false
       });
     case INCREMENT:
-      if (state.currentPage === 63) {
-        return Object.assign({}, state, {
-          currentPage: 63
-        });
+      if (state.quickViewSettings.currentPage === state.quickViewSettings.totalPages) {
+        return Object.assign({}, state, { });
       }
       return Object.assign({}, state, {
-        currentPage: state.currentPage + 1
+        quickViewSettings: {
+          currentPage: state.quickViewSettings.currentPage + 1,
+          totalPages: state.quickViewSettings.totalPages
+        }
       });
     case DECREMENT:
-      if (state.currentPage === 1) {
-        return Object.assign({}, state, {
-          currentPage: 1
-        });
+      if (state.quickViewSettings.currentPage === 1) {
+        return Object.assign({}, state, {});
       }
       return Object.assign({}, state, {
-        currentPage: state.currentPage - 1
+        quickViewSettings: {
+          currentPage: state.quickViewSettings.currentPage - 1,
+          totalPages: state.quickViewSettings.totalPages
+        }
       });
     case MARK_EDITED:
       return Object.assign({}, state, {

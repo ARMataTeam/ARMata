@@ -13,7 +13,7 @@ export default class QuickTemplate extends Component {
     openTemplate: (deployPath: string) => void,
     isQuickTemplateOpen: boolean,
     changePage: (action: string) => void,
-    currentPage: number
+    quickViewSettings: Object
   }
 
   openTemplate(deployPath: string) {
@@ -22,7 +22,7 @@ export default class QuickTemplate extends Component {
   }
 
   generateGrid() {
-    const templates = JSON.parse(fs.readFileSync(`./${dirMetadata}/output_${this.props.currentPage}.json`, 'utf8'));
+    const templates = JSON.parse(fs.readFileSync(`./${dirMetadata}/output_${this.props.quickViewSettings.currentPage}.json`, 'utf8'));
 
     const grid = [];
     for (let i = 0; i < 10; i += 2) {
@@ -37,6 +37,14 @@ export default class QuickTemplate extends Component {
     }
 
     return grid;
+  }
+
+  isLeftButtonDisabled() {
+    return this.props.quickViewSettings.currentPage === 1;
+  }
+
+  isRightButtonDisabled() {
+    return this.props.quickViewSettings.currentPage === this.props.quickViewSettings.totalPages;
   }
 
   render() {
@@ -56,8 +64,8 @@ export default class QuickTemplate extends Component {
             {this.generateGrid()}
           </Grid>
           <br />
-          <Button color="teal" className={styles.buttonLeft} onClick={() => this.props.changePage('DECREMENT')}><Icon name="arrow left" /></Button>
-          <Button color="teal" className={styles.buttonRight} onClick={() => this.props.changePage('INCREMENT')}><Icon name="arrow right" /></Button>
+          <Button color="blue" disabled={this.isLeftButtonDisabled()} className={styles.buttonLeft} onClick={() => this.props.changePage('DECREMENT')}><Icon name="arrow left" /></Button>
+          <Button color="blue" disabled={this.isRightButtonDisabled()} className={styles.buttonRight} onClick={() => this.props.changePage('INCREMENT')}><Icon name="arrow right" /></Button>
           <br />
         </Modal.Content>
       </Modal>);
