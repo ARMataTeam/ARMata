@@ -23,6 +23,8 @@ import {
 import Window from '../types/window';
 import {MARK_EDITED, MARK_IDLE, MARK_SAVED} from '../actions/editor';
 
+const fs = require('fs');
+
 type actionType = {
   type: string
 };
@@ -69,7 +71,7 @@ const initialState = {
   isQuickTemplateOpen: false,
   quickViewSettings: {
     currentPage: 1,
-    totalPages: 63
+    totalPages: fs.readdirSync('app/data/aqt').length
   },
   isEdited: false,
   isSaved: false
