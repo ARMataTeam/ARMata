@@ -28,10 +28,10 @@ export default class QuickTemplate extends Component {
     for (let i = 0; i < templates.length - 1; i += 2) {
       grid.push(<Grid.Row columns={2} key={i}>
         <Grid.Column>
-          <Form.Field><Button className="ui button" type="button" fluid onClick={() => this.openTemplate(templates[i].deployPath)}>{templates[i].itemDisplayName}</Button></Form.Field>
+          <Form.Field><Button className="ui blue basic button" type="button" fluid onClick={() => this.openTemplate(templates[i].deployPath)}>{templates[i].itemDisplayName}</Button></Form.Field>
         </Grid.Column>
         <Grid.Column>
-          <Form.Field><Button className="ui button" type="button" fluid onClick={() => this.openTemplate(templates[i].deployPath)}>{templates[i + 1].itemDisplayName}</Button></Form.Field>
+          <Form.Field><Button className="ui green basic button" type="button" fluid onClick={() => this.openTemplate(templates[i].deployPath)}>{templates[i + 1].itemDisplayName}</Button></Form.Field>
         </Grid.Column>
       </Grid.Row>);
     }
@@ -65,7 +65,8 @@ export default class QuickTemplate extends Component {
           </Grid>
           <br />
           <Button color="blue" disabled={this.isLeftButtonDisabled()} className={styles.buttonLeft} onClick={() => this.props.changePage('DECREMENT')}><Icon name="arrow left" /></Button>
-          <Button color="blue" disabled={this.isRightButtonDisabled()} className={styles.buttonRight} onClick={() => this.props.changePage('INCREMENT')}><Icon name="arrow right" /></Button>
+          <Button color="green" disabled={this.isRightButtonDisabled()} className={styles.buttonRight} onClick={() => this.props.changePage('INCREMENT')}><Icon name="arrow right" /></Button>
+          <br />
           <br />
         </Modal.Content>
       </Modal>);
