@@ -13,11 +13,11 @@ export default class StatusBar extends Component {
   }
 
   determineStatus(): string {
-    if(this.props.isSaved) {
+    if (this.props.isSaved) {
       return styles.statusBarSaved;
     }
 
-    if(this.props.isEdited) {
+    if (this.props.isEdited) {
       return styles.statusBarEdited;
     }
 
@@ -25,11 +25,11 @@ export default class StatusBar extends Component {
   }
 
   determineNotification(): string {
-    if(this.props.isEdited) {
+    if (this.props.isEdited) {
       return 'NOT SAVED';
     }
 
-    if(this.props.isSaved) {
+    if (this.props.isSaved) {
       return 'SAVED SUCCESSFULLY';
     }
   }
