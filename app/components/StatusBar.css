@@ -45,3 +45,9 @@
   width: 50%;
   float: right;
 }
+
+.notificationPart {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
