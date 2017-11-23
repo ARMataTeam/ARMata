@@ -57,6 +57,12 @@ export default class MenuBuilder {
         }
       },
       {
+        label: '&Open from a template',
+        click: () => {
+          this.mainWindow.webContents.send('open-quicktemplate');
+        }
+      },
+      {
         label: '&Save a template',
         accelerator: 'Ctrl+S',
         click: () => {

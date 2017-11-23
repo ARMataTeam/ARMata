@@ -20,6 +20,11 @@ export const CLOSE_TOOLBOX = 'CLOSE_TOOLBOX';
 export const TOGGLE_PHYSICS = 'TOGGLE_PHYSICS';
 export const ADD_RESOURCE = 'ADD_RESOURCE';
 export const DELETE_RESOURCE = 'DELETE_RESOURCE';
+export const OPEN_QUICKTEMPLATE = 'OPEN_QUICKTEMPLAT';
+export const CLOSE_QUICKTEMPLATE = 'CLOSE_QUICKTEMPLATE';
+export const OPEN_TEMPLATE = 'OPEN_TEMPLATE';
+export const INCREMENT = 'INCREMENT';
+export const DECREMENT = 'DECREMENT';
 
 type actionType = {
   type: string
@@ -135,3 +140,27 @@ export function deleteResource(id: string) {
     dispatch({ type: DELETE_RESOURCE, id });
   };
 }
+
+export function openTemplateWindow() {
+  return {
+    type: OPEN_QUICKTEMPLATE
+  };
+}
+
+export function openTemplate(deployPath: string) {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({
+      type: OPEN_TEMPLATE,
+      deployPath
+    });
+  };
+}
+
+export function changePage(action: string) {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({
+      type: action
+    });
+  };
+}
+

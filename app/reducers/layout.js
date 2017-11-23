@@ -14,10 +14,16 @@ import {
   CLOSE_WINDOW,
   TOGGLE_PHYSICS,
   OPEN_TOOLBOX,
-  CLOSE_TOOLBOX
+  CLOSE_TOOLBOX,
+  OPEN_QUICKTEMPLATE,
+  CLOSE_QUICKTEMPLATE,
+  INCREMENT,
+  DECREMENT
 } from '../actions/layout';
 import Window from '../types/window';
 import {MARK_EDITED, MARK_IDLE, MARK_SAVED} from '../actions/editor';
+
+const fs = require('fs');
 
 type actionType = {
   type: string
@@ -38,8 +44,13 @@ type layoutStateType = {
   window: Window,
   physicsEnabled: boolean,
   isToolboxOpen: boolean,
+  isQuickTemplateOpen: boolean,
   isEdited: boolean,
-  isSaved: boolean
+  isSaved: boolean,
+  quickViewSettings: {
+    currentPage: number,
+    totalPages: number
+  }
 };
 
 const initialState = {
@@ -57,6 +68,11 @@ const initialState = {
   window: {},
   physicsEnabled: true,
   isToolboxOpen: false,
+  isQuickTemplateOpen: false,
+  quickViewSettings: {
+    currentPage: 1,
+    totalPages: fs.readdirSync('app/data/aqt').length
+  },
   isEdited: false,
   isSaved: false
 };
@@ -136,6 +152,34 @@ export default function layout(state: layoutStateType = initialState, action: ac
     case CLOSE_TOOLBOX:
       return Object.assign({}, state, {
         isToolboxOpen: false
+      });
+    case OPEN_QUICKTEMPLATE:
+      return Object.assign({}, state, {
+        isQuickTemplateOpen: true
+      });
+    case CLOSE_QUICKTEMPLATE:
+      return Object.assign({}, state, {
+        isQuickTemplateOpen: false
+      });
+    case INCREMENT:
+      if (state.quickViewSettings.currentPage === state.quickViewSettings.totalPages) {
+        return Object.assign({}, state, { });
+      }
+      return Object.assign({}, state, {
+        quickViewSettings: {
+          currentPage: state.quickViewSettings.currentPage + 1,
+          totalPages: state.quickViewSettings.totalPages
+        }
+      });
+    case DECREMENT:
+      if (state.quickViewSettings.currentPage === 1) {
+        return Object.assign({}, state, {});
+      }
+      return Object.assign({}, state, {
+        quickViewSettings: {
+          currentPage: state.quickViewSettings.currentPage - 1,
+          totalPages: state.quickViewSettings.totalPages
+        }
       });
     case MARK_EDITED:
       return Object.assign({}, state, {
