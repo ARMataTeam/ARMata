@@ -13,15 +13,25 @@ export default class StatusBar extends Component {
   }
 
   determineStatus(): string {
-    if(this.props.isSaved) {
+    if (this.props.isSaved) {
       return styles.statusBarSaved;
     }
 
-    if(this.props.isEdited) {
+    if (this.props.isEdited) {
       return styles.statusBarEdited;
     }
 
     return styles.statusBar;
+  }
+
+  determineNotification(): string {
+    if (this.props.isEdited) {
+      return 'NOT SAVED';
+    }
+
+    if (this.props.isSaved) {
+      return 'SAVED SUCCESSFULLY';
+    }
   }
 
   render() {
@@ -30,6 +40,9 @@ export default class StatusBar extends Component {
         <div className={styles.filenamePart}>
           {this.props.selectedFilename ? this.props.selectedFilename : 'Template not loaded'}
           {this.props.isEdited ? ' (EDITED)' : ''}
+        </div>
+        <div className={styles.notificationPart}>
+          {this.determineNotification()}
         </div>
         <div className={styles.informationPart}>
           Lines: {this.props.lines} |
