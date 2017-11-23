@@ -28,6 +28,9 @@ build/Release
 node_modules
 app/node_modules
 
+# NPM package lock
+package-lock.json
+
 # OSX
 .DS_Store
 
