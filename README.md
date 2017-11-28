@@ -26,12 +26,16 @@ To run a project you can use either [Yarn](https://yarnpkg.com/lang/en/) or NPM:
 ```
 $ cd your_project
 $ yarn
+$ git submodule update --init
+$ powershell.exe .\_agt_clean.ps1
 $ npm run dev
 ```
 or
 ```
 $ cd your_project
 $ npm install
+$ git submodule update --init
+$ powershell.exe .\_agt_clean.ps1
 $ npm run dev
 ```
 

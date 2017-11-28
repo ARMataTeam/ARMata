@@ -7,7 +7,9 @@ const dirMetadata = 'app/data/aqt';
 
 glob('azure-quickstart-templates/**/metadata.json', (error, files) => {
   if (fs.existsSync(dirMetadata) === false) {
-    fs.mkdirSync(dirMetadata);
+    const dirMetaSplit = dirMetadata.split('/');
+    fs.mkdirSync(`${dirMetaSplit[0]}/${dirMetaSplit[1]}`);
+    fs.mkdirSync(`${dirMetaSplit[0]}/${dirMetaSplit[1]}/${dirMetaSplit[2]}`);
   }
 
   let simpleCounter = 0;
