@@ -1,3 +1,0 @@
-[submodule "azure-quickstart-templates"]
-	path = azure-quickstart-templates
-	url = https://github.com/Azure/azure-quickstart-templates.git
