@@ -6,3 +6,7 @@
   text-align: center;
   background-color: #586f80;
 }
+
+.buttons {
+  display: -webkit-inline-box !important;
+}

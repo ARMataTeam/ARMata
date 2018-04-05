@@ -22,8 +22,10 @@ export default class App extends Component {
     openVisualization: () => void,
     openToolbox: () => void,
     addResource: (resourceType: string) => void,
+    deleteResource: (id: string) => void,
     toggleHierarchicalLayout: () => void,
     togglePhysics: () => void,
+    error: (errorMessage: string) => void,
     children: Children,
     resources: Array<Resource>,
     layout: Object,
@@ -40,23 +42,29 @@ export default class App extends Component {
             message={this.props.layout.message === '' ? this.props.fileDialog.message : this.props.layout.message}
             dispatchButtonClick={this.props.dispatchButtonClick}
             buttons={this.props.layout.buttons}
-            title={this.props.layout.title === '' ? this.props.fileDialog.title : this.props.layout.title} />
+            title={this.props.layout.title === '' ? this.props.fileDialog.title : this.props.layout.title}
+            />
           <SideMenu
             changeView={this.props.changeView}
             currentView={this.props.currentView}
             openSettings={this.props.openSettings}
             openVisualization={this.props.openVisualization}
-            openToolbox={this.props.openToolbox} />
+            openToolbox={this.props.openToolbox}
+            />
           <ProgressBar progress={this.props.layout.progress} />
           <CustomWindow
             activeWindow={this.props.layout.activeWindow}
             window={this.props.layout.window}
-            dispatchButtonClick={this.props.dispatchButtonClick} />
+            dispatchButtonClick={this.props.dispatchButtonClick}
+            />
           <StatusBar
             selectedFilename={this.props.fileDialog.selectedFilename}
             lines={this.props.fileDialog.fileData.lines}
             characters={this.props.fileDialog.fileData.characters}
-            loadedIn={this.props.fileDialog.fileData.loadedIn} />
+            loadedIn={this.props.fileDialog.fileData.loadedIn}
+            isEdited={this.props.layout.isEdited}
+            isSaved={this.props.layout.isSaved}
+            />
           <Sidebar.Pushable>
             <Sidebar as={Form} className={styles.sideBar} animation="scale down" width="wide" visible={this.props.isSettingsWindowOpen} icon="labeled" inverted>
               <Header as="h3" icon style={{ color: '#FFF' }}>
@@ -73,12 +81,16 @@ export default class App extends Component {
             <Toolbox
               dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}
               addResource={(type) => this.props.addResource(type)}
-              isToolboxOpen={this.props.layout.isToolboxOpen} />
+              isToolboxOpen={this.props.layout.isToolboxOpen}
+              error={(msg) => this.props.error(msg)}
+              />
             <RightSidebar
               dispatchButtonClick={(action) => this.props.dispatchButtonClick(action)}
+              deleteResource={(id) => this.props.deleteResource(id)}
               isNodeWindowOpen={this.props.layout.isNodeWindowOpen}
               nodes={this.props.layout.nodes}
-              resources={this.props.resources} />
+              resources={this.props.resources}
+              />
             <Sidebar.Pusher dimmed={this.props.isSettingsWindowOpen} style={{ height: '100%' }}>
               {this.props.children}
             </Sidebar.Pusher>

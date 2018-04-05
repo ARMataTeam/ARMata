@@ -1,6 +1,5 @@
 # ARMata [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/ARMataTeam/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link) [![Build Status](https://travis-ci.org/ARMataTeam/ARMata.svg?branch=develop)](https://travis-ci.org/ARMataTeam/ARMata) [![Build status](https://ci.appveyor.com/api/projects/status/ao4tcsxoh1te8elk/branch/develop?svg=true)](https://ci.appveyor.com/project/kamil-mrzyglod/armata/branch/develop) [![Dependency Status](https://gemnasium.com/badges/github.com/ARMataTeam/ARMata.svg)](https://gemnasium.com/github.com/ARMataTeam/ARMata) [![Coverage Status](https://coveralls.io/repos/github/ARMataTeam/ARMata/badge.svg?branch=develop)](https://coveralls.io/github/ARMataTeam/ARMata?branch=develop)
-ARM templates visualizer
-
+ARMata is a tool designed for working with ARM templates in Azure. It enables you to visualize any template with ease and to create a brand new one with just a few clicks. You can add and delete resources in your template, test different combinations and quickly prototype an architecture. No need to go and search for boilerplates for your components - it's all gathered in one place!
 <p align="center"><img src="https://media.giphy.com/media/l3fA18K918mmRsm64/giphy.gif" /></p>
 
 ## Installation [![release](http://github-release-version.herokuapp.com/github/armatateam/armata/release.svg?style=flat)](https://github.com/armatateam/armata/releases/latest)
@@ -36,9 +35,19 @@ $ npm install
 $ npm run dev
 ```
 
+## Testing
+While working with ARMata code you can test your changes with following commands:
+
+`
+npm run test
+npm run lint
+`
+
+Those commands are run while building on Travis/AppVeyor so any error will prevent a PR from merging.
+
 ## Roadmap
 ARMata is currently at the very beginning of development phase and yet there're many thing, which are not implemented. The current roadmap:
-* toolbox
+* ~~toolbox~~
 * ~~live editing of a template~~
 * template validation
 * ~~ability to generate an image from a parsed template~~

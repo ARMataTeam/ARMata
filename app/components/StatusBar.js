@@ -7,13 +7,43 @@ export default class StatusBar extends Component {
     selectedFilename: string,
     lines: number,
     characters: number,
-    loadedIn: number
+    loadedIn: number,
+    isEdited: boolean,
+    isSaved: boolean
+  }
+
+  determineStatus(): string {
+    if (this.props.isSaved) {
+      return styles.statusBarSaved;
+    }
+
+    if (this.props.isEdited) {
+      return styles.statusBarEdited;
+    }
+
+    return styles.statusBar;
+  }
+
+  determineNotification(): string {
+    if (this.props.isEdited) {
+      return 'NOT SAVED';
+    }
+
+    if (this.props.isSaved) {
+      return 'SAVED SUCCESSFULLY';
+    }
   }
 
   render() {
     return (
-      <div className={styles.statusBar}>
-        <div className={styles.filenamePart}>{this.props.selectedFilename ? this.props.selectedFilename : 'Template not loaded'}</div>
+      <div className={this.determineStatus()}>
+        <div className={styles.filenamePart}>
+          {this.props.selectedFilename ? this.props.selectedFilename : 'Template not loaded'}
+          {this.props.isEdited ? ' (EDITED)' : ''}
+        </div>
+        <div className={styles.notificationPart}>
+          {this.determineNotification()}
+        </div>
         <div className={styles.informationPart}>
           Lines: {this.props.lines} |
           Characters: {this.props.characters} |

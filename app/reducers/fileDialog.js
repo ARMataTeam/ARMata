@@ -1,10 +1,11 @@
 // @flow
 import { OPEN_FILE, SAVE_FILE, GENERATE_IMAGE } from '../actions/fileDialog';
 import { SET_TEMPLATE } from '../actions/editor';
-import { OPEN_VISUALIZATION, CLEAR_ERRORS, ADD_RESOURCE } from '../actions/layout';
+import { OPEN_VISUALIZATION, CLEAR_ERRORS, ADD_RESOURCE, DELETE_RESOURCE } from '../actions/layout';
 import TemplateParser from '../parsers/templateParser';
 import { Template } from '../types/template';
 import Uuid from '../utils/uuid';
+import ResourceTemplateProvider from '../resources/resourceTemplateProvider';
 
 const fs = require('fs');
 
@@ -110,6 +111,27 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
         dependsOn: [],
         type: action.resourceType
       });
+
+      const rawJson = JSON.parse(state.rawJson);
+      rawJson.resources.push(JSON.parse(ResourceTemplateProvider.getTemplate(action.resourceType)));
+
+      return Object.assign({}, state, {
+        selectedFilename: 'EDITED TEMPLATE',
+        fileData: state.fileData,
+        rawJson: JSON.stringify(rawJson, null, '\t')
+      });
+    }
+    case DELETE_RESOURCE: {
+      const resources = [];
+      state.fileData.resources.find((r) => {
+        if (r.id !== action.id) {
+          resources.push(r);
+        }
+
+        return true;
+      });
+
+      state.fileData.resources = resources; // eslint-disable-line no-param-reassign
 
       return Object.assign({}, state, {
         selectedFilename: 'EDITED TEMPLATE',

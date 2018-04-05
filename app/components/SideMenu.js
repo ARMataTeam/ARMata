@@ -22,7 +22,7 @@ export default class SideMenu extends Component {
           content="Visualization"
           position="right center"
           size="mini"
-        />
+          />
         <Popup
           trigger={<Menu.Item onClick={() => this.props.openToolbox()}>
             <Link to="/"><Icon name="sitemap" size="big" /></Link>
@@ -30,7 +30,7 @@ export default class SideMenu extends Component {
           content="Toolbox"
           position="right center"
           size="mini"
-        />
+          />
         <Popup
           trigger={<Menu.Item active={this.props.currentView === '/editor'}>
             <Link to="/editor"><Icon name="code" size="big" /></Link>
@@ -38,7 +38,7 @@ export default class SideMenu extends Component {
           content="Editor"
           position="right center"
           size="mini"
-        />
+          />
         <Menu.Item onClick={() => this.props.openSettings()} active={this.props.currentView === 'Settings'} className={styles.settings}>
           <Icon name="settings" size="big" />
         </Menu.Item>

@@ -9,11 +9,13 @@ import monokai from 'brace/theme/monokai'; // eslint-disable-line no-unused-vars
 export default class Editor extends Component {
   props: {
     setNewTemplate: (template: string) => void,
+    markEdited: () => void,
     json: string
   }
 
   onChange(newValue: string) {
     this.props.setNewTemplate(newValue);
+    this.props.markEdited();
   }
 
   render() {
@@ -27,6 +29,6 @@ export default class Editor extends Component {
       editorProps={{ $blockScrolling: true }}
       style={{ marginLeft: '70px' }}
       onChange={this.onChange.bind(this)}
-    />);
+      />);
   }
 }

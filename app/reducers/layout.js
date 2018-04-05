@@ -17,6 +17,7 @@ import {
   CLOSE_TOOLBOX
 } from '../actions/layout';
 import Window from '../types/window';
+import {MARK_EDITED, MARK_IDLE, MARK_SAVED} from '../actions/editor';
 
 type actionType = {
   type: string
@@ -36,7 +37,9 @@ type layoutStateType = {
   activeWindow: string,
   window: Window,
   physicsEnabled: boolean,
-  isToolboxOpen: boolean
+  isToolboxOpen: boolean,
+  isEdited: boolean,
+  isSaved: boolean
 };
 
 const initialState = {
@@ -53,7 +56,9 @@ const initialState = {
   activeWindow: '',
   window: {},
   physicsEnabled: true,
-  isToolboxOpen: false
+  isToolboxOpen: false,
+  isEdited: false,
+  isSaved: false
 };
 
 export default function layout(state: layoutStateType = initialState, action: actionType) {
@@ -131,6 +136,21 @@ export default function layout(state: layoutStateType = initialState, action: ac
     case CLOSE_TOOLBOX:
       return Object.assign({}, state, {
         isToolboxOpen: false
+      });
+    case MARK_EDITED:
+      return Object.assign({}, state, {
+        isEdited: true,
+        isSaved: false
+      });
+    case MARK_IDLE:
+      return Object.assign({}, state, {
+        isEdited: false,
+        isSaved: false
+      });
+    case MARK_SAVED:
+      return Object.assign({}, state, {
+        isEdited: false,
+        isSaved: true
       });
     default:
       return state;

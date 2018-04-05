@@ -81,7 +81,7 @@ export default class TemplateParser {
   }
 
   getResources(): Array<Resource> {
-    const resources = this.json.resources;
+    const resources = TemplateParser.convertResourceTreeToList(this.json);
     const result = [];
 
     if (resources) {
@@ -93,10 +93,17 @@ export default class TemplateParser {
           for (let dependsOnIndex = 0;
             dependsOnIndex < resource.dependsOn.length;
             dependsOnIndex += 1) {
-            dependsOn.push({
-              id: resource.dependsOn[dependsOnIndex],
-              name: resource.dependsOn[dependsOnIndex]
-            });
+            if (typeof (resource.dependsOn[dependsOnIndex]) === 'object') {
+              dependsOn.push({
+                id: resource.dependsOn[dependsOnIndex].id,
+                name: resource.dependsOn[dependsOnIndex].name
+              });
+            } else {
+              dependsOn.push({
+                id: resource.dependsOn[dependsOnIndex],
+                name: resource.dependsOn[dependsOnIndex]
+              });
+            }
           }
         }
 
@@ -111,6 +118,23 @@ export default class TemplateParser {
     }
 
     return result;
+  }
+
+  static convertResourceTreeToList(root: object): Array<object> {
+    const stack = [];
+    const array = [];
+    stack.push(root);
+
+    while (stack.length !== 0) {
+      const node = stack.pop();
+      if (node.resources !== null && node.resources !== undefined) {
+        for (let i = node.resources.length - 1; i >= 0; i -= 1) {
+          stack.push(node.resources[i]);
+          array.push(node.resources[i]);
+        }
+      }
+    }
+    return array;
   }
 
   getOutputs(): Array<Output> {
@@ -141,10 +165,21 @@ export default class TemplateParser {
       for (let dependencyIndex = 0;
         dependencyIndex < resource.dependsOn.length;
         dependencyIndex += 1) {
-        resource.dependsOn[dependencyIndex].name =
-          TemplateParser.parseResourceName(
-            resource.dependsOn[dependencyIndex].name,
-            parsedTemplate);
+        // `dependsOn` parameter, which is also passed to this method,
+        // may contain an `{'id':'some_id', 'name':'name'}` object instead
+        // of typical resource identifier. Here we're kind of defending
+        // ourselves, so normalization happens on a correct value
+        if (typeof (resource.dependsOn[dependencyIndex].name) === 'object') {
+          resource.dependsOn[dependencyIndex].name =
+            TemplateParser.parseResourceName(
+              resource.dependsOn[dependencyIndex].name.name,
+              parsedTemplate);
+        } else {
+          resource.dependsOn[dependencyIndex].name =
+            TemplateParser.parseResourceName(
+              resource.dependsOn[dependencyIndex].name,
+              parsedTemplate);
+        }
       }
     }
   }
@@ -170,6 +205,7 @@ export default class TemplateParser {
 
   static parseVariables(name: string, parsedTemplate: Template): string {
     let normalizedName = name;
+
     const matches = normalizedName.match(/variables/g);
     if (typeof matches !== 'undefined' && matches !== null) {
       for (let matchIndex = 0; matchIndex < matches.length; matchIndex += 1) {
