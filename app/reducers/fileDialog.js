@@ -1,6 +1,6 @@
 // @flow
 import { OPEN_FILE, SAVE_FILE, GENERATE_IMAGE } from '../actions/fileDialog';
-import { SET_TEMPLATE } from '../actions/editor';
+import { SET_TEMPLATE, SET_FRESH_TEMPLATE } from '../actions/editor';
 import { OPEN_VISUALIZATION, CLEAR_ERRORS, ADD_RESOURCE, DELETE_RESOURCE } from '../actions/layout';
 import TemplateParser from '../parsers/templateParser';
 import { Template } from '../types/template';
@@ -72,6 +72,20 @@ export default function fileDialog(state: fileDialogStateType = initialState, ac
     case SET_TEMPLATE: {
       return Object.assign({}, state, {
         rawJson: action.template
+      });
+    }
+    case SET_FRESH_TEMPLATE: {
+      const templateParser = new TemplateParser(initialState.rawJson);
+      const parsedTemplate = templateParser.parseTemplate();
+
+      TemplateParser.normalizeNames(parsedTemplate);
+
+      const filename = 'EDITED TEMPLATE';
+
+      return Object.assign({}, state, {
+        rawJson: initialState.rawJson,
+        selectedFilename: filename,
+        fileData: parsedTemplate
       });
     }
     case OPEN_VISUALIZATION: {

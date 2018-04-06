@@ -1,5 +1,6 @@
 // @flow
 export const SET_TEMPLATE = 'SET_TEMPLATE';
+export const SET_FRESH_TEMPLATE = 'SET_FRESH_TEMPLATE';
 export const MARK_EDITED = 'MARK_EDITED';
 export const MARK_IDLE = 'MARK_IDLE';
 export const MARK_SAVED = 'MARK_SAVED';
@@ -11,6 +12,12 @@ type actionType = {
 export function setNewTemplate(template: string) {
   return (dispatch: (action: actionType) => void) => {
     dispatch({ type: SET_TEMPLATE, template });
+  };
+}
+
+export function setFreshTemplate(template: string) {
+  return (dispatch: (action: actionType) => void) => {
+    dispatch({ type: SET_FRESH_TEMPLATE });
   };
 }
 

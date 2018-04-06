@@ -14,10 +14,11 @@ import {
   CLOSE_WINDOW,
   TOGGLE_PHYSICS,
   OPEN_TOOLBOX,
-  CLOSE_TOOLBOX
+  CLOSE_TOOLBOX,
+  NEW_TEMPLATE
 } from '../actions/layout';
 import Window from '../types/window';
-import {MARK_EDITED, MARK_IDLE, MARK_SAVED} from '../actions/editor';
+import { MARK_EDITED, MARK_IDLE, MARK_SAVED } from '../actions/editor';
 
 type actionType = {
   type: string
@@ -152,6 +153,12 @@ export default function layout(state: layoutStateType = initialState, action: ac
         isEdited: false,
         isSaved: true
       });
+    case NEW_TEMPLATE:
+        return Object.assign({}, state, {
+          title: 'Are you sure?',
+          message: 'Do you really want to create a new template? All unsaved changes will be lost.',
+          buttons: [{ label: 'Cancel', action: 'CLEAR_ERRORS' }, { label: 'Create new', action: 'SET_FRESH_TEMPLATE' }]
+        });      
     default:
       return state;
   }

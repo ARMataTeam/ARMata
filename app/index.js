@@ -64,6 +64,10 @@ ipcRenderer.on('open-file', (event, filename) => {
   });
 });
 
+ipcRenderer.on('new-file', (event, filename) => {
+  store.dispatch(layoutActions.newTemplate());
+});
+
 ipcRenderer.on('save-file', (event, filename) => {
   store.dispatch(fileDialogActions.save(filename));
   store.dispatch(editorActions.markSaved());

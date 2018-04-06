@@ -40,6 +40,12 @@ export default class MenuBuilder {
     const templateDefault = [{
       label: '&File',
       submenu: [{
+        label: '&New template',
+        accelerator: 'Ctrl+N',
+        click: () => {
+          this.mainWindow.webContents.send('new-file');
+        }
+      },{
         label: '&Open a template',
         accelerator: 'Ctrl+O',
         click: () => {
